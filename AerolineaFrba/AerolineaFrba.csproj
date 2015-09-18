@@ -65,11 +65,47 @@
     <Compile Include="Abm Aeronave\abmAeronave.Designer.cs">
       <DependentUpon>abmAeronave.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Aeronave\altaAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\altaAeronave.Designer.cs">
+      <DependentUpon>altaAeronave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\bajaAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\bajaAeronave.Designer.cs">
+      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\modificacionAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\modificacionAeronave.Designer.cs">
+      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ciudad\abmCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Ciudad\abmCiudad.Designer.cs">
       <DependentUpon>abmCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\altaCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\altaCiudad.Designer.cs">
+      <DependentUpon>altaCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\bajaCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\bajaCiudad.Designer.cs">
+      <DependentUpon>bajaCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\modificacionCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\modificacionCiudad.Designer.cs">
+      <DependentUpon>modificacionCiudad.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\abmRol.cs">
       <SubType>Form</SubType>
@@ -77,11 +113,47 @@
     <Compile Include="Abm Rol\abmRol.Designer.cs">
       <DependentUpon>abmRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\altaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\altaRol.Designer.cs">
+      <DependentUpon>altaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\bajaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\bajaRol.Designer.cs">
+      <DependentUpon>bajaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\modificacionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\modificacionRol.Designer.cs">
+      <DependentUpon>modificacionRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ruta\abmRuta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Ruta\abmRuta.Designer.cs">
       <DependentUpon>abmRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\altaRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\altaRuta.Designer.cs">
+      <DependentUpon>altaRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\bajaRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\bajaRuta.Designer.cs">
+      <DependentUpon>bajaRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\modificacionRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\modificacionRuta.Designer.cs">
+      <DependentUpon>modificacionRuta.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Millas\canjeMillas.cs">
       <SubType>Form</SubType>
@@ -139,6 +211,54 @@
     <Compile Include="Registro Llegada Destino\registroLlegadaDestino.Designer.cs">
       <DependentUpon>registroLlegadaDestino.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Aeronave\abmAeronave.resx">
+      <DependentUpon>abmAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\altaAeronave.resx">
+      <DependentUpon>altaAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\bajaAeronave.resx">
+      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\modificacionAeronave.resx">
+      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\abmCiudad.resx">
+      <DependentUpon>abmCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\altaCiudad.resx">
+      <DependentUpon>altaCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\bajaCiudad.resx">
+      <DependentUpon>bajaCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\modificacionCiudad.resx">
+      <DependentUpon>modificacionCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\abmRol.resx">
+      <DependentUpon>abmRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\altaRol.resx">
+      <DependentUpon>altaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\bajaRol.resx">
+      <DependentUpon>bajaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\modificacionRol.resx">
+      <DependentUpon>modificacionRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\abmRuta.resx">
+      <DependentUpon>abmRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\altaRuta.resx">
+      <DependentUpon>altaRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\bajaRuta.resx">
+      <DependentUpon>bajaRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\modificacionRuta.resx">
+      <DependentUpon>modificacionRuta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>

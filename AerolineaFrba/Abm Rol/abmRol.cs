@@ -16,5 +16,26 @@ namespace AerolineaFrba.Abm_Rol
         {
             InitializeComponent();
         }
+
+        private void buttonModificacionRol_Click(object sender, EventArgs e)
+        {
+            Abm_Rol.modificacionRol abrir = new Abm_Rol.modificacionRol();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonAltaRol_Click(object sender, EventArgs e)
+        {
+            Abm_Rol.altaRol abrir = new Abm_Rol.altaRol();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonBajaRol_Click(object sender, EventArgs e)
+        {
+            Abm_Rol.bajaRol abrir = new Abm_Rol.bajaRol();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }

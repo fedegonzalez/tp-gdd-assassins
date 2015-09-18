@@ -16,5 +16,31 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAltaAero_Click(object sender, EventArgs e)
+        {
+            Abm_Aeronave.altaAeronave abrir = new Abm_Aeronave.altaAeronave();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonBajaAero_Click(object sender, EventArgs e)
+        {
+            Abm_Aeronave.bajaAeronave abrir = new Abm_Aeronave.bajaAeronave();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonModificacionAero_Click(object sender, EventArgs e)
+        {
+            Abm_Aeronave.modificacionAeronave abrir = new Abm_Aeronave.modificacionAeronave();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }
