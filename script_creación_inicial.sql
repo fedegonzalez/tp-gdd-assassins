@@ -1,0 +1,170 @@
+USE [GD2C2015]
+
+GO
+
+---------------------------------------------------------------------------
+--		CREACION DEL ESQUEMA
+---------------------------------------------------------------------------
+
+IF NOT EXISTS (SELECT * 
+			   FROM sys.schemas 
+			   WHERE name = N'ASSASSINS') 
+	BEGIN
+		EXEC sys.sp_executesql N'CREATE SCHEMA [ASSASSINS] AUTHORIZATION [gd]'
+		PRINT 'Esquema ASSASSINS creado'
+	END
+
+GO
+
+---------------------------------------------------------------------------
+--		DROP TABLAS
+---------------------------------------------------------------------------
+
+IF OBJECT_ID ('ASSASSINS.Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Pasaje
+IF OBJECT_ID ('ASSASSINS.Ruta_Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Ruta_Aeronave
+IF OBJECT_ID ('ASSASSINS.Viaje') IS NOT NULL DROP TABLE ASSASSINS.Viaje
+IF OBJECT_ID ('ASSASSINS.Ruta') IS NOT NULL DROP TABLE ASSASSINS.Ruta
+IF OBJECT_ID ('ASSASSINS.Butaca') IS NOT NULL DROP TABLE ASSASSINS.Butaca
+IF OBJECT_ID ('ASSASSINS.Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Aeronave
+IF OBJECT_ID ('ASSASSINS.Tipo_servicio') IS NOT NULL DROP TABLE ASSASSINS.Tipo_servicio
+IF OBJECT_ID ('ASSASSINS.Ciudad') IS NOT NULL DROP TABLE ASSASSINS.Ciudad
+IF OBJECT_ID ('ASSASSINS.Cliente') IS NOT NULL DROP TABLE ASSASSINS.Cliente
+IF OBJECT_ID ('ASSASSINS.Rol_Funcionalidad') IS NOT NULL DROP TABLE ASSASSINS.Rol_Funcionalidad
+IF OBJECT_ID ('ASSASSINS.Login_Historial') IS NOT NULL DROP TABLE ASSASSINS.Login_Historial
+IF OBJECT_ID ('ASSASSINS.Usuario') IS NOT NULL DROP TABLE ASSASSINS.Usuario
+IF OBJECT_ID ('ASSASSINS.Rol') IS NOT NULL DROP TABLE ASSASSINS.Rol
+IF OBJECT_ID ('ASSASSINS.Funcionalidad') IS NOT NULL DROP TABLE ASSASSINS.Funcionalidad
+
+PRINT 'Tablas borradas'
+
+GO
+
+---------------------------------------------------------------------------
+--		CREACION DE TABLAS
+---------------------------------------------------------------------------
+
+-----------Tabla Ciudad-----------
+CREATE TABLE ASSASSINS.Ciudad ( 
+	Ciudad_ID		integer IDENTITY(1,1) PRIMARY KEY,
+	Ciudad_Nombre	varchar(255)
+);
+
+-----------Tabla Tipo_Servicio-----------
+CREATE TABLE ASSASSINS.Tipo_Servicio ( 
+	TipoServ_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	TipoServ_Nombre		varchar(255),
+	TipoServ_Adicional	numeric(4,2)
+);
+
+-----------Tabla Ruta-----------
+CREATE TABLE ASSASSINS.Ruta ( 
+	Ruta_ID					integer IDENTITY(1,1) PRIMARY KEY,
+	Ruta_Precio_BasePasaje	numeric(8,2),
+	Ruta_Ciudad_Origen		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
+	Ruta_Ciudad_Destino		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
+	TipoServ_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio,
+	Ruta_Habilitado			bit
+);
+
+-----------Tabla Aeronave-----------
+CREATE TABLE ASSASSINS.Aeronave ( 
+	Aeronave_Matricula					integer IDENTITY(1,1) PRIMARY KEY,
+	Aeronave_Modelo						varchar(255),
+	Aeronave_KG_Capacidad				numeric(6),
+	Aeronave_Fabricante					varchar(255),
+	TipoServ_ID							integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio,
+	Aeronave_Fecha_Fuera_Servicio		datetime,
+	Aeronave_Fecha_Reinicio_Servicio	datetime,
+	Aeronave_Fecha_Baja_Definitiva		datetime,
+	Aeronave_Habilitado					bit
+);
+
+-----------Tabla Ruta_Aeronave-----------
+CREATE TABLE ASSASSINS.Ruta_Aeronave ( 
+	Ruta_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Ruta,
+	Aeronave_Matricula 	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	RutaAeronave_Fecha	datetime
+);
+
+-----------Tabla Viaje-----------
+CREATE TABLE ASSASSINS.Viaje ( 
+	Viaje_ID						integer IDENTITY(1,1) PRIMARY KEY,
+	Ruta_ID 						integer FOREIGN KEY REFERENCES ASSASSINS.Ruta,
+	Aeronave_Matricula				integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	Viaje_Fecha_Salida				datetime,
+	Viaje_Fecha_Llegada				datetime,
+	Viaje_Fecha_Llegada_Estimada	datetime
+);
+
+-----------Tabla Butaca-----------
+CREATE TABLE ASSASSINS.Butaca ( 
+	Butaca_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Butaca_Nro			numeric(4),
+	Butaca_Ventana		bit,
+	Butaca_Pasillo		bit,
+	Aeronave_Matricula	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+);
+
+-----------Tabla Cliente-----------
+CREATE TABLE ASSASSINS.Cliente ( 
+	Cliente_ID					integer IDENTITY(1,1) PRIMARY KEY,
+	Cliente_Nombre				varchar(255) NOT NULL,
+	Cliente_Apellido			varchar(255) NOT NULL,
+	Cliente_DNI					numeric(18) NOT NULL,
+	Cliente_Direccion			varchar(255) NOT NULL,
+	Cliente_Telefono			numeric(18) NOT NULL,
+	Cliente_Mail				varchar(255),
+	Cliente_Fecha_Nacimiento	datetime NOT NULL
+);
+
+-----------Tabla Rol-----------
+CREATE TABLE ASSASSINS.Rol ( 
+	Rol_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Rol_Nombre		varchar(255),
+	Rol_Habilitado	bit
+);
+
+-----------Tabla Usuario-----------
+CREATE TABLE ASSASSINS.Usuario ( 
+	Usuario_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Usuario_Username	varchar(255),
+	Usuario_Password	char(64),
+	Rol_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Rol,
+	Usuario_Habilitado	bit DEFAULT 1
+);
+
+-----------Tabla Pasaje-----------
+CREATE TABLE ASSASSINS.Pasaje ( 
+	Pasaje_ID				integer IDENTITY(1,1) PRIMARY KEY,
+	Pasaje_Precio			numeric(8,2),
+	Pasaje_Fecha_Compra		datetime,
+	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente,
+	Usuario_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
+	Butaca_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Butaca,
+	Viaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Viaje
+);
+
+-----------Tabla Funcionalidad-----------
+CREATE TABLE ASSASSINS.Funcionalidad ( 
+	Func_ID		integer IDENTITY(1,1) PRIMARY KEY,
+	Func_Nombre	varchar(255)
+);
+
+-----------Tabla Rol_Funcionalidad-----------
+CREATE TABLE ASSASSINS.Rol_Funcionalidad ( 
+	Func_ID	integer FOREIGN KEY REFERENCES ASSASSINS.Funcionalidad,
+	Rol_ID 	integer FOREIGN KEY REFERENCES ASSASSINS.Rol
+);
+
+-----------Tabla Login_Historial-----------
+CREATE TABLE ASSASSINS.Login_Historial ( 
+	Login_Historial_ID 			integer IDENTITY(1,1) PRIMARY KEY,
+	Usuario_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
+	Login_Historial_Fecha 		datetime,
+	Login_Historial_Intentos 	TINYINT DEFAULT 0
+);
+
+
+PRINT 'Tablas creadas'
+
+GO
