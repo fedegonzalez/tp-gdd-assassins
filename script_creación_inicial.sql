@@ -121,7 +121,7 @@ CREATE TABLE ASSASSINS.Cliente (
 CREATE TABLE ASSASSINS.Rol ( 
 	Rol_ID			integer IDENTITY(1,1) PRIMARY KEY,
 	Rol_Nombre		varchar(255),
-	Rol_Habilitado	bit
+	Rol_Habilitado	bit DEFAULT 1
 );
 
 -----------Tabla Usuario-----------
@@ -164,7 +164,93 @@ CREATE TABLE ASSASSINS.Login_Historial (
 	Login_Historial_Intentos 	TINYINT DEFAULT 0
 );
 
-
 PRINT 'Tablas creadas'
+
+GO
+
+---------------------------------------------------------------------------
+--		CREACION DE  STORED PROCEDURES
+---------------------------------------------------------------------------
+
+-----------Crea una funcionalidad-----------
+IF OBJECT_ID ('ASSASSINS.InsertFuncionalidad') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertFuncionalidad
+GO
+CREATE PROC ASSASSINS.InsertFuncionalidad(@Nombre varchar(40)) AS
+	BEGIN
+		INSERT INTO ASSASSINS.Funcionalidad(Func_Nombre)
+			VALUES(@Nombre)
+	END;
+GO
+
+-----------Crea un rol-----------
+IF OBJECT_ID ('ASSASSINS.InsertRol') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertRol
+GO
+CREATE PROC ASSASSINS.InsertRol(@Nombre varchar(40), @Habilitado bit) AS
+	BEGIN
+		INSERT INTO ASSASSINS.Rol(Rol_Nombre, Rol_Habilitado)
+			VALUES(@Nombre, @Habilitado)
+	END;
+GO
+
+-----------Asocia rol con funcionalidad-----------
+IF OBJECT_ID ('ASSASSINS.InsertRol_Funcionalidad') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertRol_Funcionalidad
+GO
+CREATE PROCEDURE ASSASSINS.InsertRol_Funcionalidad(@Rol_Nombre varchar(255), @Func_Nombre varchar(255)) AS
+	BEGIN
+		INSERT INTO ASSASSINS.Rol_Funcionalidad(Func_ID, Rol_ID)
+			SELECT f.Func_ID, r.Rol_ID 
+			FROM ASSASSINS.Rol r JOIN ASSASSINS.Funcionalidad f ON (r.Rol_Nombre = @Rol_Nombre AND f.Func_Nombre = @Func_Nombre)
+	END;
+GO
+
+-----------Crea un usuario-----------
+IF OBJECT_ID ('ASSASSINS.InsertUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertUsuario
+GO
+CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Habilitado bit) AS
+	BEGIN
+		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Habilitado)
+			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Habilitado
+			FROM ASSASSINS.Rol WHERE Rol_Nombre = @Rol_Nombre
+	END;
+GO
+
+---------------------------------------------------------------------------
+--		CREACION DE DATOS
+---------------------------------------------------------------------------
+
+-----------Funcionalidades-----------
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de rol'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Registro de usuario'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de ciudad'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de ruta aerea'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de aeronave'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Generacion de Viaje'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Registro de llegada a destino'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Compra de pasaje/encomienda'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Devolucion/cancelacion de pasaje y/o encomienda'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Consulta de millas de pasajero frecuente'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Canje de millas'
+EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Listado estadistico'
+
+EXEC ASSASSINS.InsertRol @Nombre = 'Administrador General', @Habilitado = 1
+
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'ABM de rol'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Registro de usuario'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'ABM de ciudad'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'ABM de ruta aerea'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'ABM de aeronave'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Generacion de Viaje'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Registro de llegada a destino'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Compra de pasaje/encomienda'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Devolucion/cancelacion de pasaje y/o encomienda'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Consulta de millas de pasajero frecuente'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Canje de millas'
+EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Listado estadistico'
+
+EXEC ASSASSINS.InsertUsuario @Username = 'admin', @Password = 'admin', @Rol_Nombre = 'Administrador General', @Habilitado = 1
+
+GO
+
+PRINT 'Datos creados'
 
 GO
