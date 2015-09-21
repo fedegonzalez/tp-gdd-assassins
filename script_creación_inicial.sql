@@ -27,6 +27,7 @@ IF OBJECT_ID ('ASSASSINS.Ruta') IS NOT NULL DROP TABLE ASSASSINS.Ruta
 IF OBJECT_ID ('ASSASSINS.Butaca') IS NOT NULL DROP TABLE ASSASSINS.Butaca
 IF OBJECT_ID ('ASSASSINS.Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Aeronave
 IF OBJECT_ID ('ASSASSINS.Tipo_servicio') IS NOT NULL DROP TABLE ASSASSINS.Tipo_servicio
+IF OBJECT_ID ('ASSASSINS.Ruta_TipoServicio') IS NOT NULL DROP TABLE ASSASSINS.Ruta_TipoServicio
 IF OBJECT_ID ('ASSASSINS.Ciudad') IS NOT NULL DROP TABLE ASSASSINS.Ciudad
 IF OBJECT_ID ('ASSASSINS.Cliente') IS NOT NULL DROP TABLE ASSASSINS.Cliente
 IF OBJECT_ID ('ASSASSINS.Rol_Funcionalidad') IS NOT NULL DROP TABLE ASSASSINS.Rol_Funcionalidad
@@ -62,8 +63,13 @@ CREATE TABLE ASSASSINS.Ruta (
 	Ruta_Precio_BasePasaje	numeric(8,2),
 	Ruta_Ciudad_Origen		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
 	Ruta_Ciudad_Destino		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
-	TipoServ_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio,
 	Ruta_Habilitado			bit
+);
+
+-----------Tabla Ruta_TipoServicio-----------
+CREATE TABLE ASSASSINS.Ruta_TipoServicio ( 
+	Ruta_ID			integer FOREIGN KEY REFERENCES ASSASSINS.Ruta,
+	TipoServ_ID 	integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio
 );
 
 -----------Tabla Aeronave-----------
@@ -218,7 +224,6 @@ GO
 --		CREACION DE DATOS
 ---------------------------------------------------------------------------
 
------------Funcionalidades-----------
 EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de rol'
 EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'Registro de usuario'
 EXEC ASSASSINS.InsertFuncionalidad @Nombre = 'ABM de ciudad'
@@ -254,3 +259,55 @@ GO
 PRINT 'Datos creados'
 
 GO
+
+---------------------------------------------------------------------------
+--		MIGRACION DE DATOS
+---------------------------------------------------------------------------
+
+-----------Ciudades-----------
+INSERT INTO ASSASSINS.Ciudad(Ciudad_Nombre)
+	(SELECT DISTINCT Ruta_Ciudad_Origen
+	  FROM gd_esquema.Maestra
+	WHERE Ruta_Ciudad_Origen IS NOT NULL
+	UNION
+	SELECT DISTINCT Ruta_Ciudad_Destino
+	  FROM gd_esquema.Maestra
+	WHERE Ruta_Ciudad_Destino IS NOT NULL) 
+
+
+PRINT 'Tabla ASSASSINS.Cliente migrada'
+GO
+
+-----------Tipo de servicio-----------
+INSERT INTO ASSASSINS.Tipo_Servicio(TipoServ_Nombre)
+	SELECT DISTINCT Tipo_Servicio
+	  FROM gd_esquema.Maestra
+	WHERE Tipo_Servicio IS NOT NULL
+
+
+PRINT 'Tabla ASSASSINS.Tipo_Servicio migrada'
+GO
+
+
+-----------Clientes-----------
+INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
+	SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
+	  FROM gd_esquema.Maestra
+	WHERE Cli_Dni IS NOT NULL
+
+PRINT 'Tabla ASSASSINS.Cliente migrada'
+GO
+
+-----------Pasajes-----------
+/*SET IDENTITY_INSERT ASSASSINS.Pasaje ON
+
+INSERT INTO ASSASSINS.Pasaje(Pasaje_ID, Pasaje_Precio, Pasaje_Fecha_Compra, Cliente_ID)
+	SELECT Pasaje_Codigo, Pasaje_Precio, Pasaje_FechaCompra, Cliente_ID
+	  FROM gd_esquema.Maestra m LEFT JOIN ASSASSINS.Cliente c ON(c.Cliente_DNI = m.Cli_Dni)
+	WHERE Pasaje_Codigo > 0
+
+
+SET IDENTITY_INSERT ASSASSINS.Pasaje OFF
+
+PRINT 'Tabla ASSASSINS.Pasaje migrada'
+GO*/
