@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Ruta
+namespace AerolineaFrba
 {
-    public partial class modificacionRuta : Form
+    public partial class inicioCliente : Form
     {
-        public modificacionRuta()
+        public inicioCliente()
         {
             InitializeComponent();
         }

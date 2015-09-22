@@ -16,5 +16,17 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             InitializeComponent();
         }
+
+        private void registroDeUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            inicioAdministrador abrir = new inicioAdministrador();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }

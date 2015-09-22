@@ -3,14 +3,14 @@
     partial class Inicio
     {
         /// <summary>
-        /// Variable del diseñador requerida.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Limpiar los recursos que se estén utilizando.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben eliminar; false en caso contrario.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,86 +20,67 @@
             base.Dispose(disposing);
         }
 
-        #region Código generado por el Diseñador de Windows Forms
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido del método con el editor de código.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonAeronaves = new System.Windows.Forms.Button();
-            this.buttonCiudades = new System.Windows.Forms.Button();
-            this.buttonRoles = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.accesoAAdministradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.terminalKioscoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonAeronaves
+            // menuStrip1
             // 
-            this.buttonAeronaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAeronaves.Location = new System.Drawing.Point(84, 101);
-            this.buttonAeronaves.Name = "buttonAeronaves";
-            this.buttonAeronaves.Size = new System.Drawing.Size(104, 48);
-            this.buttonAeronaves.TabIndex = 0;
-            this.buttonAeronaves.Text = "Aeronaves";
-            this.buttonAeronaves.UseVisualStyleBackColor = true;
-            this.buttonAeronaves.Click += new System.EventHandler(this.button1_Click);
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.accesoAAdministradoresToolStripMenuItem,
+            this.terminalKioscoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(797, 28);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // buttonCiudades
+            // accesoAAdministradoresToolStripMenuItem
             // 
-            this.buttonCiudades.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCiudades.Location = new System.Drawing.Point(222, 101);
-            this.buttonCiudades.Name = "buttonCiudades";
-            this.buttonCiudades.Size = new System.Drawing.Size(104, 48);
-            this.buttonCiudades.TabIndex = 1;
-            this.buttonCiudades.Text = "Ciudades";
-            this.buttonCiudades.UseVisualStyleBackColor = true;
-            this.buttonCiudades.Click += new System.EventHandler(this.buttonCiudades_Click);
+            this.accesoAAdministradoresToolStripMenuItem.Name = "accesoAAdministradoresToolStripMenuItem";
+            this.accesoAAdministradoresToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.accesoAAdministradoresToolStripMenuItem.Text = "Acceso a Administradores";
+            this.accesoAAdministradoresToolStripMenuItem.Click += new System.EventHandler(this.accesoAAdministradoresToolStripMenuItem_Click);
             // 
-            // buttonRoles
+            // terminalKioscoToolStripMenuItem
             // 
-            this.buttonRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRoles.Location = new System.Drawing.Point(360, 101);
-            this.buttonRoles.Name = "buttonRoles";
-            this.buttonRoles.Size = new System.Drawing.Size(104, 48);
-            this.buttonRoles.TabIndex = 2;
-            this.buttonRoles.Text = "Roles";
-            this.buttonRoles.UseVisualStyleBackColor = true;
-            this.buttonRoles.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(499, 101);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 48);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Rutas";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.terminalKioscoToolStripMenuItem.Name = "terminalKioscoToolStripMenuItem";
+            this.terminalKioscoToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.terminalKioscoToolStripMenuItem.Text = "Terminal Kiosco";
+            this.terminalKioscoToolStripMenuItem.Click += new System.EventHandler(this.terminalKioscoToolStripMenuItem_Click);
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(704, 386);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonRoles);
-            this.Controls.Add(this.buttonCiudades);
-            this.Controls.Add(this.buttonAeronaves);
+            this.ClientSize = new System.Drawing.Size(797, 475);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Inicio";
             this.Text = "Sistema de Pasajes";
+            this.Load += new System.EventHandler(this.Inicio_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonAeronaves;
-        private System.Windows.Forms.Button buttonCiudades;
-        private System.Windows.Forms.Button buttonRoles;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem accesoAAdministradoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem terminalKioscoToolStripMenuItem;
     }
 }
-

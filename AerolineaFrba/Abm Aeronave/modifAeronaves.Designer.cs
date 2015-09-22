@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave
 {
-    partial class modificacionAeronave
+    partial class modifAeronaves
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // modificacionAeronave
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(608, 363);
-            this.Name = "modificacionAeronave";
+            this.ClientSize = new System.Drawing.Size(788, 493);
+            this.Name = "Form1";
             this.Text = "Modificación de Aeronaves";
             this.ResumeLayout(false);
 

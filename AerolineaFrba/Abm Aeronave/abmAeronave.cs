@@ -31,14 +31,14 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void buttonBajaAero_Click(object sender, EventArgs e)
         {
-            Abm_Aeronave.bajaAeronave abrir = new Abm_Aeronave.bajaAeronave();
+            Abm_Aeronave.modificacionListadoAeronave abrir = new Abm_Aeronave.modificacionListadoAeronave();
             abrir.Show();
             this.Hide();
         }
 
         private void buttonModificacionAero_Click(object sender, EventArgs e)
         {
-            Abm_Aeronave.modificacionAeronave abrir = new Abm_Aeronave.modificacionAeronave();
+            Abm_Aeronave.modificacionListadoAeronave abrir = new Abm_Aeronave.modificacionListadoAeronave();
             abrir.Show();
             this.Hide();
         }

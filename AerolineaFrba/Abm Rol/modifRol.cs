@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Rol
 {
-    public partial class modificacionRol : Form
+    public partial class modifRol : Form
     {
-        public modificacionRol()
+        public modifRol()
         {
             InitializeComponent();
         }

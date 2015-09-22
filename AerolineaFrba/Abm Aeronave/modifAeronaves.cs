@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class modificacionAeronave : Form
+    public partial class modifAeronaves : Form
     {
-        public modificacionAeronave()
+        public modifAeronaves()
         {
             InitializeComponent();
         }

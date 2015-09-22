@@ -16,5 +16,16 @@ namespace AerolineaFrba.Abm_Rol
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            textBox1.Text="";
+            comboBox1.Text = "";
+        }
     }
 }

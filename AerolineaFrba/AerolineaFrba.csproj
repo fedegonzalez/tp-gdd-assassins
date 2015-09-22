@@ -71,17 +71,17 @@
     <Compile Include="Abm Aeronave\altaAeronave.Designer.cs">
       <DependentUpon>altaAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Aeronave\bajaAeronave.cs">
+    <Compile Include="Abm Aeronave\modifAeronaves.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\bajaAeronave.Designer.cs">
-      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\modifAeronaves.Designer.cs">
+      <DependentUpon>modifAeronaves.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Aeronave\modificacionAeronave.cs">
+    <Compile Include="Abm Aeronave\modificacionListadoAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\modificacionAeronave.Designer.cs">
-      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\modificacionListadoAeronave.Designer.cs">
+      <DependentUpon>modificacionListadoAeronave.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\abmCiudad.cs">
       <SubType>Form</SubType>
@@ -119,17 +119,17 @@
     <Compile Include="Abm Rol\altaRol.Designer.cs">
       <DependentUpon>altaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\bajaRol.cs">
+    <Compile Include="Abm Rol\modifRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\bajaRol.Designer.cs">
-      <DependentUpon>bajaRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\modifRol.Designer.cs">
+      <DependentUpon>modifRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\modificacionRol.cs">
+    <Compile Include="Abm Rol\modificacionListadoRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\modificacionRol.Designer.cs">
-      <DependentUpon>modificacionRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\modificacionListadoRol.Designer.cs">
+      <DependentUpon>modificacionListadoRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ruta\abmRuta.cs">
       <SubType>Form</SubType>
@@ -143,17 +143,17 @@
     <Compile Include="Abm Ruta\altaRuta.Designer.cs">
       <DependentUpon>altaRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\bajaRuta.cs">
+    <Compile Include="Abm Ruta\modifRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\bajaRuta.Designer.cs">
-      <DependentUpon>bajaRuta.cs</DependentUpon>
+    <Compile Include="Abm Ruta\modifRuta.Designer.cs">
+      <DependentUpon>modifRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\modificacionRuta.cs">
+    <Compile Include="Abm Ruta\modificacionListadoRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\modificacionRuta.Designer.cs">
-      <DependentUpon>modificacionRuta.cs</DependentUpon>
+    <Compile Include="Abm Ruta\modificacionListadoRuta.Designer.cs">
+      <DependentUpon>modificacionListadoRuta.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Millas\canjeMillas.cs">
       <SubType>Form</SubType>
@@ -179,11 +179,23 @@
     <Compile Include="Devolucion\devolucion.Designer.cs">
       <DependentUpon>devolucion.cs</DependentUpon>
     </Compile>
+    <Compile Include="inicioCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inicioCliente.Designer.cs">
+      <DependentUpon>inicioCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="inicioAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inicioAdministrador.Designer.cs">
+      <DependentUpon>inicioAdministrador.cs</DependentUpon>
     </Compile>
     <Compile Include="Generacion Viaje\generacionViaje.cs">
       <SubType>Form</SubType>
@@ -199,10 +211,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro de Usuario\registroDeUsuario.cs">
+    <Compile Include="Registro De Usuario\registroDeUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\registroDeUsuario.Designer.cs">
+    <Compile Include="Registro De Usuario\registroDeUsuario.Designer.cs">
       <DependentUpon>registroDeUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Llegada Destino\registroLlegadaDestino.cs">
@@ -217,11 +229,11 @@
     <EmbeddedResource Include="Abm Aeronave\altaAeronave.resx">
       <DependentUpon>altaAeronave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Aeronave\bajaAeronave.resx">
-      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Aeronave\modifAeronaves.resx">
+      <DependentUpon>modifAeronaves.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Aeronave\modificacionAeronave.resx">
-      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Aeronave\modificacionListadoAeronave.resx">
+      <DependentUpon>modificacionListadoAeronave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\abmCiudad.resx">
       <DependentUpon>abmCiudad.cs</DependentUpon>
@@ -241,11 +253,11 @@
     <EmbeddedResource Include="Abm Rol\altaRol.resx">
       <DependentUpon>altaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\bajaRol.resx">
-      <DependentUpon>bajaRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\modificacionListadoRol.resx">
+      <DependentUpon>modificacionListadoRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\modificacionRol.resx">
-      <DependentUpon>modificacionRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\modifRol.resx">
+      <DependentUpon>modifRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\abmRuta.resx">
       <DependentUpon>abmRuta.cs</DependentUpon>
@@ -253,14 +265,20 @@
     <EmbeddedResource Include="Abm Ruta\altaRuta.resx">
       <DependentUpon>altaRuta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ruta\bajaRuta.resx">
-      <DependentUpon>bajaRuta.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Ruta\modificacionListadoRuta.resx">
+      <DependentUpon>modificacionListadoRuta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ruta\modificacionRuta.resx">
-      <DependentUpon>modificacionRuta.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Ruta\modifRuta.resx">
+      <DependentUpon>modifRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inicioCliente.resx">
+      <DependentUpon>inicioCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inicioAdministrador.resx">
+      <DependentUpon>inicioAdministrador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -271,6 +289,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro De Usuario\registroDeUsuario.resx">
+      <DependentUpon>registroDeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

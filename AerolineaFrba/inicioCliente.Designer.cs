@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Abm_Rol
+﻿namespace AerolineaFrba
 {
-    partial class modificacionRol
+    partial class inicioCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // modificacionRol
+            // inicioCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(638, 390);
-            this.Name = "modificacionRol";
-            this.Text = "Modificación de Roles";
+            this.ClientSize = new System.Drawing.Size(834, 488);
+            this.Name = "inicioCliente";
+            this.Text = "Sistema de Autoservicio";
             this.ResumeLayout(false);
 
         }

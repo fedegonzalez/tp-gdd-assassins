@@ -26,14 +26,14 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void buttonBajaRut_Click(object sender, EventArgs e)
         {
-            Abm_Ruta.bajaRuta abrir = new Abm_Ruta.bajaRuta();
+            Abm_Ruta.modificacionListadoRuta abrir = new Abm_Ruta.modificacionListadoRuta();
             abrir.Show();
             this.Hide();
         }
 
         private void buttonModificacionRut_Click(object sender, EventArgs e)
         {
-            Abm_Ruta.modificacionRuta abrir = new Abm_Ruta.modificacionRuta();
+            Abm_Ruta.modificacionListadoRuta abrir = new Abm_Ruta.modificacionListadoRuta();
             abrir.Show();
             this.Hide();
         }

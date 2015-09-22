@@ -19,7 +19,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void buttonModificacionRol_Click(object sender, EventArgs e)
         {
-            Abm_Rol.modificacionRol abrir = new Abm_Rol.modificacionRol();
+            Abm_Rol.modificacionListadoRol abrir = new Abm_Rol.modificacionListadoRol();
             abrir.Show();
             this.Hide();
         }
@@ -33,7 +33,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void buttonBajaRol_Click(object sender, EventArgs e)
         {
-            Abm_Rol.bajaRol abrir = new Abm_Rol.bajaRol();
+            Abm_Rol.modificacionListadoRol abrir = new Abm_Rol.modificacionListadoRol();
             abrir.Show();
             this.Hide();
         }

@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class bajaAeronave
+    partial class modifRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // bajaAeronave
+            // modifRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(631, 367);
-            this.Name = "bajaAeronave";
-            this.Text = "Baja de Aeronaves";
+            this.ClientSize = new System.Drawing.Size(854, 482);
+            this.Name = "modifRuta";
+            this.Text = "Modificación de Ruta";
             this.ResumeLayout(false);
 
         }

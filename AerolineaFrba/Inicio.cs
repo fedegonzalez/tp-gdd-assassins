@@ -17,32 +17,21 @@ namespace AerolineaFrba
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Inicio_Load(object sender, EventArgs e)
         {
-            Abm_Aeronave.abmAeronave abrir = new Abm_Aeronave.abmAeronave();
-            abrir.Show();
-            this.Hide();
+
         }
 
-        private void buttonCiudades_Click(object sender, EventArgs e)
+        private void accesoAAdministradoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Abm_Ciudad.abmCiudad abrir = new Abm_Ciudad.abmCiudad();
-            abrir.Show();
-            this.Hide();
+            Registro_de_Usuario.registroDeUsuario abrirUsuario = new Registro_de_Usuario.registroDeUsuario();
+            abrirUsuario.Show();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void terminalKioscoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Abm_Rol.abmRol abrir = new Abm_Rol.abmRol();
-            abrir.Show();
-            this.Hide();
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            Abm_Ruta.abmRuta abrir = new Abm_Ruta.abmRuta();
-            abrir.Show();
-            this.Hide();
+            inicioCliente abrirKiosco = new inicioCliente();
+            abrirKiosco.Show();
         }
     }
 }
