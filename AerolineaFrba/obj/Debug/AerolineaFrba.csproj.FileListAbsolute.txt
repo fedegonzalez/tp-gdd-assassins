@@ -36,3 +36,10 @@ C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\Aeroline
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modifAeronaves.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modificacionListadoAeronave.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.inicioCliente.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.canjeMillas.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.compra.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Consulta_Millas.consultaMillas.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.devolucion.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.generacionViaje.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.listadoEstadistico.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.registroLlegadaDestino.resources

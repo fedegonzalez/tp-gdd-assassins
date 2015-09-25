@@ -34,7 +34,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 447);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(787, 467);
             this.Name = "registroLlegadaDestino";
             this.Text = "Registro Llegada-Destino";
             this.ResumeLayout(false);

@@ -271,6 +271,21 @@
     <EmbeddedResource Include="Abm Ruta\modifRuta.resx">
       <DependentUpon>modifRuta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canje Millas\canjeMillas.resx">
+      <DependentUpon>canjeMillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\compra.resx">
+      <DependentUpon>compra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
+      <DependentUpon>consultaMillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\devolucion.resx">
+      <DependentUpon>devolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\generacionViaje.resx">
+      <DependentUpon>generacionViaje.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="inicioCliente.resx">
       <DependentUpon>inicioCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="inicioAdministrador.resx">
       <DependentUpon>inicioAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\listadoEstadistico.resx">
+      <DependentUpon>listadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -291,6 +309,9 @@
     </Compile>
     <EmbeddedResource Include="Registro De Usuario\registroDeUsuario.resx">
       <DependentUpon>registroDeUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\registroLlegadaDestino.resx">
+      <DependentUpon>registroLlegadaDestino.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

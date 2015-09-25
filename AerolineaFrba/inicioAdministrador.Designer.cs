@@ -33,6 +33,10 @@
             this.buttonRoles = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonCompra = new System.Windows.Forms.Button();
+            this.buttonRegistro = new System.Windows.Forms.Button();
+            this.buttonGenerarViaje = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAeronaves
@@ -89,12 +93,60 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Ingrese en la sección que necesite";
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCancel.Location = new System.Drawing.Point(499, 231);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(104, 48);
+            this.buttonCancel.TabIndex = 8;
+            this.buttonCancel.Text = "Cancelar Pasaje";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonCompra
+            // 
+            this.buttonCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCompra.Location = new System.Drawing.Point(360, 231);
+            this.buttonCompra.Name = "buttonCompra";
+            this.buttonCompra.Size = new System.Drawing.Size(104, 48);
+            this.buttonCompra.TabIndex = 7;
+            this.buttonCompra.Text = "Compra de Pasaje";
+            this.buttonCompra.UseVisualStyleBackColor = true;
+            this.buttonCompra.Click += new System.EventHandler(this.buttonCompra_Click);
+            // 
+            // buttonRegistro
+            // 
+            this.buttonRegistro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRegistro.Location = new System.Drawing.Point(222, 231);
+            this.buttonRegistro.Name = "buttonRegistro";
+            this.buttonRegistro.Size = new System.Drawing.Size(104, 48);
+            this.buttonRegistro.TabIndex = 6;
+            this.buttonRegistro.Text = "Registro Llegada";
+            this.buttonRegistro.UseVisualStyleBackColor = true;
+            this.buttonRegistro.Click += new System.EventHandler(this.buttonRegistro_Click);
+            // 
+            // buttonGenerarViaje
+            // 
+            this.buttonGenerarViaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGenerarViaje.Location = new System.Drawing.Point(84, 231);
+            this.buttonGenerarViaje.Name = "buttonGenerarViaje";
+            this.buttonGenerarViaje.Size = new System.Drawing.Size(104, 48);
+            this.buttonGenerarViaje.TabIndex = 5;
+            this.buttonGenerarViaje.Text = "Generar Viaje";
+            this.buttonGenerarViaje.UseVisualStyleBackColor = true;
+            this.buttonGenerarViaje.Click += new System.EventHandler(this.buttonGenerarViaje_Click);
+            // 
             // inicioAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(704, 305);
+            this.ClientSize = new System.Drawing.Size(683, 342);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonCompra);
+            this.Controls.Add(this.buttonRegistro);
+            this.Controls.Add(this.buttonGenerarViaje);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonRoles);
@@ -114,6 +166,10 @@
         private System.Windows.Forms.Button buttonRoles;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonCompra;
+        private System.Windows.Forms.Button buttonRegistro;
+        private System.Windows.Forms.Button buttonGenerarViaje;
     }
 }
 

@@ -44,5 +44,33 @@ namespace AerolineaFrba
             abrir.Show();
             this.Hide();
         }
+
+        private void buttonGenerarViaje_Click(object sender, EventArgs e)
+        {
+            Generacion_Viaje.generacionViaje abrir = new Generacion_Viaje.generacionViaje();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonRegistro_Click(object sender, EventArgs e)
+        {
+            Registro_Llegada_Destino.registroLlegadaDestino abrir = new Registro_Llegada_Destino.registroLlegadaDestino();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonCompra_Click(object sender, EventArgs e)
+        {
+            Compra.compra abrir = new Compra.compra();
+            abrir.Show();
+            this.Hide();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Devolucion.devolucion abrir = new Devolucion.devolucion();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }
