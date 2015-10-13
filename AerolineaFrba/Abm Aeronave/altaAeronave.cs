@@ -29,5 +29,25 @@ namespace AerolineaFrba.Abm_Aeronave
             textBox8.Text = "";
             textBox9.Text = "";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            textBox1.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+        }
     }
 }

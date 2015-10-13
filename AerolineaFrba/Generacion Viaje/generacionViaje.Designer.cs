@@ -46,6 +46,9 @@
             this.monthCalendarFS = new System.Windows.Forms.MonthCalendar();
             this.monthCalendarFL = new System.Windows.Forms.MonthCalendar();
             this.monthCalendarFLE = new System.Windows.Forms.MonthCalendar();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -61,16 +64,16 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(314, 321);
+            this.textBox6.Location = new System.Drawing.Point(248, 321);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(218, 22);
+            this.textBox6.Size = new System.Drawing.Size(159, 22);
             this.textBox6.TabIndex = 23;
             this.textBox6.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(107, 324);
+            this.label6.Location = new System.Drawing.Point(40, 324);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 17);
             this.label6.TabIndex = 22;
@@ -78,16 +81,16 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(314, 275);
+            this.textBox4.Location = new System.Drawing.Point(248, 275);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(218, 22);
+            this.textBox4.Size = new System.Drawing.Size(159, 22);
             this.textBox4.TabIndex = 21;
             this.textBox4.Click += new System.EventHandler(this.textBox4_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(107, 278);
+            this.label4.Location = new System.Drawing.Point(40, 278);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 17);
             this.label4.TabIndex = 20;
@@ -96,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 230);
+            this.label3.Location = new System.Drawing.Point(40, 230);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(184, 17);
             this.label3.TabIndex = 18;
@@ -105,7 +108,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 185);
+            this.label2.Location = new System.Drawing.Point(40, 185);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 17);
             this.label2.TabIndex = 16;
@@ -113,16 +116,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(314, 134);
+            this.textBox1.Location = new System.Drawing.Point(249, 134);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(93, 22);
+            this.textBox1.Size = new System.Drawing.Size(158, 22);
             this.textBox1.TabIndex = 15;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(107, 137);
+            this.label5.Location = new System.Drawing.Point(40, 137);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 17);
             this.label5.TabIndex = 14;
@@ -136,21 +140,22 @@
             this.buttonGenerarViaje.TabIndex = 24;
             this.buttonGenerarViaje.Text = "Generar";
             this.buttonGenerarViaje.UseVisualStyleBackColor = true;
+            this.buttonGenerarViaje.Click += new System.EventHandler(this.buttonGenerarViaje_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(314, 182);
+            this.textBox2.Location = new System.Drawing.Point(249, 182);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(93, 22);
+            this.textBox2.Size = new System.Drawing.Size(158, 22);
             this.textBox2.TabIndex = 25;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(314, 227);
+            this.textBox3.Location = new System.Drawing.Point(248, 227);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(93, 22);
+            this.textBox3.Size = new System.Drawing.Size(159, 22);
             this.textBox3.TabIndex = 26;
             // 
             // button1
@@ -207,12 +212,48 @@
             this.monthCalendarFLE.Visible = false;
             this.monthCalendarFLE.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarFLE_DateChanged);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(595, 356);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 33;
+            this.dateTimePicker1.Visible = false;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker2.Location = new System.Drawing.Point(595, 386);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.TabIndex = 34;
+            this.dateTimePicker2.Visible = false;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker3.Location = new System.Drawing.Point(595, 414);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
+            this.dateTimePicker3.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker3.TabIndex = 35;
+            this.dateTimePicker3.Visible = false;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
             // generacionViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(870, 439);
+            this.Controls.Add(this.dateTimePicker3);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.monthCalendarFLE);
             this.Controls.Add(this.monthCalendarFL);
             this.Controls.Add(this.monthCalendarFS);
@@ -259,5 +300,8 @@
         private System.Windows.Forms.MonthCalendar monthCalendarFS;
         private System.Windows.Forms.MonthCalendar monthCalendarFL;
         private System.Windows.Forms.MonthCalendar monthCalendarFLE;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }

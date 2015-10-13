@@ -27,6 +27,9 @@ namespace AerolineaFrba.Generacion_Viaje
             monthCalendarFS.Visible = true;
             monthCalendarFLE.Visible = false;
             monthCalendarFL.Visible = false;
+            dateTimePicker1.Visible = true;
+            dateTimePicker2.Visible = false;
+            dateTimePicker3.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -34,6 +37,9 @@ namespace AerolineaFrba.Generacion_Viaje
             monthCalendarFL.Visible = true;
             monthCalendarFLE.Visible = false;
             monthCalendarFS.Visible = false;
+            dateTimePicker2.Visible = true;
+            dateTimePicker1.Visible = false;
+            dateTimePicker3.Visible = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -41,21 +47,24 @@ namespace AerolineaFrba.Generacion_Viaje
             monthCalendarFLE.Visible = true;
             monthCalendarFS.Visible = false;
             monthCalendarFL.Visible = false;
+            dateTimePicker3.Visible = true;
+            dateTimePicker2.Visible = false;
+            dateTimePicker1.Visible = false;
         }
 
         private void monthCalendarFS_DateChanged(object sender, DateRangeEventArgs e)
         {
-            textBox1.Text = monthCalendarFS.SelectionRange.Start.Date.ToShortDateString();
+            textBox1.Text = monthCalendarFS.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker1.Value.TimeOfDay;
         }
 
         private void monthCalendarFL_DateChanged(object sender, DateRangeEventArgs e)
         {
-            textBox2.Text = monthCalendarFL.SelectionRange.Start.Date.ToShortDateString();
+            textBox2.Text = monthCalendarFL.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker2.Value.TimeOfDay;
         }
 
         private void monthCalendarFLE_DateChanged(object sender, DateRangeEventArgs e)
         {
-            textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString();
+            textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker3.Value.TimeOfDay;
         }
 
         private void generacionViaje_Load(object sender, EventArgs e)
@@ -68,6 +77,9 @@ namespace AerolineaFrba.Generacion_Viaje
             monthCalendarFLE.Visible = false;
             monthCalendarFL.Visible = false;
             monthCalendarFS.Visible = false;
+            dateTimePicker1.Visible = false;
+            dateTimePicker2.Visible = false;
+            dateTimePicker3.Visible = false;
         }
 
         private void textBox6_Click(object sender, EventArgs e)
@@ -75,6 +87,33 @@ namespace AerolineaFrba.Generacion_Viaje
             monthCalendarFLE.Visible = false;
             monthCalendarFL.Visible = false;
             monthCalendarFS.Visible = false;
+            dateTimePicker1.Visible = false;
+            dateTimePicker2.Visible = false;
+            dateTimePicker3.Visible = false;
+        }
+
+        private void buttonGenerarViaje_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = monthCalendarFS.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker1.Value.TimeOfDay; 
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = monthCalendarFL.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker2.Value.TimeOfDay;
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker3.Value.TimeOfDay;
         }
 
     }

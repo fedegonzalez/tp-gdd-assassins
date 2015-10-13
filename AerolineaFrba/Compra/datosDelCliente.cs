@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class compra : Form
+    public partial class datosDelCliente : Form
     {
-        public compra()
+        public datosDelCliente()
         {
             InitializeComponent();
         }
@@ -29,12 +29,7 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Compra.datosDelCliente abrir = new Compra.datosDelCliente();
+            Compra.formaDePago abrir = new Compra.formaDePago();
             abrir.Show();
             this.Hide();
         }
