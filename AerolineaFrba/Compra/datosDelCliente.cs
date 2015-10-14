@@ -29,7 +29,7 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Compra.formaDePago abrir = new Compra.formaDePago();
+            Compra.formaPago abrir = new Compra.formaPago();
             abrir.Show();
             this.Hide();
         }

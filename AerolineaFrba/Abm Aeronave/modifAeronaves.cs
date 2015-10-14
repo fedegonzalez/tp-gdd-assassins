@@ -16,5 +16,30 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            textBox1.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
+        }
+
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            textBox8.Text = "";
+            textBox9.Text = "";
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            monthCalendar1.Visible = false;
+        }
     }
 }

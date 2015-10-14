@@ -72,5 +72,12 @@ namespace AerolineaFrba
             abrir.Show();
             this.Hide();
         }
+
+        private void buttonListado_Click(object sender, EventArgs e)
+        {
+            Listado_Estadistico.listadoEstadistico abrir = new Listado_Estadistico.listadoEstadistico();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }

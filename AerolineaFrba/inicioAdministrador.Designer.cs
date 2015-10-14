@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.buttonAeronaves = new System.Windows.Forms.Button();
-            this.buttonCiudades = new System.Windows.Forms.Button();
             this.buttonRoles = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +36,7 @@
             this.buttonCompra = new System.Windows.Forms.Button();
             this.buttonRegistro = new System.Windows.Forms.Button();
             this.buttonGenerarViaje = new System.Windows.Forms.Button();
+            this.buttonListado = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAeronaves
@@ -50,21 +50,10 @@
             this.buttonAeronaves.UseVisualStyleBackColor = true;
             this.buttonAeronaves.Click += new System.EventHandler(this.button1_Click);
             // 
-            // buttonCiudades
-            // 
-            this.buttonCiudades.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCiudades.Location = new System.Drawing.Point(222, 161);
-            this.buttonCiudades.Name = "buttonCiudades";
-            this.buttonCiudades.Size = new System.Drawing.Size(104, 48);
-            this.buttonCiudades.TabIndex = 1;
-            this.buttonCiudades.Text = "Ciudades";
-            this.buttonCiudades.UseVisualStyleBackColor = true;
-            this.buttonCiudades.Click += new System.EventHandler(this.buttonCiudades_Click);
-            // 
             // buttonRoles
             // 
             this.buttonRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRoles.Location = new System.Drawing.Point(360, 161);
+            this.buttonRoles.Location = new System.Drawing.Point(222, 161);
             this.buttonRoles.Name = "buttonRoles";
             this.buttonRoles.Size = new System.Drawing.Size(104, 48);
             this.buttonRoles.TabIndex = 2;
@@ -75,7 +64,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(499, 161);
+            this.button1.Location = new System.Drawing.Point(361, 161);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 48);
             this.button1.TabIndex = 3;
@@ -96,7 +85,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCancel.Location = new System.Drawing.Point(499, 231);
+            this.buttonCancel.Location = new System.Drawing.Point(361, 234);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 48);
             this.buttonCancel.TabIndex = 8;
@@ -107,7 +96,7 @@
             // buttonCompra
             // 
             this.buttonCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCompra.Location = new System.Drawing.Point(360, 231);
+            this.buttonCompra.Location = new System.Drawing.Point(222, 234);
             this.buttonCompra.Name = "buttonCompra";
             this.buttonCompra.Size = new System.Drawing.Size(104, 48);
             this.buttonCompra.TabIndex = 7;
@@ -118,7 +107,7 @@
             // buttonRegistro
             // 
             this.buttonRegistro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRegistro.Location = new System.Drawing.Point(222, 231);
+            this.buttonRegistro.Location = new System.Drawing.Point(84, 234);
             this.buttonRegistro.Name = "buttonRegistro";
             this.buttonRegistro.Size = new System.Drawing.Size(104, 48);
             this.buttonRegistro.TabIndex = 6;
@@ -129,7 +118,7 @@
             // buttonGenerarViaje
             // 
             this.buttonGenerarViaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGenerarViaje.Location = new System.Drawing.Point(84, 231);
+            this.buttonGenerarViaje.Location = new System.Drawing.Point(493, 161);
             this.buttonGenerarViaje.Name = "buttonGenerarViaje";
             this.buttonGenerarViaje.Size = new System.Drawing.Size(104, 48);
             this.buttonGenerarViaje.TabIndex = 5;
@@ -137,12 +126,24 @@
             this.buttonGenerarViaje.UseVisualStyleBackColor = true;
             this.buttonGenerarViaje.Click += new System.EventHandler(this.buttonGenerarViaje_Click);
             // 
+            // buttonListado
+            // 
+            this.buttonListado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonListado.Location = new System.Drawing.Point(493, 234);
+            this.buttonListado.Name = "buttonListado";
+            this.buttonListado.Size = new System.Drawing.Size(104, 48);
+            this.buttonListado.TabIndex = 9;
+            this.buttonListado.Text = "Listado Estadístico";
+            this.buttonListado.UseVisualStyleBackColor = true;
+            this.buttonListado.Click += new System.EventHandler(this.buttonListado_Click);
+            // 
             // inicioAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(683, 342);
+            this.Controls.Add(this.buttonListado);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonCompra);
             this.Controls.Add(this.buttonRegistro);
@@ -150,7 +151,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonRoles);
-            this.Controls.Add(this.buttonCiudades);
             this.Controls.Add(this.buttonAeronaves);
             this.Name = "inicioAdministrador";
             this.Text = "Sistema de Pasajes";
@@ -162,7 +162,6 @@
         #endregion
 
         private System.Windows.Forms.Button buttonAeronaves;
-        private System.Windows.Forms.Button buttonCiudades;
         private System.Windows.Forms.Button buttonRoles;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
@@ -170,6 +169,7 @@
         private System.Windows.Forms.Button buttonCompra;
         private System.Windows.Forms.Button buttonRegistro;
         private System.Windows.Forms.Button buttonGenerarViaje;
+        private System.Windows.Forms.Button buttonListado;
     }
 }
 

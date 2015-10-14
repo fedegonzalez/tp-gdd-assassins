@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Rol
+namespace AerolineaFrba.Compra
 {
-    public partial class modifRol : Form
+    public partial class formaPago : Form
     {
-        public modifRol()
+        public formaPago()
         {
             InitializeComponent();
-        }
-
-        private void buttonLimpiar_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-            comboBox1.Text = "";
         }
     }
 }

@@ -16,5 +16,15 @@ namespace AerolineaFrba.Canje_Millas
         {
             InitializeComponent();
         }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            textBox2.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
     }
 }
