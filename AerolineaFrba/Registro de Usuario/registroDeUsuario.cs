@@ -56,7 +56,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                 if (ok == true)
                 {
                     MessageBox.Show("Bienvenido al sistema");
-                    query = "update ASSASSINS.Usuario set Usuario_intentos_fallidos=0 where Usuario_Username='" + textUsuario.Text + "'";
+                    query = "update ASSASSINS.Usuario set Usuario_Intentos=0 where Usuario_Username='" + textUsuario.Text + "'";
                     try
                     {
                         ejecutar(query);
@@ -70,7 +70,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                 {
                     intentos = intentos + 1;
                     MessageBox.Show("Fallo de login");
-                    query = "update ASSASSINS.Usuario set Usuario_intentos_fallidos=Usuario_intentos_fallidos+1 where Usuario_Username='" + textUsuario.Text + "'";
+                    query = "update ASSASSINS.Usuario set Usuario_Intentos=Usuario_Intentos+1 where Usuario_Username='" + textUsuario.Text + "'";
                     try
                     {
                         ejecutar(query);
@@ -87,7 +87,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 intentos = intentos + 1;
                 MessageBox.Show("Debe ingresar los 2 campos");
-                query = "update ASSASSINS.Usuario set Usuario_intentos_fallidos=Usuario_intentos_fallidos+1 where Usuario_Username='" + textUsuario.Text + "'";
+                query = "update ASSASSINS.Usuario set Usuario_Intentos=Usuario_Intentos+1 where Usuario_Username='" + textUsuario.Text + "'";
                 try
                 {
                     ejecutar(query);
