@@ -137,6 +137,7 @@ CREATE TABLE ASSASSINS.Usuario (
 	Usuario_Password	char(64),
 	Rol_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Rol,
 	Usuario_Habilitado	bit DEFAULT 1
+	Usuario_Intentos	numeric(1,0)
 );
 
 -----------Tabla Pasaje-----------
