@@ -28,7 +28,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         bool ok = false;
         string query;
 
-        private void button1_Click(object sender, EventArgs e) // AGREGAR INTENTOS_FALLIDOS !!!
+        private void button1_Click(object sender, EventArgs e)
         {
             if (textUsuario.Text.Length > 0 && textPass.Text.Length > 0)
             {
@@ -87,18 +87,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             }
             else
             {
-                intentos = intentos + 1;
-                MessageBox.Show("Debe ingresar los 2 campos");
-                query = "update ASSASSINS.Usuario set Usuario_Intentos=Usuario_Intentos+1 where Usuario_Username='" + textUsuario.Text + "'";
-                try
-                {
-                    ejecutar(query);
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message);
-                }
-
+                MessageBox.Show("Todos los campos son obligatorios");
             }
             if (intentos == 3)
             {
@@ -137,7 +126,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (leer.Read() == true)
             {
 
-                if (leer.GetSqlBoolean(4) == true) // Habría que poner a lo último intentos_fallidos
+                if (leer.GetSqlBoolean(4) == true)
                 {
                     ok = true;
                 }
@@ -145,7 +134,6 @@ namespace AerolineaFrba.Registro_de_Usuario
                 {
                     ok = false;
                     MessageBox.Show("El usuario esta deshabilitado");
-
                 }
             }
             conexion.Close();
