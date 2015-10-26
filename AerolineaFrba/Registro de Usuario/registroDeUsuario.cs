@@ -42,11 +42,11 @@ namespace AerolineaFrba.Registro_de_Usuario
                 {
                     sha256Str += cryString[i].ToString("X");
                 }
-                query = query + " and password='" + sha256Str + "'";
+                query = query + " and Usuario_password='" + sha256Str + "'";
 
                 try
                 {
-                    Consultar(query);
+                    consultar(query);
                 }
                 catch (Exception err)
                 {
@@ -64,7 +64,9 @@ namespace AerolineaFrba.Registro_de_Usuario
                     catch (Exception err)
                     {
                         MessageBox.Show(err.Message);
-                    }      
+                    }
+                    inicioAdministrador abrir = new inicioAdministrador();
+                    abrir.Show();
                 }
                 else
                 {
@@ -102,7 +104,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 button1.Enabled = false;
                 MessageBox.Show("Ha sobrepasado la cantidad permitida de intentos de login");
-                query = "update ASSASSINS.Usuario set Usuario_Habilitado=false where Usuario_Username='" + textUsuario.Text + "'";
+                query = "update ASSASSINS.Usuario set Usuario_Habilitado=0 where Usuario_Username='" + textUsuario.Text + "'";
                 try
                 {
                     ejecutar(query);
@@ -125,7 +127,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             conexion.Close();
         }
 
-        void Consultar(string query)
+        void consultar(string query)
         {
             SqlConnection conexion = new SqlConnection(conex);
             SqlCommand comando = new SqlCommand(query, conexion);
@@ -135,7 +137,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (leer.Read() == true)
             {
 
-                if (leer.GetBoolean(4) == true && leer.GetDecimal(5) < 3) // Habría que poner a lo último intentos_fallidos
+                if (leer.GetSqlBoolean(4) == true) // Habría que poner a lo último intentos_fallidos
                 {
                     ok = true;
                 }
