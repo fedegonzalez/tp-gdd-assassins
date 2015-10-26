@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Compra
 {
@@ -37,6 +38,23 @@ namespace AerolineaFrba.Compra
             Compra.datosDelCliente abrir = new Compra.datosDelCliente();
             abrir.Show();
             this.Hide();
+        }
+
+        private void compra_Load(object sender, EventArgs e)
+        {
+            string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
+            string query = "select Ciudad_Nombre from ASSASSINS.Ciudad";
+            SqlConnection conexion = new SqlConnection(conex);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox1.Items.Add(leer[0]);
+                comboBox2.Items.Add(leer[0]);
+            }
+            conexion.Close();
         }
     }
 }

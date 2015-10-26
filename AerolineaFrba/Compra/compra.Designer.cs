@@ -232,6 +232,7 @@
             this.Controls.Add(this.label5);
             this.Name = "compra";
             this.Text = "Compra de Pasajes";
+            this.Load += new System.EventHandler(this.compra_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -188,6 +188,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "modificacionListadoRuta";
             this.Text = "Modificación de Rutas";
+            this.Load += new System.EventHandler(this.modificacionListadoRuta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
