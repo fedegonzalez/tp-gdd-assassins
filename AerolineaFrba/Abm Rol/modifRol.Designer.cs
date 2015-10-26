@@ -114,6 +114,7 @@
             this.Controls.Add(this.label1);
             this.Name = "modifRol";
             this.Text = "Modificación del Rol";
+            this.Load += new System.EventHandler(this.modifRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

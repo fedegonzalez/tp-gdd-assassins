@@ -115,6 +115,7 @@
             this.Controls.Add(this.label1);
             this.Name = "altaRol";
             this.Text = "Alta de Roles";
+            this.Load += new System.EventHandler(this.altaRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

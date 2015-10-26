@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Abm_Rol
 {
@@ -32,11 +33,6 @@ namespace AerolineaFrba.Abm_Rol
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBoxParteRol.Text = "";
@@ -50,5 +46,23 @@ namespace AerolineaFrba.Abm_Rol
             Abm_Rol.modifRol abrir = new Abm_Rol.modifRol();
             abrir.Show();
         }
+
+        private void modificacionListadoRol_Load(object sender, EventArgs e)
+        {
+            string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
+            string query = "select Rol_Nombre from ASSASSINS.Rol";
+            SqlConnection conexion = new SqlConnection(conex);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBoxRol.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        
     }
 }

@@ -63,7 +63,6 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // textBoxSelecRol
             // 
@@ -190,6 +189,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "modificacionListadoRol";
             this.Text = "Modificación de Roles";
+            this.Load += new System.EventHandler(this.modificacionListadoRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
