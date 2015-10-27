@@ -253,7 +253,11 @@ EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @F
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Canje de millas'
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Listado estadistico'
 
-EXEC ASSASSINS.InsertUsuario @Username = 'admin', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin1', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin2', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin3', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin4', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin5', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
 
 GO
 

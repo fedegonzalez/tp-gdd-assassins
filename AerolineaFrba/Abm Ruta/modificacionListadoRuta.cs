@@ -24,10 +24,29 @@ namespace AerolineaFrba.Abm_Ruta
             abrir.Show();
         }
 
+        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
+        string query;
+
         private void modificacionListadoRuta_Load(object sender, EventArgs e)
         {
-            string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
-            string query = "select Ruta_ID from ASSASSINS.Ruta";
+            query = "select Ruta_ID from ASSASSINS.Ruta";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void textBoxParteRol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        void cargarComboBox(string query)
+        {
             SqlConnection conexion = new SqlConnection(conex);
             SqlCommand comando = new SqlCommand(query, conexion);
             conexion.Open();

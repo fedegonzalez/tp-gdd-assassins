@@ -47,10 +47,25 @@ namespace AerolineaFrba.Abm_Rol
             abrir.Show();
         }
 
+        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
+        string query;
+
         private void modificacionListadoRol_Load(object sender, EventArgs e)
         {
-            string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
-            string query = "select Rol_Nombre from ASSASSINS.Rol";
+            query = "select Rol_Nombre from ASSASSINS.Rol";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        void cargarComboBox(string query)
+        {
+            query = "select Rol_Nombre from ASSASSINS.Rol";
             SqlConnection conexion = new SqlConnection(conex);
             SqlCommand comando = new SqlCommand(query, conexion);
             conexion.Open();
@@ -62,7 +77,5 @@ namespace AerolineaFrba.Abm_Rol
             }
             conexion.Close();
         }
-
-        
     }
 }
