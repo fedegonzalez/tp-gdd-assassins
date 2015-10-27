@@ -45,8 +45,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -57,16 +55,17 @@
             // 
             // buttonGuardar
             // 
-            this.buttonGuardar.Location = new System.Drawing.Point(481, 511);
+            this.buttonGuardar.Location = new System.Drawing.Point(481, 478);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(95, 34);
             this.buttonGuardar.TabIndex = 33;
             this.buttonGuardar.Text = "Guardar";
             this.buttonGuardar.UseVisualStyleBackColor = true;
+            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
             // 
             // buttonLimpiar
             // 
-            this.buttonLimpiar.Location = new System.Drawing.Point(257, 511);
+            this.buttonLimpiar.Location = new System.Drawing.Point(257, 478);
             this.buttonLimpiar.Name = "buttonLimpiar";
             this.buttonLimpiar.Size = new System.Drawing.Size(95, 34);
             this.buttonLimpiar.TabIndex = 32;
@@ -185,7 +184,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(456, 374);
+            this.textBox7.Location = new System.Drawing.Point(456, 341);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(218, 22);
             this.textBox7.TabIndex = 39;
@@ -193,37 +192,15 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(210, 377);
+            this.label8.Location = new System.Drawing.Point(210, 344);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(184, 17);
             this.label8.TabIndex = 38;
             this.label8.Text = "Cantidad de Butacas Pasillo";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(535, 341);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(139, 21);
-            this.checkBox1.TabIndex = 40;
-            this.checkBox1.Text = "Baja por Vida Útil";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(213, 341);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(198, 21);
-            this.checkBox2.TabIndex = 41;
-            this.checkBox2.Text = "Baja por Fuera de Servicio";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(456, 408);
+            this.textBox8.Location = new System.Drawing.Point(456, 375);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(218, 22);
             this.textBox8.TabIndex = 43;
@@ -231,7 +208,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(210, 411);
+            this.label9.Location = new System.Drawing.Point(210, 378);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(205, 17);
             this.label9.TabIndex = 42;
@@ -239,7 +216,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(456, 445);
+            this.textBox9.Location = new System.Drawing.Point(456, 412);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(218, 22);
             this.textBox9.TabIndex = 45;
@@ -247,7 +224,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(210, 448);
+            this.label10.Location = new System.Drawing.Point(210, 415);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(112, 17);
             this.label10.TabIndex = 44;
@@ -276,15 +253,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(988, 561);
+            this.ClientSize = new System.Drawing.Size(988, 536);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonGuardar);
@@ -328,8 +303,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox9;

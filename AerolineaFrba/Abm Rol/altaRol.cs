@@ -58,5 +58,29 @@ namespace AerolineaFrba.Abm_Rol
             }
             conexion.Close();
         }
+
+      private void buttonGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conex))
+                using (SqlCommand comando = connection.CreateCommand())
+                {
+                    comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Rol_Nombre, Func_Nombre, Rol_Habilitado) VALUES (@rolNombre, @funcNombre, @rolHabilitado)";
+
+                    comando.Parameters.AddWithValue("@rolID", textBox1.Text);
+                    comando.Parameters.AddWithValue("@funcNombre", comboBox1.Text);
+                    comando.Parameters.AddWithValue("@rolHabilitado", 1);
+
+                    connection.Open();
+                    comando.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
     }
 }
