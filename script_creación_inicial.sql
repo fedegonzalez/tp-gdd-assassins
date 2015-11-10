@@ -23,11 +23,11 @@ GO
 IF OBJECT_ID ('ASSASSINS.Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Pasaje
 IF OBJECT_ID ('ASSASSINS.Ruta_Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Ruta_Aeronave
 IF OBJECT_ID ('ASSASSINS.Viaje') IS NOT NULL DROP TABLE ASSASSINS.Viaje
+IF OBJECT_ID ('ASSASSINS.Ruta_TipoServicio') IS NOT NULL DROP TABLE ASSASSINS.Ruta_TipoServicio
 IF OBJECT_ID ('ASSASSINS.Ruta') IS NOT NULL DROP TABLE ASSASSINS.Ruta
 IF OBJECT_ID ('ASSASSINS.Butaca') IS NOT NULL DROP TABLE ASSASSINS.Butaca
 IF OBJECT_ID ('ASSASSINS.Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Aeronave
 IF OBJECT_ID ('ASSASSINS.Tipo_servicio') IS NOT NULL DROP TABLE ASSASSINS.Tipo_servicio
-IF OBJECT_ID ('ASSASSINS.Ruta_TipoServicio') IS NOT NULL DROP TABLE ASSASSINS.Ruta_TipoServicio
 IF OBJECT_ID ('ASSASSINS.Ciudad') IS NOT NULL DROP TABLE ASSASSINS.Ciudad
 IF OBJECT_ID ('ASSASSINS.Cliente') IS NOT NULL DROP TABLE ASSASSINS.Cliente
 IF OBJECT_ID ('ASSASSINS.Rol_Funcionalidad') IS NOT NULL DROP TABLE ASSASSINS.Rol_Funcionalidad
@@ -61,6 +61,7 @@ CREATE TABLE ASSASSINS.Tipo_Servicio (
 CREATE TABLE ASSASSINS.Ruta ( 
 	Ruta_ID					integer IDENTITY(1,1) PRIMARY KEY,
 	Ruta_Precio_BasePasaje	numeric(8,2),
+	Ruta_Precio_BaseKG	numeric(8,2),
 	Ruta_Ciudad_Origen		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
 	Ruta_Ciudad_Destino		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
 	Ruta_Habilitado			bit
@@ -136,8 +137,7 @@ CREATE TABLE ASSASSINS.Usuario (
 	Usuario_Username	varchar(255),
 	Usuario_Password	char(64),
 	Rol_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Rol,
-	Usuario_Habilitado	bit DEFAULT 1,
-	Usuario_Intentos	numeric(1)
+	Usuario_Habilitado	bit DEFAULT 1
 );
 
 -----------Tabla Pasaje-----------
@@ -168,7 +168,7 @@ CREATE TABLE ASSASSINS.Login_Historial (
 	Login_Historial_ID 			integer IDENTITY(1,1) PRIMARY KEY,
 	Usuario_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
 	Login_Historial_Fecha 		datetime,
-	Login_Historial_Intentos 	TINYINT DEFAULT 0
+	Login_Historial_Intentos 	tinyint DEFAULT 0
 );
 
 PRINT 'Tablas creadas'
@@ -213,11 +213,21 @@ GO
 -----------Crea un usuario-----------
 IF OBJECT_ID ('ASSASSINS.InsertUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertUsuario
 GO
-CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Habilitado bit, @Intentos numeric(1)) AS
+CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Habilitado bit) AS
 	BEGIN
-		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Habilitado, Usuario_Intentos)
-			SELECT @Username, @Password, Rol_ID , @Habilitado, @Intentos
+		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Habilitado)
+			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Habilitado
 			FROM ASSASSINS.Rol WHERE Rol_Nombre = @Rol_Nombre
+	END;
+GO
+
+-----------Busca un usuario-----------
+IF OBJECT_ID ('ASSASSINS.SelectUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.SelectUsuario
+GO
+CREATE PROCEDURE ASSASSINS.SelectUsuario(@Username varchar(255), @Password varchar(255)) AS
+	BEGIN
+		SELECT *
+		FROM ASSASSINS.Usuario WHERE Usuario_Username = @Username AND Usuario_Password = HASHBYTES('SHA2_256', @Password)
 	END;
 GO
 
@@ -253,11 +263,7 @@ EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @F
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Canje de millas'
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Listado estadistico'
 
-EXEC ASSASSINS.InsertUsuario @Username = 'admin1', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
-EXEC ASSASSINS.InsertUsuario @Username = 'admin2', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
-EXEC ASSASSINS.InsertUsuario @Username = 'admin3', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
-EXEC ASSASSINS.InsertUsuario @Username = 'admin4', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
-EXEC ASSASSINS.InsertUsuario @Username = 'admin5', @Password = 'E6B87050BFCB8143FCB8DB170A4DC9ED0D904DDD3E2A4AD1B1E8DCFDC9BE7   ', @Rol_Nombre = 'Administrador General', @Habilitado = 1, @Intentos = 0
+EXEC ASSASSINS.InsertUsuario @Username = 'admin', @Password = 'admin', @Rol_Nombre = 'Administrador General', @Habilitado = 1
 
 GO
 
@@ -280,25 +286,44 @@ INSERT INTO ASSASSINS.Ciudad(Ciudad_Nombre)
 	WHERE Ruta_Ciudad_Destino IS NOT NULL) 
 
 
-PRINT 'Tabla ASSASSINS.Cliente migrada'
+PRINT 'Tabla ASSASSINS.Ciudad migrada'
 GO
 
------------Tipo de servicio-----------
-INSERT INTO ASSASSINS.Tipo_Servicio(TipoServ_Nombre)
-	SELECT DISTINCT Tipo_Servicio
+-----------Tipos de servicio-----------
+INSERT INTO ASSASSINS.Tipo_Servicio(TipoServ_Nombre, TipoServ_Adicional)
+	(SELECT DISTINCT Tipo_Servicio, (SUM(Pasaje_Precio) - SUM(Ruta_Precio_BasePasaje)) / SUM(Ruta_Precio_BasePasaje)
 	  FROM gd_esquema.Maestra
-	WHERE Tipo_Servicio IS NOT NULL
+	WHERE Pasaje_Precio > 0 AND Ruta_Precio_BasePasaje > 0 AND Tipo_Servicio IS NOT NULL GROUP BY Tipo_Servicio)
 
 
 PRINT 'Tabla ASSASSINS.Tipo_Servicio migrada'
 GO
 
 
+-----------Rutas-----------
+/*SET IDENTITY_INSERT ASSASSINS.Ruta ON
+
+INSERT INTO ASSASSINS.Ruta(Ruta_ID, Ruta_Precio_BasePasaje, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)
+	(SELECT DISTINCT Ruta_Codigo, Ruta_Precio_BasePasaje, Ciudad_Origen.Ciudad_ID, Ciudad_Destino.Ciudad_ID, 1
+	  FROM gd_esquema.Maestra Maestra
+	  LEFT JOIN ASSASSINS.Ciudad Ciudad_Destino ON(Ciudad_Destino.Ciudad_Nombre = Maestra.Ruta_Ciudad_Destino)
+	  LEFT JOIN ASSASSINS.Ciudad Ciudad_Origen ON(Ciudad_Origen.Ciudad_Nombre = Maestra.Ruta_Ciudad_Origen)
+	WHERE Ruta_Codigo > 0 AND Ruta_Precio_BasePasaje > 0)
+
+UPDATE ASSASSINS.Ruta SET Ruta_Precio_BaseKG = Ruta_Precio_BaseKG
+	FROM (SELECT Ruta_Precio_BaseKG FROM gd_esquema.Maestra WHERE Ruta_Precio_BaseKG > 0) i
+	WHERE ASSASSINS.Ruta.Ruta_ID = i.Ruta_Codigo
+
+PRINT 'Tabla ASSASSINS.Ruta migrada'
+GO
+
+SET IDENTITY_INSERT ASSASSINS.Ruta OFF*/
+
 -----------Clientes-----------
 INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
-	SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
+	(SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
 	  FROM gd_esquema.Maestra
-	WHERE Cli_Dni IS NOT NULL
+	WHERE Cli_Dni IS NOT NULL)
 
 PRINT 'Tabla ASSASSINS.Cliente migrada'
 GO
