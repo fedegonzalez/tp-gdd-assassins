@@ -20,6 +20,10 @@ GO
 --		DROP TABLAS
 ---------------------------------------------------------------------------
 
+IF OBJECT_ID ('ASSASSINS.Canje') IS NOT NULL DROP TABLE ASSASSINS.Canje
+IF OBJECT_ID ('ASSASSINS.Productos') IS NOT NULL DROP TABLE ASSASSINS.Productos
+IF OBJECT_ID ('ASSASSINS.Millas') IS NOT NULL DROP TABLE ASSASSINS.Millas
+IF OBJECT_ID ('ASSASSINS.Devolucion') IS NOT NULL DROP TABLE ASSASSINS.Devolucion
 IF OBJECT_ID ('ASSASSINS.Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Pasaje
 IF OBJECT_ID ('ASSASSINS.Ruta_Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Ruta_Aeronave
 IF OBJECT_ID ('ASSASSINS.Viaje') IS NOT NULL DROP TABLE ASSASSINS.Viaje
@@ -35,6 +39,7 @@ IF OBJECT_ID ('ASSASSINS.Login_Historial') IS NOT NULL DROP TABLE ASSASSINS.Logi
 IF OBJECT_ID ('ASSASSINS.Usuario') IS NOT NULL DROP TABLE ASSASSINS.Usuario
 IF OBJECT_ID ('ASSASSINS.Rol') IS NOT NULL DROP TABLE ASSASSINS.Rol
 IF OBJECT_ID ('ASSASSINS.Funcionalidad') IS NOT NULL DROP TABLE ASSASSINS.Funcionalidad
+IF OBJECT_ID ('ASSASSINS.Canje') IS NOT NULL DROP TABLE ASSASSINS.Canje
 
 PRINT 'Tablas borradas'
 
@@ -83,6 +88,7 @@ CREATE TABLE ASSASSINS.Aeronave (
 	Aeronave_Fecha_Fuera_Servicio		datetime,
 	Aeronave_Fecha_Reinicio_Servicio	datetime,
 	Aeronave_Fecha_Baja_Definitiva		datetime,
+	Aeronave_Fecha_Alta					datetime,
 	Aeronave_Habilitado					bit
 );
 
@@ -148,7 +154,44 @@ CREATE TABLE ASSASSINS.Pasaje (
 	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente,
 	Usuario_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
 	Butaca_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Butaca,
-	Viaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Viaje
+	Viaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Viaje,
+	Cantidad_KG				numeric(6),
+	PNR						varchar(8)
+);
+
+-----------Tabla Devolucion-----------
+CREATE TABLE ASSASSINS.Devolucion ( 
+	Devolucion_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
+	PNR						varchar(8),
+	Fecha_Devolucion		datetime,
+	Motivo 					varchar(255)
+);
+
+-----------Tabla Millas-----------
+CREATE TABLE ASSASSINS.Millas ( 
+	Millas_ID				integer IDENTITY(1,1) PRIMARY KEY,
+	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
+	Millas					numeric(8),
+	Fecha					datetime,
+	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente
+);
+
+-----------Tabla Productos-----------
+CREATE TABLE ASSASSINS.Productos ( 
+	Productos_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Stock					numeric(4),
+	Descripcion				varchar(120),
+	Precio_Millas			numeric(8)
+);
+
+-----------Tabla Canje-----------
+CREATE TABLE ASSASSINS.Canje ( 
+	Canje_ID				integer IDENTITY(1,1) PRIMARY KEY,
+	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente,
+	Producto_ID 			integer FOREIGN KEY REFERENCES ASSASSINS.Productos,
+	Fecha				    datetime,
+	Cantidad				numeric(4)
 );
 
 -----------Tabla Funcionalidad-----------
