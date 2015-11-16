@@ -24,7 +24,6 @@ namespace AerolineaFrba.Abm_Rol
             comboBox1.Text = "";
         }
 
-        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
         string query;
 
         private void modifRol_Load(object sender, EventArgs e)
@@ -42,7 +41,7 @@ namespace AerolineaFrba.Abm_Rol
 
         void cargarComboBox(string query)
         {
-            SqlConnection conexion = new SqlConnection(conex);
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             SqlCommand comando = new SqlCommand(query, conexion);
             conexion.Open();
             SqlDataReader leer = comando.ExecuteReader();

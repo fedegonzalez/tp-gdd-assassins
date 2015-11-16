@@ -32,5 +32,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         {
             textBox3.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker1.Value.TimeOfDay;
         }
+
+        private void registroLlegadaDestino_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

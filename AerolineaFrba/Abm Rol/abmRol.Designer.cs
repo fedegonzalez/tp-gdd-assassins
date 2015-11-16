@@ -38,17 +38,19 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(133, 68);
+            this.label2.Location = new System.Drawing.Point(100, 55);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(207, 32);
+            this.label2.Size = new System.Drawing.Size(164, 26);
             this.label2.TabIndex = 12;
             this.label2.Text = "ABM de Roles";
             // 
             // buttonModificacionRol
             // 
-            this.buttonModificacionRol.Location = new System.Drawing.Point(338, 166);
+            this.buttonModificacionRol.Location = new System.Drawing.Point(254, 135);
+            this.buttonModificacionRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonModificacionRol.Name = "buttonModificacionRol";
-            this.buttonModificacionRol.Size = new System.Drawing.Size(97, 38);
+            this.buttonModificacionRol.Size = new System.Drawing.Size(73, 31);
             this.buttonModificacionRol.TabIndex = 11;
             this.buttonModificacionRol.Text = "Modificación";
             this.buttonModificacionRol.UseVisualStyleBackColor = true;
@@ -56,9 +58,10 @@
             // 
             // buttonBajaRol
             // 
-            this.buttonBajaRol.Location = new System.Drawing.Point(214, 166);
+            this.buttonBajaRol.Location = new System.Drawing.Point(160, 135);
+            this.buttonBajaRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBajaRol.Name = "buttonBajaRol";
-            this.buttonBajaRol.Size = new System.Drawing.Size(92, 38);
+            this.buttonBajaRol.Size = new System.Drawing.Size(69, 31);
             this.buttonBajaRol.TabIndex = 10;
             this.buttonBajaRol.Text = "Baja";
             this.buttonBajaRol.UseVisualStyleBackColor = true;
@@ -66,9 +69,10 @@
             // 
             // buttonAltaRol
             // 
-            this.buttonAltaRol.Location = new System.Drawing.Point(81, 166);
+            this.buttonAltaRol.Location = new System.Drawing.Point(61, 135);
+            this.buttonAltaRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAltaRol.Name = "buttonAltaRol";
-            this.buttonAltaRol.Size = new System.Drawing.Size(92, 38);
+            this.buttonAltaRol.Size = new System.Drawing.Size(69, 31);
             this.buttonAltaRol.TabIndex = 9;
             this.buttonAltaRol.Text = "Alta";
             this.buttonAltaRol.UseVisualStyleBackColor = true;
@@ -76,16 +80,18 @@
             // 
             // abmRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(516, 300);
+            this.ClientSize = new System.Drawing.Size(387, 244);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonModificacionRol);
             this.Controls.Add(this.buttonBajaRol);
             this.Controls.Add(this.buttonAltaRol);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "abmRol";
             this.Text = "ABM de Roles";
+            this.Load += new System.EventHandler(this.abmRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

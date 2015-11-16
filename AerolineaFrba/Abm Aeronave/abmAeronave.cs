@@ -42,5 +42,10 @@ namespace AerolineaFrba.Abm_Aeronave
             abrir.Show();
             this.Hide();
         }
+
+        private void abmAeronave_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

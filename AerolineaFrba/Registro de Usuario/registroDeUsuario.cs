@@ -23,7 +23,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         }
 
-        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
+        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=sa;Password=Riduca24";
         decimal intentos = 0;
         bool ok = false;
         string query;
@@ -106,7 +106,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
         void ejecutar(string query)
         {
-            SqlConnection conexion = new SqlConnection(conex);
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             DataSet dataset = new DataSet();
             SqlCommand comando = new SqlCommand(query, conexion);
             SqlDataAdapter adapter = new SqlDataAdapter(comando);
@@ -118,7 +118,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         void consultar(string query)
         {
-            SqlConnection conexion = new SqlConnection(conex);
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             SqlCommand comando = new SqlCommand(query, conexion);
             conexion.Open();
             SqlDataReader leer = comando.ExecuteReader();

@@ -16,5 +16,10 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             InitializeComponent();
         }
+
+        private void bajaCiudad_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

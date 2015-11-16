@@ -50,7 +50,6 @@ namespace AerolineaFrba.Abm_Aeronave
             monthCalendar1.Visible = false;
         }
 
-        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
         string query;
 
         private void buttonGuardar_Click(object sender, EventArgs e)
@@ -67,6 +66,11 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         void ejecutar(string query)
+        {
+
+        }
+
+        private void altaAeronave_Load(object sender, EventArgs e)
         {
 
         }

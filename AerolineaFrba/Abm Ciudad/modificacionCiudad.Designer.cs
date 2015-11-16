@@ -30,14 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // Form3
+            // modificacionCiudad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(540, 389);
-            this.Name = "Form3";
+            this.ClientSize = new System.Drawing.Size(405, 316);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "modificacionCiudad";
             this.Text = "Modificación de Ciudades";
+            this.Load += new System.EventHandler(this.modificacionCiudad_Load);
             this.ResumeLayout(false);
 
         }

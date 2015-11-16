@@ -30,14 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // Form2
+            // bajaCiudad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(513, 387);
-            this.Name = "Form2";
+            this.ClientSize = new System.Drawing.Size(385, 314);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "bajaCiudad";
             this.Text = "Baja de Ciudades";
+            this.Load += new System.EventHandler(this.bajaCiudad_Load);
             this.ResumeLayout(false);
 
         }

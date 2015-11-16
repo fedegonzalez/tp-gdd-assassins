@@ -41,5 +41,10 @@ namespace AerolineaFrba.Abm_Aeronave
             checkBox2.Checked = false;
             monthCalendar1.Visible = false;
         }
+
+        private void modifAeronaves_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

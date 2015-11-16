@@ -37,5 +37,10 @@ namespace AerolineaFrba.Abm_Rol
             abrir.Show();
             this.Hide();
         }
+
+        private void abmRol_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

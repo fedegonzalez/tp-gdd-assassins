@@ -28,13 +28,12 @@ namespace AerolineaFrba.Abm_Ruta
             textBox6.Text = "";
         }
 
-        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015";
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(conex))
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
                 using (SqlCommand comando = connection.CreateCommand())
                 {
                     comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Ruta_ID, Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG,Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado) VALUES (@rutaID, @rutaPrecioBasePas, @rutaPrecioBaseKG,@rutaCiudadOrigen, @rutaCiudadDestino, @rutaHabilitado)";
