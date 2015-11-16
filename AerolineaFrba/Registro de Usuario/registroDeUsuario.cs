@@ -18,12 +18,23 @@ namespace AerolineaFrba.Registro_de_Usuario
             InitializeComponent();
         }
 
+        static string sha256Encrypt(string password)
+        {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
         private void registroDeUsuario_Load(object sender, EventArgs e)
         {
 
         }
 
-        string conex = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=sa;Password=Riduca24";
         decimal intentos = 0;
         bool ok = false;
         string query;
@@ -33,15 +44,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (textUsuario.Text.Length > 0 && textPass.Text.Length > 0)
             {
                 query = "select * from ASSASSINS.Usuario where Usuario_Username='" + textUsuario.Text + "'";
-
-                System.Security.Cryptography.SHA256 sha256 = new System.Security.Cryptography.SHA256Managed();
-                byte[] sha256Bytes = System.Text.Encoding.Default.GetBytes(textPass.Text);
-                byte[] cryString = sha256.ComputeHash(sha256Bytes);
-                string sha256Str = string.Empty;
-                for (int i = 0; i < cryString.Length; i++)
-                {
-                    sha256Str += cryString[i].ToString("X");
-                }
+                string sha256Str = sha256Encrypt(textPass.Text);
                 query = query + " and Usuario_password='" + sha256Str + "'";
 
                 try

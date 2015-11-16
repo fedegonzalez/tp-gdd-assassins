@@ -56,5 +56,10 @@ namespace AerolineaFrba.Abm_Ruta
             }
         }
 
+        private void altaRuta_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

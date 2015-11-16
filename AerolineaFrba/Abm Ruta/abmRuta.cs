@@ -37,5 +37,10 @@ namespace AerolineaFrba.Abm_Ruta
             abrir.Show();
             this.Hide();
         }
+
+        private void abmRuta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
