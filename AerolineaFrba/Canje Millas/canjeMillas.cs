@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Canje_Millas
 {
@@ -25,6 +26,40 @@ namespace AerolineaFrba.Canje_Millas
         private void button1_Click(object sender, EventArgs e)
         {
             monthCalendar1.Visible = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        string query;
+
+        private void canjeMillas_Load(object sender, EventArgs e)
+        {
+            query = "select Descripcion from ASSASSINS.Productos";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        void cargarComboBox(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox1.Items.Add(leer[0]);
+            }
+            conexion.Close();
         }
     }
 }

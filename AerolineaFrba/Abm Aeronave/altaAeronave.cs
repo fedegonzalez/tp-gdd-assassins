@@ -21,10 +21,9 @@ namespace AerolineaFrba.Abm_Aeronave
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-            textBox5.Text = "";
+            comboBox1.Text = "";
             textBox6.Text = "";
             textBox7.Text = "";
             textBox8.Text = "";

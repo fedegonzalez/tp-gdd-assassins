@@ -145,6 +145,7 @@
             this.button2.TabIndex = 55;
             this.button2.Text = "Canjear";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // canjeMillas
             // 
@@ -166,6 +167,7 @@
             this.Controls.Add(this.label2);
             this.Name = "canjeMillas";
             this.Text = "Canje de Millas";
+            this.Load += new System.EventHandler(this.canjeMillas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
