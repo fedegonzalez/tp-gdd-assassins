@@ -147,6 +147,7 @@ CREATE TABLE ASSASSINS.Usuario (
 	Usuario_Username	varchar(255),
 	Usuario_Password	char(64),
 	Rol_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Rol,
+	Usuario_Intentos	integer,
 	Usuario_Habilitado	bit DEFAULT 1
 );
 
@@ -260,10 +261,10 @@ GO
 -----------Crea un usuario-----------
 IF OBJECT_ID ('ASSASSINS.InsertUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertUsuario
 GO
-CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Habilitado bit) AS
+CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Intentos integer, @Habilitado bit) AS
 	BEGIN
-		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Habilitado)
-			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Habilitado
+		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Intentos, Usuario_Habilitado)
+			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Intentos, @Habilitado
 			FROM ASSASSINS.Rol WHERE Rol_Nombre = @Rol_Nombre
 	END;
 GO
@@ -310,7 +311,7 @@ EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @F
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Canje de millas'
 EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre = 'Administrador General', @Func_Nombre = 'Listado estadistico'
 
-EXEC ASSASSINS.InsertUsuario @Username = 'admin', @Password = 'admin', @Rol_Nombre = 'Administrador General', @Habilitado = 1
+EXEC ASSASSINS.InsertUsuario @Username = 'admin', @Password = 'w23e', @Rol_Nombre = 'Administrador General', @Intentos = 0, @Habilitado = 1
 
 GO
 

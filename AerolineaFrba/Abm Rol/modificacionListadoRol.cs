@@ -37,7 +37,6 @@ namespace AerolineaFrba.Abm_Rol
         {
             textBoxParteRol.Text = "";
             textBoxRol.Text = "";
-            textBoxSelecRol.Text = "";
             comboBoxRol.Text = "";
         }
 
@@ -75,6 +74,39 @@ namespace AerolineaFrba.Abm_Rol
                 comboBoxRol.Items.Add(leer[0]);
             }
             conexion.Close();
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            if (textBoxParteRol.Text != "" && textBoxRol.Text == "" && comboBoxRol.Text == "")
+            {
+                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre like '%" + textBoxParteRol.Text + "%'";
+            }
+            else if (textBoxParteRol.Text == "" && textBoxRol.Text != "" && comboBoxRol.Text == "")
+            {
+                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre ='" + textBoxRol.Text + "'";
+            }
+            else
+            {
+                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre ='" + comboBoxRol.Text + "'";
+            }
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                using (var command = new SqlCommand(query, connection))
+                using (var adapter = new SqlDataAdapter(command))
+                {
+                    connection.Open();
+                    var myTable = new DataTable();
+                    adapter.Fill(myTable);
+                    dataGridView1.DataSource = myTable;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
     }
 }

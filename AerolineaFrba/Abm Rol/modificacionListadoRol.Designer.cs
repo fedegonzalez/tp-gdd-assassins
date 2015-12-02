@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBoxSelecRol = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.comboBoxRol = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxRol = new System.Windows.Forms.TextBox();
@@ -48,9 +45,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBoxSelecRol);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.comboBoxRol);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBoxRol);
@@ -64,36 +58,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
             // 
-            // textBoxSelecRol
-            // 
-            this.textBoxSelecRol.Location = new System.Drawing.Point(675, 127);
-            this.textBoxSelecRol.Name = "textBoxSelecRol";
-            this.textBoxSelecRol.ReadOnly = true;
-            this.textBoxSelecRol.Size = new System.Drawing.Size(100, 22);
-            this.textBoxSelecRol.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(803, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 25);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(525, 130);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 17);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Seleccione el Rol";
-            // 
             // comboBoxRol
             // 
             this.comboBoxRol.FormattingEnabled = true;
-            this.comboBoxRol.Location = new System.Drawing.Point(675, 55);
+            this.comboBoxRol.Location = new System.Drawing.Point(675, 90);
             this.comboBoxRol.Name = "comboBoxRol";
             this.comboBoxRol.Size = new System.Drawing.Size(225, 24);
             this.comboBoxRol.TabIndex = 15;
@@ -101,7 +69,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(525, 58);
+            this.label3.Location = new System.Drawing.Point(525, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 17);
             this.label3.TabIndex = 14;
@@ -157,6 +125,7 @@
             this.buttonBuscar.TabIndex = 12;
             this.buttonBuscar.Text = "Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
             // dataGridView1
             // 
@@ -200,9 +169,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBoxSelecRol;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxRol;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxRol;

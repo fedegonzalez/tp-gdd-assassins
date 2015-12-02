@@ -53,5 +53,50 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             conexion.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            textBoxParteRol.Text = "";
+            textBoxRol.Text = "";
+            comboBoxRol.Text = "";
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            if (textBoxParteRol.Text != "" && textBoxRol.Text == "" && comboBoxRol.Text == "")
+            {
+                query = "SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula like '%" + textBoxParteRol.Text + "%'";
+            }
+            else if (textBoxParteRol.Text == "" && textBoxRol.Text != "" && comboBoxRol.Text == "")
+            {
+                query = "SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula ='" + textBoxRol.Text + "'";
+            }
+            else
+            {
+                query = "SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula ='" + comboBoxRol.Text + "'";
+            }
+            
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                using (var command = new SqlCommand(query, connection))
+                using (var adapter = new SqlDataAdapter(command))
+                {
+                    connection.Open();
+                    var myTable = new DataTable();
+                    adapter.Fill(myTable);
+                    dataGridView1.DataSource = myTable;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
     }
 }

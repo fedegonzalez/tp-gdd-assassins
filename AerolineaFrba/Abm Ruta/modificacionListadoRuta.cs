@@ -28,15 +28,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void modificacionListadoRuta_Load(object sender, EventArgs e)
         {
-            query = "select Ruta_ID from ASSASSINS.Ruta";
-            try
-            {
-                cargarComboBox(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
+
         }
 
         private void textBoxParteRol_TextChanged(object sender, EventArgs e)
@@ -44,18 +36,32 @@ namespace AerolineaFrba.Abm_Ruta
 
         }
 
-        void cargarComboBox(string query)
+        private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
+            Abm_Ruta.modificacionListadoRuta2 abrir = new Abm_Ruta.modificacionListadoRuta2();
+            abrir.Show();
+        }
 
-            while (leer.Read())
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            query="SELECT * FROM ASSASSINS.Ruta WHERE Ruta_ID=" + textBoxRol;
+            
+            try
             {
-                comboBoxRol.Items.Add(leer[0]);
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                using (var command = new SqlCommand(query, connection))
+                using (var adapter = new SqlDataAdapter(command))
+                {
+                    connection.Open();
+                    var myTable = new DataTable();
+                    adapter.Fill(myTable);
+                    dataGridView1.DataSource = myTable;
+                }
             }
-            conexion.Close();
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
     }
 }

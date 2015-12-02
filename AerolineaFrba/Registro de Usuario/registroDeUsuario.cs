@@ -132,7 +132,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (leer.Read() == true)
             {
 
-                if (leer.GetSqlBoolean(4) == true)
+                if (leer.GetSqlBoolean(5) == true)
                 {
                     ok = true;
                 }
