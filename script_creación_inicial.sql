@@ -81,7 +81,7 @@ CREATE TABLE ASSASSINS.Ruta_TipoServicio (
 -----------Tabla Aeronave-----------
 CREATE TABLE ASSASSINS.Aeronave ( 
 	Aeronave_Numero						integer IDENTITY(1,1) PRIMARY KEY,
-	Aeronave_Matricula					char(8) unique,
+	Aeronave_Matricula					varchar(255) unique,
 	Aeronave_Modelo						varchar(255),
 	Aeronave_KG_Capacidad				numeric(6),
 	Aeronave_Fabricante					varchar(255),
@@ -98,7 +98,7 @@ CREATE TABLE ASSASSINS.Aeronave (
 -----------Tabla Ruta_Aeronave-----------
 CREATE TABLE ASSASSINS.Ruta_Aeronave ( 
 	Ruta_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Ruta,
-	Aeronave_Matricula 	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	Aeronave_Numero 	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 	RutaAeronave_Fecha	datetime
 );
 
@@ -106,7 +106,7 @@ CREATE TABLE ASSASSINS.Ruta_Aeronave (
 CREATE TABLE ASSASSINS.Viaje ( 
 	Viaje_ID						integer IDENTITY(1,1) PRIMARY KEY,
 	Ruta_ID 						integer FOREIGN KEY REFERENCES ASSASSINS.Ruta,
-	Aeronave_Matricula				integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	Aeronave_Numero					integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 	Viaje_Fecha_Salida				datetime,
 	Viaje_Fecha_Llegada				datetime,
 	Viaje_Fecha_Llegada_Estimada	datetime
@@ -118,7 +118,7 @@ CREATE TABLE ASSASSINS.Butaca (
 	Butaca_Nro			numeric(4),
 	Butaca_Ventana		bit,
 	Butaca_Pasillo		bit,
-	Aeronave_Matricula	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	Aeronave_Numero	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 );
 
 -----------Tabla Cliente-----------

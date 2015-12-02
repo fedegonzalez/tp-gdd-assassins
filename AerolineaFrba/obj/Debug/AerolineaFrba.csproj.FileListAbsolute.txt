@@ -82,3 +82,6 @@ C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\Aeroline
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modificacionListadoRuta2.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoRutas.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoAeronaves.resources

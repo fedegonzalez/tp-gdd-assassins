@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Generacion_Viaje
 {
@@ -67,6 +68,8 @@ namespace AerolineaFrba.Generacion_Viaje
             textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker3.Value.TimeOfDay;
         }
 
+        string query;
+
         private void generacionViaje_Load(object sender, EventArgs e)
         {
 
@@ -94,6 +97,29 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void buttonGenerarViaje_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                using (SqlCommand comando = connection.CreateCommand())
+                {
+                    comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
+                    + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
+
+                    comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
+                    comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
+                    comando.Parameters.AddWithValue("@salida", textBox1.Text);
+                    comando.Parameters.AddWithValue("@llegada", textBox2.Text);
+                    comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
+
+                    connection.Open();
+                    comando.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -114,6 +140,18 @@ namespace AerolineaFrba.Generacion_Viaje
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
             textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker3.Value.TimeOfDay;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Generacion_Viaje.listadoRutas abrir = new Generacion_Viaje.listadoRutas();
+            abrir.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Generacion_Viaje.listadoAeronaves abrir = new Generacion_Viaje.listadoAeronaves();
+            abrir.Show();
         }
 
     }

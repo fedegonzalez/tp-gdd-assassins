@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,6 +48,9 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +68,7 @@
             // 
             this.textBox6.Location = new System.Drawing.Point(248, 321);
             this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(159, 22);
             this.textBox6.TabIndex = 23;
             this.textBox6.Click += new System.EventHandler(this.textBox6_Click);
@@ -78,14 +81,6 @@
             this.label6.Size = new System.Drawing.Size(80, 17);
             this.label6.TabIndex = 22;
             this.label6.Text = "Ruta Aérea";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(248, 275);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(159, 22);
-            this.textBox4.TabIndex = 21;
-            this.textBox4.Click += new System.EventHandler(this.textBox4_Click);
             // 
             // label4
             // 
@@ -245,12 +240,43 @@
             this.dateTimePicker3.Visible = false;
             this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(434, 321);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(98, 22);
+            this.button4.TabIndex = 37;
+            this.button4.Text = "Seleccionar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(248, 275);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(159, 22);
+            this.textBox4.TabIndex = 38;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(434, 275);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(98, 22);
+            this.button5.TabIndex = 39;
+            this.button5.Text = "Seleccionar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // generacionViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(870, 439);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.dateTimePicker3);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -265,7 +291,6 @@
             this.Controls.Add(this.buttonGenerarViaje);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -285,7 +310,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -303,5 +327,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button5;
     }
 }

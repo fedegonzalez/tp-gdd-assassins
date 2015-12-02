@@ -143,6 +143,12 @@
     <Compile Include="Abm Ruta\altaRuta.Designer.cs">
       <DependentUpon>altaRuta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Ruta\modificacionListadoRuta2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\modificacionListadoRuta2.Designer.cs">
+      <DependentUpon>modificacionListadoRuta2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ruta\modifRuta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,18 @@
     </Compile>
     <Compile Include="Devolucion\devolucion.Designer.cs">
       <DependentUpon>devolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generacion Viaje\listadoAeronaves.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generacion Viaje\listadoAeronaves.Designer.cs">
+      <DependentUpon>listadoAeronaves.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generacion Viaje\listadoRutas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generacion Viaje\listadoRutas.Designer.cs">
+      <DependentUpon>listadoRutas.cs</DependentUpon>
     </Compile>
     <Compile Include="inicioCliente.cs">
       <SubType>Form</SubType>
@@ -280,6 +298,9 @@
     <EmbeddedResource Include="Abm Ruta\modificacionListadoRuta.resx">
       <DependentUpon>modificacionListadoRuta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\modificacionListadoRuta2.resx">
+      <DependentUpon>modificacionListadoRuta2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\modifRuta.resx">
       <DependentUpon>modifRuta.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,6 +324,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\generacionViaje.resx">
       <DependentUpon>generacionViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\listadoAeronaves.resx">
+      <DependentUpon>listadoAeronaves.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\listadoRutas.resx">
+      <DependentUpon>listadoRutas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="inicioCliente.resx">
       <DependentUpon>inicioCliente.cs</DependentUpon>
