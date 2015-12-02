@@ -109,14 +109,17 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
         void ejecutar(string query)
         {
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            DataSet dataset = new DataSet();
-            SqlCommand comando = new SqlCommand(query, conexion);
-            SqlDataAdapter adapter = new SqlDataAdapter(comando);
 
-            conexion.Open();
-            adapter.Fill(dataset);
-            conexion.Close();
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+                comando.CommandText = query;
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
+
         }
 
         void consultar(string query)
@@ -139,7 +142,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                     MessageBox.Show("El usuario esta deshabilitado");
                 }
             }
-            conexion.Close();
+            conexion.Close();           
         }
     }
 }

@@ -47,16 +47,13 @@ namespace AerolineaFrba.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security In" +
-            "fo=True;User ID=gd;Password=gd2015")]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd;Password=gd2015")]
         public string dbConnection {
             get {
                 return ((string)(this["dbConnection"]));
-            }
-            set {
-                this["dbConnection"] = value;
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -67,12 +68,54 @@ namespace AerolineaFrba.Abm_Aeronave
 
         void ejecutar(string query)
         {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+                comando.CommandText = "INSERT INTO ASSASSINS.Aeronave (Aeronave_Matricula, Aeronave_Modelo, Aeronave_KG_Capacidad, Aeronave_Fabricante, Aeronave_Butacas_Pasillo, Aeronave_Butacas_Ventana, TipoServ_ID, Aeronave_Fecha_Alta, Aeronave_Habilitado)"
+                +"VALUES (@aeroMat, @aeroMod, @aeroKG, @aeroFab, @aeroButPas, @aeroButVen, @tipoServ, @aeroFechaAlta, @aeroHab)";
 
+                comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
+                comando.Parameters.AddWithValue("@aeroMod", textBox3.Text);
+                comando.Parameters.AddWithValue("@aeroKG", textBox9.Text);
+                comando.Parameters.AddWithValue("@aeroFab", textBox6.Text);
+                comando.Parameters.AddWithValue("@aeroButPas", textBox7.Text);
+                comando.Parameters.AddWithValue("@aeroButVen", textBox8.Text);
+                comando.Parameters.AddWithValue("@tipoServ", comboBox1.Text);
+                comando.Parameters.AddWithValue("@aeroFechaAlta", textBox1.Text);
+                comando.Parameters.AddWithValue("@aeroHab", 1);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
         }
 
         private void altaAeronave_Load(object sender, EventArgs e)
         {
+            query = "select TipoServ_ID from ASSASSINS.Tipo_Servicio";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
 
+
+        void cargarComboBox(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox1.Items.Add(leer[0]);
+            }
+            conexion.Close();
         }
     }
 }

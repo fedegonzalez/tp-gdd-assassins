@@ -66,7 +66,7 @@ CREATE TABLE ASSASSINS.Tipo_Servicio (
 CREATE TABLE ASSASSINS.Ruta ( 
 	Ruta_ID					integer IDENTITY(1,1) PRIMARY KEY,
 	Ruta_Precio_BasePasaje	numeric(8,2),
-	Ruta_Precio_BaseKG	numeric(8,2),
+	Ruta_Precio_BaseKG		numeric(8,2),
 	Ruta_Ciudad_Origen		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
 	Ruta_Ciudad_Destino		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
 	Ruta_Habilitado			bit
@@ -80,10 +80,13 @@ CREATE TABLE ASSASSINS.Ruta_TipoServicio (
 
 -----------Tabla Aeronave-----------
 CREATE TABLE ASSASSINS.Aeronave ( 
-	Aeronave_Matricula					integer IDENTITY(1,1) PRIMARY KEY,
+	Aeronave_Numero						integer IDENTITY(1,1) PRIMARY KEY,
+	Aeronave_Matricula					char(8) unique,
 	Aeronave_Modelo						varchar(255),
 	Aeronave_KG_Capacidad				numeric(6),
 	Aeronave_Fabricante					varchar(255),
+	Aeronave_Butacas_Pasillo			integer,
+	Aeronave_Butacas_Ventana			integer,
 	TipoServ_ID							integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio,
 	Aeronave_Fecha_Fuera_Servicio		datetime,
 	Aeronave_Fecha_Reinicio_Servicio	datetime,
