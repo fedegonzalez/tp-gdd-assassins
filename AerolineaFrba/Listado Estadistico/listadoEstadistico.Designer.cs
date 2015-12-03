@@ -41,6 +41,11 @@
             // comboBoxRol
             // 
             this.comboBoxRol.FormattingEnabled = true;
+            this.comboBoxRol.Items.AddRange(new object[] {
+            "1-2016",
+            "2-2016",
+            "1-2017",
+            "2-2017"});
             this.comboBoxRol.Location = new System.Drawing.Point(417, 107);
             this.comboBoxRol.Name = "comboBoxRol";
             this.comboBoxRol.Size = new System.Drawing.Size(225, 24);
@@ -86,6 +91,12 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Top 5 de los destinos con más pasajes comprados",
+            "Top 5 de los destinos con aeronaves más vacías",
+            "Top 5 de los Clientes con más puntos acumulados a la fecha",
+            "Top 5 de los destinos con pasajes cancelado",
+            "Top 5 de las aeronaves con mayor cantidad de días fuera de servicio"});
             this.comboBox1.Location = new System.Drawing.Point(417, 153);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(225, 24);

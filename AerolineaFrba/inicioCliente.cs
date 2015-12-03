@@ -33,9 +33,7 @@ namespace AerolineaFrba
 
         private void buttonCanje_Click(object sender, EventArgs e)
         {
-            Canje_Millas.canjeMillas abrirCliente = new Canje_Millas.canjeMillas();
-            abrirCliente.Show();
-            this.Hide();
+            
         }
     }
 }

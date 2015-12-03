@@ -37,12 +37,13 @@
             this.buttonRegistro = new System.Windows.Forms.Button();
             this.buttonGenerarViaje = new System.Windows.Forms.Button();
             this.buttonListado = new System.Windows.Forms.Button();
+            this.buttonCanje = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonAeronaves
             // 
             this.buttonAeronaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAeronaves.Location = new System.Drawing.Point(84, 161);
+            this.buttonAeronaves.Location = new System.Drawing.Point(86, 124);
             this.buttonAeronaves.Name = "buttonAeronaves";
             this.buttonAeronaves.Size = new System.Drawing.Size(104, 48);
             this.buttonAeronaves.TabIndex = 0;
@@ -53,7 +54,7 @@
             // buttonRoles
             // 
             this.buttonRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRoles.Location = new System.Drawing.Point(222, 161);
+            this.buttonRoles.Location = new System.Drawing.Point(224, 124);
             this.buttonRoles.Name = "buttonRoles";
             this.buttonRoles.Size = new System.Drawing.Size(104, 48);
             this.buttonRoles.TabIndex = 2;
@@ -64,7 +65,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(361, 161);
+            this.button1.Location = new System.Drawing.Point(363, 124);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 48);
             this.button1.TabIndex = 3;
@@ -85,7 +86,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCancel.Location = new System.Drawing.Point(361, 234);
+            this.buttonCancel.Location = new System.Drawing.Point(363, 197);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 48);
             this.buttonCancel.TabIndex = 8;
@@ -96,7 +97,7 @@
             // buttonCompra
             // 
             this.buttonCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCompra.Location = new System.Drawing.Point(222, 234);
+            this.buttonCompra.Location = new System.Drawing.Point(224, 197);
             this.buttonCompra.Name = "buttonCompra";
             this.buttonCompra.Size = new System.Drawing.Size(104, 48);
             this.buttonCompra.TabIndex = 7;
@@ -107,7 +108,7 @@
             // buttonRegistro
             // 
             this.buttonRegistro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRegistro.Location = new System.Drawing.Point(84, 234);
+            this.buttonRegistro.Location = new System.Drawing.Point(86, 197);
             this.buttonRegistro.Name = "buttonRegistro";
             this.buttonRegistro.Size = new System.Drawing.Size(104, 48);
             this.buttonRegistro.TabIndex = 6;
@@ -118,7 +119,7 @@
             // buttonGenerarViaje
             // 
             this.buttonGenerarViaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGenerarViaje.Location = new System.Drawing.Point(493, 161);
+            this.buttonGenerarViaje.Location = new System.Drawing.Point(495, 124);
             this.buttonGenerarViaje.Name = "buttonGenerarViaje";
             this.buttonGenerarViaje.Size = new System.Drawing.Size(104, 48);
             this.buttonGenerarViaje.TabIndex = 5;
@@ -129,7 +130,7 @@
             // buttonListado
             // 
             this.buttonListado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonListado.Location = new System.Drawing.Point(493, 234);
+            this.buttonListado.Location = new System.Drawing.Point(495, 197);
             this.buttonListado.Name = "buttonListado";
             this.buttonListado.Size = new System.Drawing.Size(104, 48);
             this.buttonListado.TabIndex = 9;
@@ -137,12 +138,24 @@
             this.buttonListado.UseVisualStyleBackColor = true;
             this.buttonListado.Click += new System.EventHandler(this.buttonListado_Click);
             // 
+            // buttonCanje
+            // 
+            this.buttonCanje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCanje.Location = new System.Drawing.Point(293, 268);
+            this.buttonCanje.Name = "buttonCanje";
+            this.buttonCanje.Size = new System.Drawing.Size(104, 48);
+            this.buttonCanje.TabIndex = 10;
+            this.buttonCanje.Text = "Canje Millas";
+            this.buttonCanje.UseVisualStyleBackColor = true;
+            this.buttonCanje.Click += new System.EventHandler(this.buttonCanje_Click);
+            // 
             // inicioAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(683, 342);
+            this.Controls.Add(this.buttonCanje);
             this.Controls.Add(this.buttonListado);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonCompra);
@@ -170,6 +183,7 @@
         private System.Windows.Forms.Button buttonRegistro;
         private System.Windows.Forms.Button buttonGenerarViaje;
         private System.Windows.Forms.Button buttonListado;
+        private System.Windows.Forms.Button buttonCanje;
     }
 }
 

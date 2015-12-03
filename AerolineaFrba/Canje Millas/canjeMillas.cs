@@ -28,38 +28,98 @@ namespace AerolineaFrba.Canje_Millas
             monthCalendar1.Visible = true;
         }
 
+        bool ok = false;
+
         private void button2_Click(object sender, EventArgs e)
         {
-
-        }
-
-        string query;
-
-        private void canjeMillas_Load(object sender, EventArgs e)
-        {
-            query = "select Descripcion from ASSASSINS.Productos";
             try
             {
-                cargarComboBox(query);
+                consultar();
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message);
             }
+
+            if (ok == true)
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                    using (SqlCommand comando = connection.CreateCommand())
+                    {
+
+                        comando.CommandText = "INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad)" +
+                        "VALUES (@clieID, @prodID, @fecha, @cantidad)";
+
+                        comando.Parameters.AddWithValue("@clieID", textBox1.Text);
+                        comando.Parameters.AddWithValue("@prodID", textBox4.Text);
+                        comando.Parameters.AddWithValue("@fecha", textBox2.Text);
+                        comando.Parameters.AddWithValue("@cantidad", textBox3.Text);
+
+                        connection.Open();
+                        comando.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
         }
 
-        void cargarComboBox(string query)
+        void consultar()
         {
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
+            string query = "SELECT Stock, Precio_Millas FROM ASSASSINS.Productos WHERE Productos_ID=" + textBox4.Text;
+            string query2 = "SELECT SUM(Millas) FROM ASSASSINS.Millas WHERE Cliente_ID=" + textBox1.Text;
 
-            while (leer.Read())
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlConnection conexion2 = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            SqlCommand comando2 = new SqlCommand(query2, conexion2);
+            conexion.Open();
+            conexion2.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+            SqlDataReader leer2 = comando2.ExecuteReader();
+
+            if (leer.Read() == true && leer2.Read() == true)
             {
-                comboBox1.Items.Add(leer[0]);
+
+                if (leer.GetSqlDecimal(0) < Convert.ToDecimal(textBox3.Text))
+                {
+                    ok = false;
+                    MessageBox.Show("No hay suficiente stock");
+                }
+                else if (leer.GetSqlDecimal(1) * Convert.ToDecimal(textBox3.Text) > leer2.GetSqlDecimal(0))
+                {
+                    ok = false;
+                    MessageBox.Show("No tiene suficientes millas");
+                }
+                else
+                {
+                    ok = true;
+                }
             }
             conexion.Close();
+            conexion2.Close();
+        }
+
+                private void canjeMillas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Canje_Millas.listadoProductos abrir = new Canje_Millas.listadoProductos();
+            abrir.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Canje_Millas.listadoClientes abrir = new Canje_Millas.listadoClientes();
+            abrir.Show();
         }
     }
 }
