@@ -46,5 +46,22 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public string idText
+        {
+            get
+            {
+                return this.textBox2.Text;
+            }
+            set
+            {
+                this.textBox2.Text = value;
+            }
+        }
     }
 }

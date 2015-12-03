@@ -22,6 +22,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             Abm_Aeronave.modifAeronaves abrir = new Abm_Aeronave.modifAeronaves();
             abrir.Show();
+            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
         }
 
         string query;
