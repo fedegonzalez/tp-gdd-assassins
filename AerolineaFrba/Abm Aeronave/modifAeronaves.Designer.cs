@@ -41,7 +41,6 @@
             this.buttonGuardar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // monthCalendar1
@@ -72,6 +72,7 @@
             this.button1.TabIndex = 71;
             this.button1.Text = "Seleccionar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox9
@@ -118,6 +119,7 @@
             this.checkBox2.TabIndex = 66;
             this.checkBox2.Text = "Baja por Fuera de Servicio";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -129,6 +131,7 @@
             this.checkBox1.TabIndex = 65;
             this.checkBox1.Text = "Baja por Vida Útil";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // textBox7
             // 
@@ -177,14 +180,6 @@
             this.label7.Size = new System.Drawing.Size(382, 32);
             this.label7.TabIndex = 60;
             this.label7.Text = "Modificación de Aeronaves";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(329, 246);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(217, 22);
-            this.textBox5.TabIndex = 59;
             // 
             // label5
             // 
@@ -254,6 +249,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(217, 22);
             this.textBox1.TabIndex = 49;
+            this.textBox1.Visible = false;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
@@ -261,9 +257,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(83, 101);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 17);
+            this.label2.Size = new System.Drawing.Size(122, 17);
             this.label2.TabIndex = 48;
-            this.label2.Text = "Fecha de Alta";
+            this.label2.Text = "Fecha de Retorno";
+            this.label2.Visible = false;
             // 
             // textBox2
             // 
@@ -283,12 +280,21 @@
             this.label1.TabIndex = 73;
             this.label1.Text = "Número de Aeronave";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(328, 246);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(218, 24);
+            this.comboBox1.TabIndex = 75;
+            // 
             // modifAeronaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(873, 529);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.monthCalendar1);
@@ -304,7 +310,6 @@
             this.Controls.Add(this.buttonGuardar);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label6);
@@ -338,7 +343,6 @@
         private System.Windows.Forms.Button buttonGuardar;
         private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
@@ -350,5 +354,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
