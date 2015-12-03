@@ -130,7 +130,6 @@ CREATE TABLE ASSASSINS.Cliente (
 	Cliente_Direccion			varchar(255) NOT NULL,
 	Cliente_Telefono			numeric(18) NOT NULL,
 	Cliente_Mail				varchar(255),
-	Cliente_Millas				numeric(8),
 	Cliente_Fecha_Nacimiento	datetime NOT NULL
 );
 

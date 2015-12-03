@@ -29,22 +29,20 @@ namespace AerolineaFrba.Consulta_Millas
         {
             if (textBox1.Text != "")
             {
+                query = "SELECT m.* FROM ASSASSINS.Millas m, ASSASSINS.Cliente c WHERE m.Cliente_ID=c.Cliente_ID"+
+                " AND c.Cliente_DNI=" + textBox1.Text + " AND DATEDIFF (day , m.Fecha , getdate())<365";
+
                 try
                 {
-                    query = "SELECT Cliente_Millas FROM ASSASSINS.Cliente WHERE Cliente_DNI=" + textBox1.Text;
-
-                    SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-                    SqlCommand comando = new SqlCommand(query, conexion);
-                    conexion.Open();
-                    SqlDataReader leer = comando.ExecuteReader();
-
-                    if (leer.Read())
+                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                    using (var command = new SqlCommand(query, connection))
+                    using (var adapter = new SqlDataAdapter(command))
                     {
-                        label3.Text = "Usted tiene " + leer.GetSqlDecimal(0) + " millas.";
-                        label3.Visible = true;
+                        connection.Open();
+                        var myTable = new DataTable();
+                        adapter.Fill(myTable);
+                        dataGridView1.DataSource = myTable;
                     }
-
-                    conexion.Close();
                 }
                 catch (Exception err)
                 {
