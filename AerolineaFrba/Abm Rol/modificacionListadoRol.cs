@@ -33,64 +33,26 @@ namespace AerolineaFrba.Abm_Rol
 
         }
 
-        private void buttonLimpiar_Click(object sender, EventArgs e)
+        bool flag = false;
+
+        public void set()
         {
-            textBoxParteRol.Text = "";
-            textBoxRol.Text = "";
-            comboBoxRol.Text = "";
+            flag = true;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Abm_Rol.modifRol abrir = new Abm_Rol.modifRol();
             abrir.Show();
+            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            if (flag) abrir.block();
         }
 
         string query;
-
+        
         private void modificacionListadoRol_Load(object sender, EventArgs e)
         {
-            query = "select Rol_Nombre from ASSASSINS.Rol";
-            try
-            {
-                cargarComboBox(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-        }
-
-        void cargarComboBox(string query)
-        {
-            query = "select Rol_Nombre from ASSASSINS.Rol";
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
-
-            while (leer.Read())
-            {
-                comboBoxRol.Items.Add(leer[0]);
-            }
-            conexion.Close();
-        }
-
-        private void buttonBuscar_Click(object sender, EventArgs e)
-        {
-            if (textBoxParteRol.Text != "" && textBoxRol.Text == "" && comboBoxRol.Text == "")
-            {
-                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre like '%" + textBoxParteRol.Text + "%'";
-            }
-            else if (textBoxParteRol.Text == "" && textBoxRol.Text != "" && comboBoxRol.Text == "")
-            {
-                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre ='" + textBoxRol.Text + "'";
-            }
-            else
-            {
-                query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre ='" + comboBoxRol.Text + "'";
-            }
-
+            query = "select * from ASSASSINS.Rol";
             try
             {
                 using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
@@ -108,5 +70,6 @@ namespace AerolineaFrba.Abm_Rol
                 MessageBox.Show(err.Message);
             }
         }
+
     }
 }

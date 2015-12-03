@@ -65,9 +65,10 @@ namespace AerolineaFrba.Abm_Rol
                 using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
                 using (SqlCommand comando = connection.CreateCommand())
                 {
-                    comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Rol_Nombre, Func_Nombre, Rol_Habilitado) VALUES (@rolNombre, @funcNombre, @rolHabilitado)";
+                    comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Rol_Nombre, Func_Nombre, Rol_Habilitado) VALUES"+
+                        "(@rolNombre, @funcNombre, @rolHabilitado)";
 
-                    comando.Parameters.AddWithValue("@rolID", textBox1.Text);
+                    comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
                     comando.Parameters.AddWithValue("@funcNombre", comboBox1.Text);
                     comando.Parameters.AddWithValue("@rolHabilitado", 1);
 

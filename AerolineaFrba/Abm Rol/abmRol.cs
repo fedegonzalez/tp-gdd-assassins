@@ -35,6 +35,7 @@ namespace AerolineaFrba.Abm_Rol
         {
             Abm_Rol.modificacionListadoRol abrir = new Abm_Rol.modificacionListadoRol();
             abrir.Show();
+            abrir.set();
             this.Hide();
         }
 

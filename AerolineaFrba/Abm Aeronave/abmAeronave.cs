@@ -47,5 +47,12 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Abm_Aeronave.modificacionListadoAeronave abrir = new Abm_Aeronave.modificacionListadoAeronave();
+            abrir.Show();
+            this.Hide();
+        }
     }
 }
