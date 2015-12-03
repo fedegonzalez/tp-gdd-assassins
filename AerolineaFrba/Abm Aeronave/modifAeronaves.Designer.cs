@@ -159,6 +159,7 @@
             this.buttonGuardar.TabIndex = 62;
             this.buttonGuardar.Text = "Actualizar";
             this.buttonGuardar.UseVisualStyleBackColor = true;
+            this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click_1);
             // 
             // buttonLimpiar
             // 

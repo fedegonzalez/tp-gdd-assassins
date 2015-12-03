@@ -87,3 +87,5 @@ C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\Aeroline
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoAeronaves.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoProductos.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoClientes.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.listadoDestino.resources
+C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.listadoOrigen.resources

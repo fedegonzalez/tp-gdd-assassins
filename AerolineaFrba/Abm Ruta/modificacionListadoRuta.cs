@@ -22,9 +22,23 @@ namespace AerolineaFrba.Abm_Ruta
         {
             Abm_Ruta.modifRuta abrir = new Abm_Ruta.modifRuta();
             abrir.Show();
+            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            this.Hide();
         }
 
         string query;
+
+        public string idText
+        {
+            get
+            {
+                return this.textBoxSelecRol.Text;
+            }
+            set
+            {
+                this.textBoxSelecRol.Text = value;
+            }
+        }
 
         private void modificacionListadoRuta_Load(object sender, EventArgs e)
         {
@@ -44,7 +58,14 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            query="SELECT * FROM ASSASSINS.Ruta WHERE Ruta_ID=" + textBoxRol;
+            if (textBoxRol.Text != "" && textBoxSelecRol.Text == "")
+            {
+                query = "SELECT * FROM ASSASSINS.Ruta WHERE Ruta_ID=" + textBoxRol.Text;
+            }
+            else
+            {
+                query = "SELECT * FROM ASSASSINS.Ruta WHERE Ruta_ID=" + textBoxSelecRol.Text;
+            }
             
             try
             {
@@ -62,6 +83,12 @@ namespace AerolineaFrba.Abm_Ruta
             {
                 MessageBox.Show(err.Message);
             }
+        }
+
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            textBoxRol.Text = "";
+            textBoxSelecRol.Text = "";
         }
     }
 }

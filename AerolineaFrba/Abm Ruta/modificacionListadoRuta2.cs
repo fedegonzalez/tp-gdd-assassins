@@ -30,8 +30,8 @@ namespace AerolineaFrba.Abm_Ruta
         {
             if (textBoxRol.Text != "" && textBox1.Text != "")
             {
-                query = "select r.* from assassins.ruta r, assassins.ciudad c1, assassins.ciudad c2" +
-                "where r.Ruta_Ciudad_Origen=c1.Ciudad_ID and r.Ruta_Ciudad_Destino=c2.Ciudad_ID" +
+                query = "select r.* from assassins.ruta r, assassins.ciudad c1, assassins.ciudad c2 " +
+                "where r.Ruta_Ciudad_Origen=c1.Ciudad_ID and r.Ruta_Ciudad_Destino=c2.Ciudad_ID " +
                 "and c1.Ciudad_Nombre like '%" + textBoxRol.Text + "%' and c2.Ciudad_Nombre like '%" + textBox1.Text + "%'";
 
                 try
@@ -51,6 +51,14 @@ namespace AerolineaFrba.Abm_Ruta
                     MessageBox.Show(err.Message);
                 }
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Abm_Ruta.modificacionListadoRuta abrir = new Abm_Ruta.modificacionListadoRuta();
+            abrir.Show();
+            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            this.Hide();
         }
     }
 }

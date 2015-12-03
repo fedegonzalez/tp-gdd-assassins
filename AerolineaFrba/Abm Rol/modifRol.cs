@@ -82,13 +82,13 @@ namespace AerolineaFrba.Abm_Rol
                 {
                     if (checkBox2.Visible == true)
                     {
-                        comando.CommandText = "UPDATE ASSASSINS.Ruta SET Rol_Habilitado=@habilitado";
+                        comando.CommandText = "UPDATE ASSASSINS.Rol SET Rol_Habilitado=@habilitado";
 
                         comando.Parameters.AddWithValue("@habilitado", checkBox2.Checked);
                     }
                     else
                     {
-                        comando.CommandText = "UPDATE ASSASSINS.Ruta SET Rol_Nombre=@rolNombre, Func_Nombre= @funcNombre"+
+                        comando.CommandText = "UPDATE ASSASSINS.Rol SET Rol_Nombre=@rolNombre, Func_Nombre= @funcNombre"+
                         "WHERE Rol_ID=@rolID";
 
                         comando.Parameters.AddWithValue("@rolID", textBox2.Text);

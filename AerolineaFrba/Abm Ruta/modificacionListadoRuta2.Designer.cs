@@ -33,10 +33,10 @@
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxRol = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +51,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(946, 473);
             this.dataGridView1.TabIndex = 21;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // columnSeleccionar
             // 
@@ -92,6 +93,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(714, 38);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(215, 22);
+            this.textBox1.TabIndex = 17;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -116,13 +124,6 @@
             this.label2.Size = new System.Drawing.Size(165, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Ingrese ciudad de origen";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(714, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 22);
-            this.textBox1.TabIndex = 17;
             // 
             // modificacionListadoRuta2
             // 

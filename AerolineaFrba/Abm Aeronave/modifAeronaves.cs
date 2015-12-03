@@ -65,13 +65,11 @@ namespace AerolineaFrba.Abm_Aeronave
             }
         }
 
-        string query;
-
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                ejecutar(query);
+                ejecutar();
             }
             catch (Exception err)
             {
@@ -79,7 +77,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
         }
 
-        void ejecutar(string query)
+        void ejecutar()
         {
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
@@ -140,6 +138,11 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 checkBox2.Checked = false;
             }
+        }
+
+        private void buttonGuardar_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
