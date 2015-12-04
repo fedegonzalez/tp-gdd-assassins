@@ -143,18 +143,6 @@
     <Compile Include="Abm Ruta\altaRuta.Designer.cs">
       <DependentUpon>altaRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\listadoDestino.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Ruta\listadoDestino.Designer.cs">
-      <DependentUpon>listadoDestino.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Ruta\listadoOrigen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Ruta\listadoOrigen.Designer.cs">
-      <DependentUpon>listadoOrigen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Ruta\modificacionListadoRuta2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,12 +306,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\altaRuta.resx">
       <DependentUpon>altaRuta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ruta\listadoDestino.resx">
-      <DependentUpon>listadoDestino.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ruta\listadoOrigen.resx">
-      <DependentUpon>listadoOrigen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\modificacionListadoRuta.resx">
       <DependentUpon>modificacionListadoRuta.cs</DependentUpon>

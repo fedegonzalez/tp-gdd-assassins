@@ -21,8 +21,6 @@ namespace AerolineaFrba.Abm_Ruta
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
             textBox5.Text = "";
             textBox6.Text = "";
         }
@@ -85,18 +83,6 @@ namespace AerolineaFrba.Abm_Ruta
                 comando.ExecuteNonQuery();
                 connection.Close();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Abm_Ruta.listadoOrigen abrir = new Abm_Ruta.listadoOrigen();
-            abrir.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Abm_Ruta.listadoDestino abrir = new Abm_Ruta.listadoDestino();
-            abrir.Show();
         }
     }
 }

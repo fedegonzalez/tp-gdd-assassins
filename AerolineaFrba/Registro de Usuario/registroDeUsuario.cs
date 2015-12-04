@@ -18,24 +18,11 @@ namespace AerolineaFrba.Registro_de_Usuario
             InitializeComponent();
         }
 
-        static string sha256Encrypt(string password)
-        {
-            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
-            System.Text.StringBuilder hash = new System.Text.StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
-            foreach (byte theByte in crypto)
-            {
-                hash.Append(theByte.ToString("x2"));
-            }
-            return hash.ToString();
-        }
-
         private void registroDeUsuario_Load(object sender, EventArgs e)
         {
 
         }
 
-        decimal intentos = 0;
         bool ok = false;
         string query;
 
@@ -43,13 +30,11 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             if (textUsuario.Text.Length > 0 && textPass.Text.Length > 0)
             {
-                query = "select * from ASSASSINS.Usuario where Usuario_Username='" + textUsuario.Text + "'";
-                string sha256Str = sha256Encrypt(textPass.Text);
-                query = query + " and Usuario_password='" + sha256Str + "'";
+                query = "EXEC ASSASSINS.SelectUsuario @Username = '" + textUsuario.Text + "' , @Password = '" + textPass.Text + "'";
 
                 try
                 {
-                    consultar(query);
+                    consultarUsuario(query);
                 }
                 catch (Exception err)
                 {
@@ -71,42 +56,13 @@ namespace AerolineaFrba.Registro_de_Usuario
                     inicioAdministrador abrir = new inicioAdministrador();
                     abrir.Show();
                 }
-                else
-                {
-                    intentos = intentos + 1;
-                    MessageBox.Show("Fallo de login");
-                    query = "update ASSASSINS.Usuario set Usuario_Intentos=Usuario_Intentos+1 where Usuario_Username='" + textUsuario.Text + "'";
-                    try
-                    {
-                        ejecutar(query);
-                    }
-                    catch (Exception err)
-                    {
-                        MessageBox.Show(err.Message);
-                    }
-
-                }
-
             }
             else
             {
                 MessageBox.Show("Todos los campos son obligatorios");
             }
-            if (intentos == 3)
-            {
-                button1.Enabled = false;
-                MessageBox.Show("Ha sobrepasado la cantidad permitida de intentos de login");
-                query = "update ASSASSINS.Usuario set Usuario_Habilitado=0 where Usuario_Username='" + textUsuario.Text + "'";
-                try
-                {
-                    ejecutar(query);
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message);
-                }
-            }
         }
+
         void ejecutar(string query)
         {
 
@@ -122,7 +78,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         }
 
-        void consultar(string query)
+        void consultarUsuario(string query)
         {
             SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             SqlCommand comando = new SqlCommand(query, conexion);
@@ -142,7 +98,30 @@ namespace AerolineaFrba.Registro_de_Usuario
                     MessageBox.Show("El usuario esta deshabilitado");
                 }
             }
-            conexion.Close();           
+            else
+            {
+                MessageBox.Show("Contraseña incorrecta");
+                ejecutar("update ASSASSINS.Usuario set Usuario_Intentos=Usuario_Intentos+1 where Usuario_Username='" + textUsuario.Text + "'");
+                consultarIntentos("SELECT * FROM ASSASSINS.Usuario WHERE Usuario_Username='" + textUsuario.Text + "'");
+            }
+            conexion.Close();
+        }
+
+        void consultarIntentos(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                if (leer.GetSqlDecimal(4) == 3)
+                {
+                    ejecutar("update ASSASSINS.Usuario set Usuario_Habilitado=0 where Usuario_Username='" + textUsuario.Text + "'");
+                }
+            }
+            conexion.Close();
         }
     }
 }
