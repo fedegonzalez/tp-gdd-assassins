@@ -111,6 +111,16 @@ CREATE TABLE ASSASSINS.Aeronave (
 	Aeronave_Habilitado					bit
 );
 
+-----------Tabla Butaca-----------
+CREATE TABLE ASSASSINS.Butaca ( 
+	Butaca_ID			integer IDENTITY(1,1) PRIMARY KEY,
+	Butaca_Nro			numeric(4),
+	Butaca_Ventana		bit,
+	Butaca_Pasillo		bit,
+	Butaca_Piso			numeric(1),
+	Aeronave_Numero		integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+);
+
 -----------Tabla Baja_Servicio-----------
 CREATE TABLE ASSASSINS.Baja_Servicio ( 
 	Baja_Servicio_ID					integer IDENTITY(1,1) PRIMARY KEY,
@@ -134,16 +144,6 @@ CREATE TABLE ASSASSINS.Viaje (
 	Viaje_Fecha_Salida				datetime,
 	Viaje_Fecha_Llegada				datetime,
 	Viaje_Fecha_Llegada_Estimada	datetime
-);
-
------------Tabla Butaca-----------
-CREATE TABLE ASSASSINS.Butaca ( 
-	Butaca_ID			integer IDENTITY(1,1) PRIMARY KEY,
-	Butaca_Nro			numeric(4),
-	Butaca_Ventana		bit,
-	Butaca_Pasillo		bit,
-	Butaca_Piso			numeric(1),
-	Aeronave_Numero		integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 );
 
 -----------Tabla Cliente-----------
@@ -461,6 +461,38 @@ INSERT INTO ASSASSINS.Aeronave(Aeronave_Matricula, Modelo_ID, Aeronave_KG_Capaci
 
 
 PRINT 'Tabla ASSASSINS.Aeronave migrada'
+GO
+
+-----------Butacas-----------
+
+INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Ventana, Butaca_Piso, Aeronave_Numero)
+	(SELECT Butaca_Nro, 1, Butaca_Piso, Aeronave_Numero 
+		FROM gd_esquema.Maestra m
+		LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
+		WHERE Butaca_Piso > 0 AND Butaca_Tipo = 'Ventanilla' 
+		GROUP BY a.Aeronave_Numero, Butaca_Nro, Butaca_Piso) 
+
+UPDATE ASSASSINS.Aeronave SET Aeronave_Butacas_Ventana = b.Cantidad_Butacas
+	FROM (SELECT Aeronave_Numero, COUNT(*) Cantidad_Butacas 
+			FROM ASSASSINS.Butaca 
+			WHERE Butaca_Ventana = 1 
+			GROUP BY Aeronave_Numero) b
+	WHERE ASSASSINS.Aeronave.Aeronave_Numero = b.Aeronave_Numero
+
+INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Pasillo, Butaca_Piso, Aeronave_Numero)
+	(SELECT Butaca_Nro, 1, Butaca_Piso, Aeronave_Numero 
+		FROM gd_esquema.Maestra m
+		LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
+		WHERE Butaca_Piso > 0 AND Butaca_Tipo = 'Pasillo' 
+		GROUP BY a.Aeronave_Numero, Butaca_Nro, Butaca_Piso) 
+
+UPDATE ASSASSINS.Aeronave SET Aeronave_Butacas_Pasillo = b.Cantidad_Butacas
+	FROM (SELECT Aeronave_Numero, COUNT(*) Cantidad_Butacas 
+			FROM ASSASSINS.Butaca 
+			WHERE Butaca_Pasillo = 1 
+			GROUP BY Aeronave_Numero) b
+	WHERE ASSASSINS.Aeronave.Aeronave_Numero = b.Aeronave_Numero	
+PRINT 'Tabla ASSASSINS.Butacas migrada'
 GO
 /*
 -----------Clientes-----------
