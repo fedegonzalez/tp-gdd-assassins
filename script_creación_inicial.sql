@@ -23,14 +23,19 @@ GO
 IF OBJECT_ID ('ASSASSINS.Canje') IS NOT NULL DROP TABLE ASSASSINS.Canje
 IF OBJECT_ID ('ASSASSINS.Productos') IS NOT NULL DROP TABLE ASSASSINS.Productos
 IF OBJECT_ID ('ASSASSINS.Millas') IS NOT NULL DROP TABLE ASSASSINS.Millas
-IF OBJECT_ID ('ASSASSINS.Devolucion') IS NOT NULL DROP TABLE ASSASSINS.Devolucion
+IF OBJECT_ID ('ASSASSINS.Devolucion_Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Devolucion_Pasaje
+IF OBJECT_ID ('ASSASSINS.Devolucion_Encomienda') IS NOT NULL DROP TABLE ASSASSINS.Devolucion_Encomienda
 IF OBJECT_ID ('ASSASSINS.Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Pasaje
+IF OBJECT_ID ('ASSASSINS.Encomienda') IS NOT NULL DROP TABLE ASSASSINS.Encomienda
 IF OBJECT_ID ('ASSASSINS.Ruta_Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Ruta_Aeronave
 IF OBJECT_ID ('ASSASSINS.Viaje') IS NOT NULL DROP TABLE ASSASSINS.Viaje
 IF OBJECT_ID ('ASSASSINS.Ruta_TipoServicio') IS NOT NULL DROP TABLE ASSASSINS.Ruta_TipoServicio
 IF OBJECT_ID ('ASSASSINS.Ruta') IS NOT NULL DROP TABLE ASSASSINS.Ruta
 IF OBJECT_ID ('ASSASSINS.Butaca') IS NOT NULL DROP TABLE ASSASSINS.Butaca
+IF OBJECT_ID ('ASSASSINS.Baja_Servicio') IS NOT NULL DROP TABLE ASSASSINS.Baja_Servicio
 IF OBJECT_ID ('ASSASSINS.Aeronave') IS NOT NULL DROP TABLE ASSASSINS.Aeronave
+IF OBJECT_ID ('ASSASSINS.Fabricante') IS NOT NULL DROP TABLE ASSASSINS.Fabricante
+IF OBJECT_ID ('ASSASSINS.Modelo') IS NOT NULL DROP TABLE ASSASSINS.Modelo
 IF OBJECT_ID ('ASSASSINS.Tipo_servicio') IS NOT NULL DROP TABLE ASSASSINS.Tipo_servicio
 IF OBJECT_ID ('ASSASSINS.Ciudad') IS NOT NULL DROP TABLE ASSASSINS.Ciudad
 IF OBJECT_ID ('ASSASSINS.Cliente') IS NOT NULL DROP TABLE ASSASSINS.Cliente
@@ -78,21 +83,39 @@ CREATE TABLE ASSASSINS.Ruta_TipoServicio (
 	TipoServ_ID 	integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio
 );
 
+-----------Tabla Fabricante-----------
+CREATE TABLE ASSASSINS.Fabricante ( 
+	Fabricante_ID		integer IDENTITY(1,1) PRIMARY KEY,
+	Fabricante_Nombre 	varchar(255)
+);
+
+-----------Tabla Fabricante-----------
+CREATE TABLE ASSASSINS.Modelo ( 
+	Modelo_ID		integer IDENTITY(1,1) PRIMARY KEY,
+	Modelo_Nombre 	varchar(255)
+);
+
 -----------Tabla Aeronave-----------
 CREATE TABLE ASSASSINS.Aeronave ( 
 	Aeronave_Numero						integer IDENTITY(1,1) PRIMARY KEY,
 	Aeronave_Matricula					varchar(255) unique,
-	Aeronave_Modelo						varchar(255),
+	Modelo_ID							integer FOREIGN KEY REFERENCES ASSASSINS.Modelo,
 	Aeronave_KG_Capacidad				numeric(6),
-	Aeronave_Fabricante					varchar(255),
+	Fabricante_ID						integer FOREIGN KEY REFERENCES ASSASSINS.Fabricante,
 	Aeronave_Butacas_Pasillo			integer,
 	Aeronave_Butacas_Ventana			integer,
 	TipoServ_ID							integer FOREIGN KEY REFERENCES ASSASSINS.Tipo_Servicio,
-	Aeronave_Fecha_Fuera_Servicio		datetime,
-	Aeronave_Fecha_Reinicio_Servicio	datetime,
 	Aeronave_Fecha_Baja_Definitiva		datetime,
 	Aeronave_Fecha_Alta					datetime,
 	Aeronave_Habilitado					bit
+);
+
+-----------Tabla Baja_Servicio-----------
+CREATE TABLE ASSASSINS.Baja_Servicio ( 
+	Baja_Servicio_ID					integer IDENTITY(1,1) PRIMARY KEY,
+	Aeronave_Fecha_Fuera_Servicio		datetime,
+	Aeronave_Fecha_Reinicio_Servicio	datetime,
+	Aeronave_Numero 					integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave
 );
 
 -----------Tabla Ruta_Aeronave-----------
@@ -118,7 +141,7 @@ CREATE TABLE ASSASSINS.Butaca (
 	Butaca_Nro			numeric(4),
 	Butaca_Ventana		bit,
 	Butaca_Pasillo		bit,
-	Aeronave_Numero	integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
+	Aeronave_Numero		integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 );
 
 -----------Tabla Cliente-----------
@@ -163,15 +186,35 @@ CREATE TABLE ASSASSINS.Pasaje (
 	PNR						varchar(8)
 );
 
------------Tabla Devolucion-----------
-CREATE TABLE ASSASSINS.Devolucion ( 
-	Devolucion_ID			integer IDENTITY(1,1) PRIMARY KEY,
-	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
-	PNR						varchar(8),
-	Fecha_Devolucion		datetime,
-	Motivo 					varchar(255)
+-----------Tabla Encomienda-----------
+CREATE TABLE ASSASSINS.Encomienda ( 
+	Encomienda_ID				integer IDENTITY(1,1) PRIMARY KEY,
+	Encomienda_Precio			numeric(8,2),
+	Encomienda_Fecha_Compra		datetime,
+	Cliente_ID 					integer FOREIGN KEY REFERENCES ASSASSINS.Cliente,
+	Usuario_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
+	Viaje_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Viaje,
+	Cantidad_KG					numeric(6),
+	PNR							varchar(8)
 );
 
+-----------Tabla Devolucion_Pasaje-----------
+CREATE TABLE ASSASSINS.Devolucion_Pasaje ( 
+	Devolucion_Pasaje_ID		integer IDENTITY(1,1) PRIMARY KEY,
+	Pasaje_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
+	PNR							varchar(8),
+	Fecha_Devolucion			datetime,
+	Motivo 						varchar(255)
+);
+
+-----------Tabla Devolucion_Encomienda-----------
+CREATE TABLE ASSASSINS.Devolucion_Encomienda ( 
+	Devolucion_Encomienda_ID	integer IDENTITY(1,1) PRIMARY KEY,
+	Encomienda_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Encomienda,
+	PNR							varchar(8),
+	Fecha_Devolucion			datetime,
+	Motivo 						varchar(255)
+);
 -----------Tabla Millas-----------
 CREATE TABLE ASSASSINS.Millas ( 
 	Millas_ID				integer IDENTITY(1,1) PRIMARY KEY,
