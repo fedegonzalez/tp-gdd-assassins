@@ -21,10 +21,10 @@ namespace AerolineaFrba.Abm_Aeronave
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox3.Text = "";
             textBox4.Text = "";
             comboBox1.Text = "";
-            textBox6.Text = "";
+            comboBox2.Text = "";
+            comboBox3.Text = "";
             textBox7.Text = "";
             textBox8.Text = "";
             textBox9.Text = "";
@@ -70,13 +70,12 @@ namespace AerolineaFrba.Abm_Aeronave
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
             {
-                comando.CommandText = "INSERT INTO ASSASSINS.Aeronave (Aeronave_Matricula, Aeronave_Modelo, Aeronave_KG_Capacidad, Aeronave_Fabricante, Aeronave_Butacas_Pasillo, Aeronave_Butacas_Ventana, TipoServ_ID, Aeronave_Fecha_Alta, Aeronave_Habilitado)"
-                +"VALUES (@aeroMat, @aeroMod, @aeroKG, @aeroFab, @aeroButPas, @aeroButVen, @tipoServ, @aeroFechaAlta, @aeroHab)";
+                comando.CommandText = "EXEC ASSASSINS.InsertAeronave @aeroMat=@aeroMat, @aeroMod=@aeroMod, @aeroKG=@aeroKG, @aeroFab=@aeroFab, @aeroButPas=@aeroButPas, @aeroButVen=@aeroButVen, @tipoServ=@tipoServ, @aeroFechaAlta=@aeroFechaAlta, @aeroHab=@aeroHab";
 
                 comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
-                comando.Parameters.AddWithValue("@aeroMod", textBox3.Text);
+                comando.Parameters.AddWithValue("@aeroMod", comboBox2.Text);
                 comando.Parameters.AddWithValue("@aeroKG", textBox9.Text);
-                comando.Parameters.AddWithValue("@aeroFab", textBox6.Text);
+                comando.Parameters.AddWithValue("@aeroFab", comboBox3.Text);
                 comando.Parameters.AddWithValue("@aeroButPas", textBox7.Text);
                 comando.Parameters.AddWithValue("@aeroButVen", textBox8.Text);
                 comando.Parameters.AddWithValue("@tipoServ", comboBox1.Text);
@@ -109,6 +108,15 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 MessageBox.Show(err.Message);
             }
+            query = "select Fabricante_Nombre from ASSASSINS.Fabricante";
+            try
+            {
+                cargarComboBoxFabricante(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
 
@@ -136,6 +144,20 @@ namespace AerolineaFrba.Abm_Aeronave
             while (leer.Read())
             {
                 comboBox2.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        void cargarComboBoxFabricante(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox3.Items.Add(leer[0]);
             }
             conexion.Close();
         }

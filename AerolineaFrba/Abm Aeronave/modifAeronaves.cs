@@ -31,11 +31,10 @@ namespace AerolineaFrba.Abm_Aeronave
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            textBox3.Text = "";
+            comboBox1.Text = "";
             textBox4.Text = "";
-            textBox6.Text = "";
-            textBox7.Text = "";
-            textBox8.Text = "";
+            comboBox2.Text = "";
+            comboBox3.Text = "";
             textBox9.Text = "";
             comboBox1.Text = "";
             checkBox1.Checked = false;
@@ -43,9 +42,37 @@ namespace AerolineaFrba.Abm_Aeronave
             monthCalendar1.Visible = false;
         }
 
+        string query;
+
         private void modifAeronaves_Load(object sender, EventArgs e)
         {
-            
+            query = "select TipoServ_Nombre from ASSASSINS.Tipo_Servicio";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            query = "select Modelo_Nombre from ASSASSINS.Modelo";
+            try
+            {
+                cargarComboBoxModelo(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            query = "select Fabricante_Nombre from ASSASSINS.Fabricante";
+            try
+            {
+                cargarComboBoxFabricante(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -84,27 +111,35 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 if (checkBox1.Checked == true)
                 {
-                    comando.CommandText = "UPDATE ASSASSINS.Aeronave SET Aeronave_Fecha_Baja_Definitiva=getdate(),"+
-                    "Aeronave_Habilitado=0 WHERE Aeronave_Numero=@aeroNum";
+                    comando.CommandText = "UPDATE ASSASSINS.Aeronave SET Aeronave_Habilitado=0, "+
+                    "Aeronave_Fecha_Baja_Definitiva=getdate() WHERE Aeronave_Numero=@aeroNum";
 
                     comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
                 }
                 else
                 {
-                    comando.CommandText = "UPDATE ASSASSINS.Aeronave SET Aeronave_Matricula=@aeroMat, Aeronave_Modelo=@aeroMod,"
-                + "Aeronave_KG_Capacidad=@aeroKG, Aeronave_Fabricante=@aeroFab, Aeronave_Butacas_Pasillo=@aeroButPas," +
-                "Aeronave_Butacas_Ventana=@aeroButVen, TipoServ_ID=@tipoServ, Aeronave_Fecha_Reinicio_Servicio=@aeroFechaRein," +
-                "Aeronave_Habilitado=0, Aeronave_Fecha_Fuera_Servicio=getdate() WHERE Aeronave_Numero=@aeroNum)";
+                    if (checkBox2.Checked == true)
+                    {
+                        comando.CommandText = "EXEC ASSASSINS.UpdateAeronave @aeroNum=@aeroNum, @aeroMat=@aeroMat, @aeroMod=@aeroMod,"
+                        + "@aeroKG=@aeroKG, @aeroFab=@aeroFab, @tipoServ=@tipoServ, " +
+                        "Aeronave_Habilitado=@aeroHab WHERE Aeronave_Numero=@aeroNum); INSERT INTO ASSASSINS.Baja_Servicio("
+                        +"Aeronave_Fecha_Fuera_Servicio, Aeronave_Fecha_Reinicio_Servicio, Aeronave_Numero) VALUES("+
+                        "getdate(), @fechaReset, @aeroNum)";
+                    }
+                    else
+                    {
+                        comando.CommandText = "EXEC ASSASSINS.UpdateAeronave @aeroNum=@aeroNum, @aeroMat=@aeroMat, @aeroMod=@aeroMod,"
+                        + "@aeroKG=@aeroKG, @aeroFab=@aeroFab, @tipoServ=@tipoServ, " +
+                        "Aeronave_Habilitado=@aeroHab WHERE Aeronave_Numero=@aeroNum)";
+                    }
 
+                    comando.Parameters.AddWithValue("@fechaReset", textBox1.Text);
                     comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
                     comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
-                    comando.Parameters.AddWithValue("@aeroMod", textBox3.Text);
+                    comando.Parameters.AddWithValue("@aeroMod", comboBox2.Text);
                     comando.Parameters.AddWithValue("@aeroKG", textBox9.Text);
-                    comando.Parameters.AddWithValue("@aeroFab", textBox6.Text);
-                    comando.Parameters.AddWithValue("@aeroButPas", textBox7.Text);
-                    comando.Parameters.AddWithValue("@aeroButVen", textBox8.Text);
+                    comando.Parameters.AddWithValue("@aeroFab", comboBox3.Text);
                     comando.Parameters.AddWithValue("@tipoServ", comboBox1.Text);
-                    comando.Parameters.AddWithValue("@aeroFechaRein", textBox1.Text);
                     comando.Parameters.AddWithValue("@aeroHab", checkBox1.Checked);
                 }
 
@@ -138,6 +173,48 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 checkBox2.Checked = false;
             }
+        }
+
+        void cargarComboBox(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox1.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        void cargarComboBoxModelo(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox2.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        void cargarComboBoxFabricante(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox3.Items.Add(leer[0]);
+            }
+            conexion.Close();
         }
 
         private void buttonGuardar_Click_1(object sender, EventArgs e)

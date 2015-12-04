@@ -322,6 +322,35 @@ CREATE PROCEDURE ASSASSINS.SelectUsuario(@Username varchar(255), @Password varch
 	END;
 GO
 
+--------Inserta una aeronave y las butacas----------
+IF OBJECT_ID ('ASSASSINS.InsertAeronave') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertAeronave
+GO
+CREATE PROCEDURE ASSASSINS.InsertAeronave(@aeroMat varchar(255), @aeroMod varchar(255), @aeroKG numeric(6,0),
+@aeroFab varchar(255), @aeroButPas int, @aeroButVen int, @tipoServ varchar(255), @aeroFechaAlta datetime, @aeroHab bit)
+	AS BEGIN
+		DECLARE @Contador int
+		SET @Contador = 0
+		INSERT INTO ASSASSINS.Aeronave(Aeronave_Matricula, Modelo_ID, Aeronave_KG_Capacidad,
+		Fabricante_ID, Aeronave_Butacas_Pasillo, Aeronave_Butacas_Ventana, TipoServ_ID,
+		Aeronave_Fecha_Alta, Aeronave_Habilitado)
+		VALUES(@aeroMat, (SELECT Modelo_ID FROM ASSASSINS.Modelo WHERE Modelo_Nombre=@aeroMod),
+		@aeroKG, (SELECT Fabricante_ID FROM ASSASSINS.Fabricante WHERE Fabricante_Nombre=@aeroFab),
+		@aeroButPas, @aeroButVen, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE
+		TipoServ_Nombre=@tipoServ), @aeroFechaAlta, @aeroHab);
+		WHILE @Contador < (@aeroButPas)
+		BEGIN
+			INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Pasillo, Butaca_Ventana, Aeronave_Numero)
+			VALUES (@Contador,1,0,(SELECT Aeronave_Numero FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula=@aeroMat))
+		END
+		SET @Contador = 0
+		WHILE @Contador < (@aeroButVen)
+		BEGIN
+			INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Pasillo, Butaca_Ventana, Aeronave_Numero)
+			VALUES (@Contador+@aeroButPas,0,1,(SELECT Aeronave_Numero FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula=@aeroMat))
+		END
+	END;
+GO
+
 ---------------------------------------------------------------------------
 --		CREACION DE DATOS
 ---------------------------------------------------------------------------
