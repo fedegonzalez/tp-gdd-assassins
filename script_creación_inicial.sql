@@ -70,6 +70,7 @@ CREATE TABLE ASSASSINS.Tipo_Servicio (
 -----------Tabla Ruta-----------
 CREATE TABLE ASSASSINS.Ruta ( 
 	Ruta_ID					integer IDENTITY(1,1) PRIMARY KEY,
+	Ruta_Codigo				integer,
 	Ruta_Precio_BasePasaje	numeric(8,2),
 	Ruta_Precio_BaseKG		numeric(8,2),
 	Ruta_Ciudad_Origen		integer FOREIGN KEY REFERENCES ASSASSINS.Ciudad,
@@ -391,23 +392,20 @@ GO
 
 
 -----------Rutas-----------
-/*SET IDENTITY_INSERT ASSASSINS.Ruta ON
 
-INSERT INTO ASSASSINS.Ruta(Ruta_ID, Ruta_Precio_BasePasaje, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)
+INSERT INTO ASSASSINS.Ruta(Ruta_Codigo, Ruta_Precio_BasePasaje, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)
 	(SELECT DISTINCT Ruta_Codigo, Ruta_Precio_BasePasaje, Ciudad_Origen.Ciudad_ID, Ciudad_Destino.Ciudad_ID, 1
 	  FROM gd_esquema.Maestra Maestra
 	  LEFT JOIN ASSASSINS.Ciudad Ciudad_Destino ON(Ciudad_Destino.Ciudad_Nombre = Maestra.Ruta_Ciudad_Destino)
 	  LEFT JOIN ASSASSINS.Ciudad Ciudad_Origen ON(Ciudad_Origen.Ciudad_Nombre = Maestra.Ruta_Ciudad_Origen)
 	WHERE Ruta_Codigo > 0 AND Ruta_Precio_BasePasaje > 0)
-
-UPDATE ASSASSINS.Ruta SET Ruta_Precio_BaseKG = Ruta_Precio_BaseKG
-	FROM (SELECT Ruta_Precio_BaseKG FROM gd_esquema.Maestra WHERE Ruta_Precio_BaseKG > 0) i
-	WHERE ASSASSINS.Ruta.Ruta_ID = i.Ruta_Codigo
-
+	
+UPDATE ASSASSINS.Ruta SET Ruta_Precio_BaseKG = i.Ruta_Precio_BaseKG
+	FROM (SELECT Ruta_Codigo, o.Ciudad_ID Origen, d.Ciudad_ID Destino, Ruta_Precio_BaseKG FROM gd_esquema.Maestra m LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen) LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino) WHERE Ruta_Precio_BaseKG > 0 GROUP BY Ruta_Codigo, o.Ciudad_ID, d.Ciudad_ID, Ruta_Precio_BaseKG) i
+	WHERE ASSASSINS.Ruta.Ruta_Codigo = i.Ruta_Codigo AND ASSASSINS.Ruta.Ruta_Ciudad_Origen = i.Origen AND ASSASSINS.Ruta.Ruta_Ciudad_Destino = i.Destino
+	
 PRINT 'Tabla ASSASSINS.Ruta migrada'
 GO
-
-SET IDENTITY_INSERT ASSASSINS.Ruta OFF*/
 
 -----------Clientes-----------
 INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
