@@ -90,7 +90,7 @@ CREATE TABLE ASSASSINS.Fabricante (
 	Fabricante_Nombre 	varchar(255)
 );
 
------------Tabla Fabricante-----------
+-----------Tabla Modelo-----------
 CREATE TABLE ASSASSINS.Modelo ( 
 	Modelo_ID		integer IDENTITY(1,1) PRIMARY KEY,
 	Modelo_Nombre 	varchar(255)
@@ -401,12 +401,32 @@ INSERT INTO ASSASSINS.Ruta(Ruta_Codigo, Ruta_Precio_BasePasaje, Ruta_Ciudad_Orig
 	WHERE Ruta_Codigo > 0 AND Ruta_Precio_BasePasaje > 0)
 	
 UPDATE ASSASSINS.Ruta SET Ruta_Precio_BaseKG = i.Ruta_Precio_BaseKG
-	FROM (SELECT Ruta_Codigo, o.Ciudad_ID Origen, d.Ciudad_ID Destino, Ruta_Precio_BaseKG FROM gd_esquema.Maestra m LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen) LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino) WHERE Ruta_Precio_BaseKG > 0 GROUP BY Ruta_Codigo, o.Ciudad_ID, d.Ciudad_ID, Ruta_Precio_BaseKG) i
+	FROM (SELECT Ruta_Codigo, o.Ciudad_ID Origen, d.Ciudad_ID Destino, Ruta_Precio_BaseKG 
+			FROM gd_esquema.Maestra m 
+			LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen) 
+			LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino) 
+			WHERE Ruta_Precio_BaseKG > 0 
+			GROUP BY Ruta_Codigo, o.Ciudad_ID, d.Ciudad_ID, Ruta_Precio_BaseKG) i
 	WHERE ASSASSINS.Ruta.Ruta_Codigo = i.Ruta_Codigo AND ASSASSINS.Ruta.Ruta_Ciudad_Origen = i.Origen AND ASSASSINS.Ruta.Ruta_Ciudad_Destino = i.Destino
 	
 PRINT 'Tabla ASSASSINS.Ruta migrada'
 GO
 
+-----------Rutas con Tipos de Servicio-----------
+INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
+	(SELECT Ruta_ID, TipoServ_ID 
+	FROM gd_esquema.Maestra m 
+	LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen) 
+	LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino) 
+	LEFT JOIN ASSASSINS.Ruta r ON(r.Ruta_Codigo = m.Ruta_Codigo AND o.Ciudad_ID = r.Ruta_Ciudad_Origen AND d.Ciudad_ID = r.Ruta_Ciudad_Destino) 
+	LEFT JOIN ASSASSINS.Tipo_Servicio ts ON(ts.TipoServ_Nombre = m.Tipo_Servicio) 
+	WHERE Ruta_ID IS NOT NULL AND TipoServ_ID IS NOT NULL 
+	GROUP BY Ruta_ID, TipoServ_ID)
+
+PRINT 'Tabla ASSASSINS.Ruta_TipoServicio migrada'
+GO
+
+/*
 -----------Clientes-----------
 INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
 	(SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Dir, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
@@ -417,7 +437,7 @@ PRINT 'Tabla ASSASSINS.Cliente migrada'
 GO
 
 -----------Pasajes-----------
-/*SET IDENTITY_INSERT ASSASSINS.Pasaje ON
+SET IDENTITY_INSERT ASSASSINS.Pasaje ON
 
 INSERT INTO ASSASSINS.Pasaje(Pasaje_ID, Pasaje_Precio, Pasaje_Fecha_Compra, Cliente_ID)
 	SELECT Pasaje_Codigo, Pasaje_Precio, Pasaje_FechaCompra, Cliente_ID
