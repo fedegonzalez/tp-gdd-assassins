@@ -426,6 +426,35 @@ INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
 PRINT 'Tabla ASSASSINS.Ruta_TipoServicio migrada'
 GO
 
+-----------Fabricantes-----------
+INSERT INTO ASSASSINS.Fabricante(Fabricante_Nombre)
+	(SELECT DISTINCT Aeronave_Fabricante
+	  FROM gd_esquema.Maestra
+	WHERE Aeronave_Fabricante IS NOT NULL) 
+
+
+PRINT 'Tabla ASSASSINS.Fabricante migrada'
+GO
+
+-----------Modelos-----------
+INSERT INTO ASSASSINS.Modelo(Modelo_Nombre)
+	(SELECT DISTINCT Aeronave_Modelo
+	  FROM gd_esquema.Maestra
+	WHERE Aeronave_Modelo IS NOT NULL) 
+
+
+PRINT 'Tabla ASSASSINS.Modelo migrada'
+GO
+/*
+-----------Aeronaves-----------
+INSERT INTO ASSASSINS.Aeronave(Aeronave_Matricula, Modelo_ID, Aeronave_KG_Capacidad, Fabricante_ID, Aeronave_Butacas_Pasillo, Aeronave_Butacas_Ventana, TipoServ_ID, Aeronave_Habilitado)
+	(SELECT DISTINCT Aeronave_Matricula
+	  FROM gd_esquema.Maestra
+	WHERE Aeronave_Modelo IS NOT NULL) 
+
+
+PRINT 'Tabla ASSASSINS.Aeronave migrada'
+GO*/
 /*
 -----------Clientes-----------
 INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
