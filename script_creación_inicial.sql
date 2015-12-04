@@ -20,9 +20,9 @@ GO
 --		DROP TABLAS
 ---------------------------------------------------------------------------
 
+IF OBJECT_ID ('ASSASSINS.Millas') IS NOT NULL DROP TABLE ASSASSINS.Millas
 IF OBJECT_ID ('ASSASSINS.Canje') IS NOT NULL DROP TABLE ASSASSINS.Canje
 IF OBJECT_ID ('ASSASSINS.Productos') IS NOT NULL DROP TABLE ASSASSINS.Productos
-IF OBJECT_ID ('ASSASSINS.Millas') IS NOT NULL DROP TABLE ASSASSINS.Millas
 IF OBJECT_ID ('ASSASSINS.Devolucion_Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Devolucion_Pasaje
 IF OBJECT_ID ('ASSASSINS.Devolucion_Encomienda') IS NOT NULL DROP TABLE ASSASSINS.Devolucion_Encomienda
 IF OBJECT_ID ('ASSASSINS.Pasaje') IS NOT NULL DROP TABLE ASSASSINS.Pasaje
@@ -142,6 +142,7 @@ CREATE TABLE ASSASSINS.Butaca (
 	Butaca_Nro			numeric(4),
 	Butaca_Ventana		bit,
 	Butaca_Pasillo		bit,
+	Butaca_Piso			numeric(1),
 	Aeronave_Numero		integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 );
 
@@ -216,14 +217,6 @@ CREATE TABLE ASSASSINS.Devolucion_Encomienda (
 	Fecha_Devolucion			datetime,
 	Motivo 						varchar(255)
 );
------------Tabla Millas-----------
-CREATE TABLE ASSASSINS.Millas ( 
-	Millas_ID				integer IDENTITY(1,1) PRIMARY KEY,
-	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
-	Millas					numeric(8),
-	Fecha					datetime,
-	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente
-);
 
 -----------Tabla Productos-----------
 CREATE TABLE ASSASSINS.Productos ( 
@@ -240,6 +233,16 @@ CREATE TABLE ASSASSINS.Canje (
 	Producto_ID 			integer FOREIGN KEY REFERENCES ASSASSINS.Productos,
 	Fecha				    datetime,
 	Cantidad				numeric(4)
+);
+
+-----------Tabla Millas-----------
+CREATE TABLE ASSASSINS.Millas ( 
+	Millas_ID				integer IDENTITY(1,1) PRIMARY KEY,
+	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
+	Canje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Canje,
+	Millas					numeric(8),
+	Fecha					datetime,
+	Cliente_ID 				integer FOREIGN KEY REFERENCES ASSASSINS.Cliente
 );
 
 -----------Tabla Funcionalidad-----------
@@ -445,16 +448,20 @@ INSERT INTO ASSASSINS.Modelo(Modelo_Nombre)
 
 PRINT 'Tabla ASSASSINS.Modelo migrada'
 GO
-/*
+
 -----------Aeronaves-----------
-INSERT INTO ASSASSINS.Aeronave(Aeronave_Matricula, Modelo_ID, Aeronave_KG_Capacidad, Fabricante_ID, Aeronave_Butacas_Pasillo, Aeronave_Butacas_Ventana, TipoServ_ID, Aeronave_Habilitado)
-	(SELECT DISTINCT Aeronave_Matricula
-	  FROM gd_esquema.Maestra
-	WHERE Aeronave_Modelo IS NOT NULL) 
+INSERT INTO ASSASSINS.Aeronave(Aeronave_Matricula, Modelo_ID, Aeronave_KG_Capacidad, Fabricante_ID, TipoServ_ID, Aeronave_Habilitado)
+	(SELECT Aeronave_Matricula, Modelo_ID, (SELECT MAX(Aeronave_KG_Disponibles + Paquete_KG) FROM gd_esquema.Maestra WHERE Aeronave_Matricula = m.Aeronave_Matricula), Fabricante_ID, TipoServ_ID, 1
+		FROM gd_esquema.Maestra m
+		LEFT JOIN ASSASSINS.Modelo mo ON(m.Aeronave_Modelo = mo.Modelo_Nombre)
+		LEFT JOIN ASSASSINS.Fabricante fa ON(m.Aeronave_Fabricante = fa.Fabricante_Nombre)
+		LEFT JOIN ASSASSINS.Tipo_Servicio serv ON(m.Tipo_Servicio = serv.TipoServ_Nombre)
+		WHERE Aeronave_Matricula IS NOT NULL
+		GROUP BY Aeronave_Matricula, Modelo_ID, Fabricante_ID, TipoServ_ID) 
 
 
 PRINT 'Tabla ASSASSINS.Aeronave migrada'
-GO*/
+GO
 /*
 -----------Clientes-----------
 INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cliente_Direccion, Cliente_Telefono, Cliente_Mail, Cliente_Fecha_Nacimiento)
