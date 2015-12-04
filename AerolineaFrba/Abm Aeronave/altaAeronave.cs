@@ -91,10 +91,19 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void altaAeronave_Load(object sender, EventArgs e)
         {
-            query = "select TipoServ_ID from ASSASSINS.Tipo_Servicio";
+            query = "select TipoServ_Nombre from ASSASSINS.Tipo_Servicio";
             try
             {
                 cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            query = "select Modelo_Nombre from ASSASSINS.Modelo";
+            try
+            {
+                cargarComboBoxModelo(query);
             }
             catch (Exception err)
             {
@@ -113,6 +122,20 @@ namespace AerolineaFrba.Abm_Aeronave
             while (leer.Read())
             {
                 comboBox1.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        void cargarComboBoxModelo(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox2.Items.Add(leer[0]);
             }
             conexion.Close();
         }
