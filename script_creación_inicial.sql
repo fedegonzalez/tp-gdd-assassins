@@ -605,7 +605,7 @@ GO
 
 -----------Millas-----------
 INSERT INTO ASSASSINS.Millas(Pasaje_ID, Cliente_ID, Millas, Fecha, Encomienda_ID)
-	(SELECT pas.Pasaje_ID, cli.Cliente_ID, convert(integer,(m.Pasaje_Precio + m.Paquete_Precio / 10)), m.FechaLLegada,  Encomienda_ID
+	(SELECT pas.Pasaje_ID, cli.Cliente_ID, convert(integer,(m.Pasaje_Precio + m.Paquete_Precio / 10)), m.FechaLLegada, enco.Encomienda_ID
 	FROM gd_esquema.Maestra m 
 	LEFT JOIN ASSASSINS.Cliente cli ON(cli.Cliente_DNI = m.Cli_Dni AND Cli_Apellido=m.Cli_Apellido)
 	LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
