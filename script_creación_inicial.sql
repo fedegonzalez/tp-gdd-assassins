@@ -183,7 +183,6 @@ CREATE TABLE ASSASSINS.Pasaje (
 	Usuario_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
 	Butaca_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Butaca,
 	Viaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Viaje,
-	Cantidad_KG				numeric(6),
 	PNR						varchar(8)
 );
 
@@ -549,17 +548,16 @@ INSERT INTO ASSASSINS.Ruta_Aeronave(Ruta_ID, Aeronave_Numero)
 	
 PRINT 'Tabla ASSASSINS.Ruta_Aeronave migrada'
 GO  
------------Encomienda-----------
 
-INSERT INTO ASSASSINS.Encomienda(Encomienda_Precio, Encomienda_Fecha_Compra, Cliente_ID, Usuario_ID, Viaje_ID, Cantidad_KG, PNR)
-	(SELECT DISTINCT Pasaje_Precio, Pasaje_FechaCompra, c.Cliente_ID, NULL, Viaje_ID, Paquete_KG, null
-	  FROM gd_esquema.Maestra m
-	  LEFT JOIN ASSASSINS.Cliente c ON(m.Cli_Dni = c.Cliente_DNI)
-	  LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
-	  LEFT JOIN ASSASSINS.Viaje v ON(v.Aeronave_Numero = a.Aeronave_Numero AND v.Viaje_Fecha_Llegada = m.FechaLLegada)
-	  WHERE Paquete_Codigo IS NOT NULL)
+-----------Viajes-----------
+INSERT INTO ASSASSINS.Viaje(Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, Viaje_Fecha_Llegada_Estimada)
+	(SELECT rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada
+	FROM gd_esquema.Maestra m 
+	LEFT JOIN ASSASSINS.Ruta rut ON(rut.Ruta_Codigo = m.Ruta_Codigo) 
+	LEFT JOIN ASSASSINS.Aeronave aer ON(aer.Aeronave_Matricula = m.Aeronave_Matricula) 
+	GROUP BY rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada)
 
-PRINT 'Tabla ASSASSINS.Encomienda migrada'
+PRINT 'Tabla ASSASSINS.Viajes migrada'
 GO
 	  
 -----------Clientes-----------
@@ -570,17 +568,49 @@ INSERT INTO ASSASSINS.Cliente(Cliente_Nombre, Cliente_Apellido, Cliente_DNI, Cli
 
 PRINT 'Tabla ASSASSINS.Cliente migrada'
 GO
-
 -----------Pasajes-----------
-/*SET IDENTITY_INSERT ASSASSINS.Pasaje ON
-
-INSERT INTO ASSASSINS.Pasaje(Pasaje_ID, Pasaje_Precio, Pasaje_Fecha_Compra, Cliente_ID)
-	SELECT Pasaje_Codigo, Pasaje_Precio, Pasaje_FechaCompra, Cliente_ID
-	  FROM gd_esquema.Maestra m LEFT JOIN ASSASSINS.Cliente c ON(c.Cliente_DNI = m.Cli_Dni)
-	WHERE Pasaje_Codigo > 0
-
-
-SET IDENTITY_INSERT ASSASSINS.Pasaje OFF
+INSERT INTO ASSASSINS.Pasaje(Pasaje_Precio, Pasaje_Fecha_Compra, Cliente_ID, Usuario_ID, Butaca_ID, Viaje_ID, PNR)
+	(SELECT m.Pasaje_Precio, m.Pasaje_FechaCompra, cli.Cliente_ID, NULL, bu.Butaca_ID, via.Viaje_ID , NULL
+	  FROM gd_esquema.Maestra m 
+	  LEFT JOIN ASSASSINS.Cliente cli ON(cli.Cliente_DNI = m.Cli_Dni) 
+	  LEFT JOIN ASSASSINS.Aeronave aero ON(aero.Aeronave_Matricula = m.Aeronave_Matricula) 
+	  LEFT JOIN ASSASSINS.Butaca bu ON( bu.Butaca_Nro = m.Butaca_Nro and bu.Aeronave_Numero = aero.Aeronave_Numero)
+      LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino)
+	  LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen)
+	  LEFT JOIN ASSASSINS.Ruta r ON(r.Ruta_Ciudad_Destino = d.Ciudad_ID AND r.Ruta_Ciudad_Origen = o.Ciudad_ID AND m.Ruta_Codigo = r.Ruta_Codigo)
+	  LEFT JOIN ASSASSINS.Viaje via ON(via.Aeronave_Numero = aero.Aeronave_Numero and r.Ruta_ID = via.Ruta_ID and Viaje_Fecha_Salida = m.FechaSalida) 
+	  WHERE Pasaje_Codigo > 0
+	  group by  m.Pasaje_Precio, m.Pasaje_FechaCompra, cli.Cliente_ID, bu.Butaca_ID, via.Viaje_ID)
 
 PRINT 'Tabla ASSASSINS.Pasaje migrada'
+GO
+
+-----------Encomienda-----------
+
+INSERT INTO ASSASSINS.Encomienda(Encomienda_Precio, Encomienda_Fecha_Compra, Cliente_ID, Viaje_ID, Cantidad_KG)
+	(SELECT DISTINCT Paquete_Precio, Paquete_FechaCompra, c.Cliente_ID, Viaje_ID, Paquete_KG
+	  FROM gd_esquema.Maestra m
+	  LEFT JOIN ASSASSINS.Cliente c ON(m.Cli_Dni = c.Cliente_DNI)
+	  LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
+	  LEFT JOIN ASSASSINS.Ciudad d ON(d.Ciudad_Nombre = m.Ruta_Ciudad_Destino)
+	  LEFT JOIN ASSASSINS.Ciudad o ON(o.Ciudad_Nombre = m.Ruta_Ciudad_Origen)
+	  LEFT JOIN ASSASSINS.Ruta r ON(r.Ruta_Ciudad_Destino = d.Ciudad_ID AND r.Ruta_Ciudad_Origen = o.Ciudad_ID AND m.Ruta_Codigo = r.Ruta_Codigo)
+	  LEFT JOIN ASSASSINS.Viaje v ON(v.Aeronave_Numero = a.Aeronave_Numero AND v.Ruta_ID = r.Ruta_ID AND v.Viaje_Fecha_Salida = m.FechaSalida)
+	  WHERE Pasaje_Codigo = 0 
+	  GROUP BY Paquete_Precio, Paquete_FechaCompra, c.Cliente_ID, Viaje_ID, Paquete_KG)
+
+PRINT 'Tabla ASSASSINS.Encomienda migrada'
+GO
+
+-----------Millas-----------
+/*INSERT INTO ASSASSINS.Millas(Pasaje_ID, Cliente_ID, Millas, Fecha)
+	(SELECT pas.Pasaje_ID, cli.Cliente_ID, (m.Pasaje_Precio+m.Paquete_Precio / 10), m.FechaLLegada
+	FROM gd_esquema.Maestra m 
+	LEFT JOIN ASSASSINS.Cliente cli ON(cli.Cliente_DNI = m.Cli_Dni AND Cli_Apellido=m.Cli_Apellido) 
+	LEFT JOIN ASSASSINS.Pasaje pas ON(pas.Pasaje_Fecha_Compra = m.Pasaje_FechaCompra AND pas.Cliente_ID = cli.Cliente_ID)
+	LEFT JOIN ASSASSINS.Encomienda enc ON(enc.Encomienda_Fecha_Compra = m.Pasaje_FechaCompra AND pas.Cliente_ID = cli.Cliente_ID)
+	WHERE  m.Pasaje_Precio > 0 OR m.Paquete_Precio > 0
+	GROUP BY pas.Pasaje_ID, cli.Cliente_ID, cli.Cliente_DNI, pas.Pasaje_Fecha_Compra, m.FechaLLegada,m.Pasaje_Precio,m.Paquete_Precio)
+
+PRINT 'Tabla ASSASSINS.Millas migrada'
 GO*/
