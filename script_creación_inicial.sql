@@ -367,6 +367,21 @@ CREATE PROCEDURE ASSASSINS.UpdateAeronave(@aeroNum int, @aeroMat varchar(255), @
     END;
 GO
 
+IF OBJECT_ID ('ASSASSINS.UpdateRol') IS NOT NULL DROP PROCEDURE ASSASSINS.UpdateRol
+GO
+CREATE PROCEDURE ASSASSINS.UpdateRol(@rolID int, @rolNombre varchar(255), @funcAgregar varchar(255), @funcSacar varchar(255))
+    AS BEGIN
+
+        UPDATE ASSASSINS.Rol SET Rol_Nombre=@rolNombre WHERE Rol_ID=@rolID
+		IF @funcAgregar=''
+			DELETE FROM ASSASSINS.Rol_Funcionalidad WHERE Rol_ID=@rolID AND Func_ID=(SELECT Func_ID FROM
+			ASSASSINS.Funcionalidad WHERE Func_Nombre=@funcSacar)
+		ELSE
+			EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre=@rolNombre, @Func_Nombre=@funcAgregar
+
+    END;
+GO
+
 ---------------------------------------------------------------------------
 --		CREACION DE DATOS
 ---------------------------------------------------------------------------
