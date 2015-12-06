@@ -237,6 +237,7 @@ CREATE TABLE ASSASSINS.Canje (
 CREATE TABLE ASSASSINS.Millas ( 
 	Millas_ID				integer IDENTITY(1,1) PRIMARY KEY,
 	Pasaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
+	Encomienda_ID           integer FOREIGN KEY REFERENCES ASSASSINS.Encomienda,
 	Canje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Canje,
 	Millas					numeric(8),
 	Fecha					datetime,
@@ -603,14 +604,15 @@ PRINT 'Tabla ASSASSINS.Encomienda migrada'
 GO
 
 -----------Millas-----------
-/*INSERT INTO ASSASSINS.Millas(Pasaje_ID, Cliente_ID, Millas, Fecha)
-	(SELECT pas.Pasaje_ID, cli.Cliente_ID, (m.Pasaje_Precio+m.Paquete_Precio / 10), m.FechaLLegada
+INSERT INTO ASSASSINS.Millas(Pasaje_ID, Cliente_ID, Millas, Fecha, Encomienda_ID)
+	(SELECT pas.Pasaje_ID, cli.Cliente_ID, convert(integer,(m.Pasaje_Precio + m.Paquete_Precio / 10)), m.FechaLLegada, enco.Encomienda_ID
 	FROM gd_esquema.Maestra m 
-	LEFT JOIN ASSASSINS.Cliente cli ON(cli.Cliente_DNI = m.Cli_Dni AND Cli_Apellido=m.Cli_Apellido) 
-	LEFT JOIN ASSASSINS.Pasaje pas ON(pas.Pasaje_Fecha_Compra = m.Pasaje_FechaCompra AND pas.Cliente_ID = cli.Cliente_ID)
-	LEFT JOIN ASSASSINS.Encomienda enc ON(enc.Encomienda_Fecha_Compra = m.Pasaje_FechaCompra AND pas.Cliente_ID = cli.Cliente_ID)
-	WHERE  m.Pasaje_Precio > 0 OR m.Paquete_Precio > 0
-	GROUP BY pas.Pasaje_ID, cli.Cliente_ID, cli.Cliente_DNI, pas.Pasaje_Fecha_Compra, m.FechaLLegada,m.Pasaje_Precio,m.Paquete_Precio)
+	LEFT JOIN ASSASSINS.Cliente cli ON(cli.Cliente_DNI = m.Cli_Dni AND Cli_Apellido=m.Cli_Apellido)
+	LEFT JOIN ASSASSINS.Aeronave a ON(a.Aeronave_Matricula = m.Aeronave_Matricula)
+	LEFT JOIN ASSASSINS.Viaje vi ON(vi.Aeronave_Numero = a.Aeronave_Numero and vi.Viaje_Fecha_Llegada = m.FechaLLegada and vi.Viaje_Fecha_Salida = m.FechaSalida) 
+	LEFT JOIN ASSASSINS.Pasaje pas ON(pas.Cliente_ID = cli.Cliente_ID and vi.Viaje_ID = pas.Viaje_ID and pas.Pasaje_Precio = m.Pasaje_Precio)
+	LEFT JOIN ASSASSINS.Encomienda enco ON(enco.Cliente_ID = cli.Cliente_ID and vi.Viaje_ID = enco.Viaje_ID)
+	WHERE  (m.Pasaje_Precio > 0 OR m.Paquete_Precio > 0) and (Pasaje_ID is not null or Encomienda_ID is not null))
 
 PRINT 'Tabla ASSASSINS.Millas migrada'
-GO*/
+GO
