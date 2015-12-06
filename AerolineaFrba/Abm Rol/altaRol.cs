@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace AerolineaFrba.Abm_Rol
 {
@@ -60,27 +61,100 @@ namespace AerolineaFrba.Abm_Rol
 
       private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                using (SqlCommand comando = connection.CreateCommand())
-                {
-                    comando.CommandText = "INSERT INTO ASSASSINS.Rol (Rol_Nombre, Func_Nombre, Rol_Habilitado) VALUES"+
-                        "(@rolNombre, @funcNombre, @rolHabilitado)";
-
-                    comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
-                    comando.Parameters.AddWithValue("@funcNombre", comboBox1.Text);
-                    comando.Parameters.AddWithValue("@rolHabilitado", 1);
-
-                    connection.Open();
-                    comando.ExecuteNonQuery();
-                    connection.Close();
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
+            verificarRol();
         }
+
+      void altaDeRol()
+      {
+          try
+          {
+              using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+              using (SqlCommand comando = connection.CreateCommand())
+              {
+                  comando.CommandText = "INSERT INTO ASSASSINS.Rol (Rol_Nombre, Rol_Habilitado) VALUES" +
+                      "(@rolNombre, @rolHabilitado)";
+
+                  comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
+                  comando.Parameters.AddWithValue("@rolHabilitado", 1);
+
+                  connection.Open();
+                  comando.ExecuteNonQuery();
+                  connection.Close();
+              }
+          }
+          catch (Exception err)
+          {
+              MessageBox.Show(err.Message);
+          }
+          try
+          {
+              using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+              using (SqlCommand comando = connection.CreateCommand())
+              {
+                  comando.CommandText = "INSERT INTO ASSASSINS.Rol_Funcionalidad(Func_ID, Rol_ID) VALUES ((SELECT Func_ID FROM ASSASSINS.Funcionalidad" +
+                  "WHERE Func_Nombre=@funcNombre), (SELECT Func_ID FROM ASSASSINS.Funcionalidad WHERE Rol_Nombre=@rolNombre))";
+
+                  comando.Parameters.AddWithValue("@funcNombre", comboBox1.Text);
+                  comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
+
+                  connection.Open();
+                  comando.ExecuteNonQuery();
+                  connection.Close();
+              }
+          }
+          catch (Exception err)
+          {
+              MessageBox.Show(err.Message);
+          }
+      }
+
+      void verificarRol()
+      {
+          query = "SELECT * FROM ASSASSINS.Rol WHERE Rol_Nombre='" + textBox1.Text + "'";
+          try
+          {
+              SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+              SqlCommand comando = new SqlCommand(query, conexion);
+              conexion.Open();
+              SqlDataReader leer = comando.ExecuteReader();
+
+              if (leer.Read() == true)
+              {
+                  insertarRolExistente();
+              }
+              else
+              {
+                  altaDeRol();
+              }
+              conexion.Close();
+          }
+          catch (Exception err)
+          {
+              MessageBox.Show(err.Message);
+          }
+      }
+
+      void insertarRolExistente()
+      {
+          try
+          {
+              using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+              using (SqlCommand comando = connection.CreateCommand())
+              {
+                  comando.CommandText = "EXEC ASSASSINS.InsertRol_Funcionalidad @Func_Nombre=@funcNombre, @Rol_Nombre=@rolNombre";
+
+                  comando.Parameters.AddWithValue("@funcNombre", comboBox1.Text);
+                  comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
+
+                  connection.Open();
+                  comando.ExecuteNonQuery();
+                  connection.Close();
+              }
+          }
+          catch (Exception err)
+          {
+              MessageBox.Show(err.Message);
+          }
+      }
     }
 }

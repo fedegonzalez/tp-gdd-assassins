@@ -70,7 +70,8 @@ namespace AerolineaFrba.Abm_Aeronave
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
             {
-                comando.CommandText = "EXEC ASSASSINS.InsertAeronave @aeroMat=@aeroMat, @aeroMod=@aeroMod, @aeroKG=@aeroKG, @aeroFab=@aeroFab, @aeroButPas=@aeroButPas, @aeroButVen=@aeroButVen, @tipoServ=@tipoServ, @aeroFechaAlta=@aeroFechaAlta, @aeroHab=@aeroHab";
+                comando.CommandText = "EXEC ASSASSINS.InsertAeronave @aeroMat=@aeroMat, @aeroMod=@aeroMod, @aeroKG=@aeroKG, @aeroFab=@aeroFab"+
+                ", @aeroButPas=@aeroButPas, @aeroButVen=@aeroButVen, @tipoServ=@tipoServ, @aeroFechaAlta=@aeroFechaAlta, @aeroHab=@aeroHab";
 
                 comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
                 comando.Parameters.AddWithValue("@aeroMod", comboBox2.Text);

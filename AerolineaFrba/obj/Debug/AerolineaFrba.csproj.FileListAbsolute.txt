@@ -1,97 +1,6 @@
-c:\users\matias\documents\visual studio 2012\Projects\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.exe
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
-C:\Users\FEDE\Desktop\TP Aerolinea FRBA 1.1 - 2C 2015\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Form1.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.exe
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.abmAeronave.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.altaAeronave.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.abmCiudad.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.altaCiudad.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.bajaCiudad.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.modificacionCiudad.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.abmRol.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.altaRol.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.abmRuta.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.altaRuta.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_de_Usuario.registroDeUsuario.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.inicioAdministrador.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Inicio.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.modificacionListadoRol.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.modifRol.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modificacionListadoRuta.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modifRuta.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modifAeronaves.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modificacionListadoAeronave.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.inicioCliente.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.compra.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Consulta_Millas.consultaMillas.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.devolucion.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.generacionViaje.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.listadoEstadistico.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.registroLlegadaDestino.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.datosDelCliente.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.formaPago.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.exe
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.abmAeronave.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.altaAeronave.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modifAeronaves.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modificacionListadoAeronave.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.abmCiudad.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.altaCiudad.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.bajaCiudad.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.modificacionCiudad.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.abmRol.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.altaRol.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.modificacionListadoRol.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.modifRol.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.abmRuta.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.altaRuta.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modificacionListadoRuta.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modifRuta.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.compra.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.datosDelCliente.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.formaPago.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Consulta_Millas.consultaMillas.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.devolucion.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.generacionViaje.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.inicioCliente.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Inicio.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.inicioAdministrador.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Listado_Estadistico.listadoEstadistico.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_de_Usuario.registroDeUsuario.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.registroLlegadaDestino.resources
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
-C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modificacionListadoRuta2.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoRutas.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoAeronaves.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoProductos.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoClientes.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.listadoDestino.resources
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.listadoOrigen.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.exe
-C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.abmAeronave.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.altaAeronave.resources
@@ -129,5 +38,5 @@ C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\Aerol
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_de_Usuario.registroDeUsuario.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Registro_Llegada_Destino.registroLlegadaDestino.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
-C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
