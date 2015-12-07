@@ -29,8 +29,8 @@ namespace AerolineaFrba.Consulta_Millas
         {
             if (textBox1.Text != "")
             {
-                query = "SELECT m.Millas_ID as 'Número de movimiento', m.Pasaje_ID as 'Número de Pasaje', m.Millas as Cantidad, m.Fecha "+
-                "FROM ASSASSINS.Millas m, ASSASSINS.Cliente c WHERE m.Cliente_ID=c.Cliente_ID"+
+                query = "SELECT m.Millas_ID as 'Número de movimiento', ISNULL(m.Pasaje_ID, m.Encomienda_Id) as 'Número de Pasaje/Encomienda"+
+                    "', m.Millas as Cantidad, m.Fecha FROM ASSASSINS.Millas m, ASSASSINS.Cliente c WHERE m.Cliente_ID=c.Cliente_ID"+
                 " AND c.Cliente_DNI=" + textBox1.Text + " AND DATEDIFF (day , m.Fecha , getdate())<365";
 
                 try
@@ -63,6 +63,11 @@ namespace AerolineaFrba.Consulta_Millas
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }
