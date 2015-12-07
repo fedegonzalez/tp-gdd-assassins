@@ -44,7 +44,9 @@ namespace AerolineaFrba.Canje_Millas
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            Canje_Millas.canjeMillas abrir = new Canje_Millas.canjeMillas();
+            abrir.Show();
+            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
         }
     }
 }

@@ -49,11 +49,10 @@ namespace AerolineaFrba.Canje_Millas
                     using (SqlCommand comando = connection.CreateCommand())
                     {
 
-                        comando.CommandText = "INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad)" +
-                        "VALUES (@clieID, @prodID, @fecha, @cantidad)";
+                        comando.CommandText = "EXEC ASSASSINS.CanjeMillas @clieID=@clieID, @desc=@desc, @fecha=@fecha, @cant=@cantidad";
 
                         comando.Parameters.AddWithValue("@clieID", textBox1.Text);
-                        comando.Parameters.AddWithValue("@prodID", textBox4.Text);
+                        comando.Parameters.AddWithValue("@desc", comboBox1.Text);
                         comando.Parameters.AddWithValue("@fecha", textBox2.Text);
                         comando.Parameters.AddWithValue("@cantidad", textBox3.Text);
 
@@ -71,7 +70,7 @@ namespace AerolineaFrba.Canje_Millas
 
         void consultar()
         {
-            string query = "SELECT Stock, Precio_Millas FROM ASSASSINS.Productos WHERE Productos_ID=" + textBox4.Text;
+            string query = "SELECT Stock, Precio_Millas FROM ASSASSINS.Productos WHERE Descripcion='" + comboBox1.Text + "'";
             string query2 = "SELECT SUM(Millas) FROM ASSASSINS.Millas WHERE Cliente_ID=" + textBox1.Text;
 
             SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
@@ -107,14 +106,43 @@ namespace AerolineaFrba.Canje_Millas
 
                 private void canjeMillas_Load(object sender, EventArgs e)
         {
+            string query3 = "SELECT Descripcion FROM ASSASSINS.Productos";
+            try
+            {
+                cargarComboBox(query3);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            } 
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Canje_Millas.listadoProductos abrir = new Canje_Millas.listadoProductos();
-            abrir.Show();
-        }
+                void cargarComboBox(string query)
+                {
+                    SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    conexion.Open();
+                    SqlDataReader leer = comando.ExecuteReader();
+
+                    while (leer.Read())
+                    {
+                        comboBox1.Items.Add(leer[0]);
+                    }
+                    conexion.Close();
+                }
+
+                public string idText
+                {
+                    get
+                    {
+                        return this.textBox1.Text;
+                    }
+                    set
+                    {
+                        this.textBox1.Text = value;
+                    }
+                }
 
         private void button4_Click(object sender, EventArgs e)
         {

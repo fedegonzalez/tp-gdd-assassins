@@ -30,11 +30,8 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,14 +40,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.buttonGuardar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(209, 92);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(164, 20);
+            this.textBox1.Size = new System.Drawing.Size(166, 20);
             this.textBox1.TabIndex = 5;
             // 
             // label2
@@ -63,14 +63,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Código de Ruta";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(209, 131);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(164, 20);
-            this.textBox2.TabIndex = 7;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -81,14 +73,6 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Tipo de Servicio";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(209, 167);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(164, 20);
-            this.textBox3.TabIndex = 9;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -98,14 +82,6 @@
             this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Ciudad de Origen";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(209, 206);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(164, 20);
-            this.textBox4.TabIndex = 11;
             // 
             // label4
             // 
@@ -120,9 +96,9 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(209, 283);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(164, 20);
+            this.textBox5.Size = new System.Drawing.Size(166, 20);
             this.textBox5.TabIndex = 15;
             // 
             // label5
@@ -138,9 +114,9 @@
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(209, 244);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(164, 20);
+            this.textBox6.Size = new System.Drawing.Size(166, 20);
             this.textBox6.TabIndex = 13;
             // 
             // label6
@@ -167,7 +143,7 @@
             // buttonGuardar
             // 
             this.buttonGuardar.Location = new System.Drawing.Point(257, 339);
-            this.buttonGuardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonGuardar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(71, 28);
             this.buttonGuardar.TabIndex = 18;
@@ -178,7 +154,7 @@
             // buttonLimpiar
             // 
             this.buttonLimpiar.Location = new System.Drawing.Point(89, 339);
-            this.buttonLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLimpiar.Name = "buttonLimpiar";
             this.buttonLimpiar.Size = new System.Drawing.Size(71, 28);
             this.buttonLimpiar.TabIndex = 17;
@@ -186,12 +162,39 @@
             this.buttonLimpiar.UseVisualStyleBackColor = true;
             this.buttonLimpiar.Click += new System.EventHandler(this.buttonLimpiar_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(207, 167);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(166, 21);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(207, 206);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(166, 21);
+            this.comboBox2.TabIndex = 20;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(209, 130);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(166, 21);
+            this.comboBox3.TabIndex = 21;
+            // 
             // altaRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(412, 399);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonGuardar);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.label7);
@@ -199,15 +202,12 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "altaRuta";
             this.Text = "Alta de Rutas";
             this.Load += new System.EventHandler(this.altaRuta_Load);
@@ -220,11 +220,8 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
@@ -233,5 +230,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonGuardar;
         private System.Windows.Forms.Button buttonLimpiar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }

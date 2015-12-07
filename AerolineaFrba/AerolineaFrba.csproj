@@ -173,12 +173,6 @@
     <Compile Include="Canje Millas\listadoClientes.Designer.cs">
       <DependentUpon>listadoClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Millas\listadoProductos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Canje Millas\listadoProductos.Designer.cs">
-      <DependentUpon>listadoProductos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Compra\compra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,9 +315,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Millas\listadoClientes.resx">
       <DependentUpon>listadoClientes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Canje Millas\listadoProductos.resx">
-      <DependentUpon>listadoProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\compra.resx">
       <DependentUpon>compra.cs</DependentUpon>

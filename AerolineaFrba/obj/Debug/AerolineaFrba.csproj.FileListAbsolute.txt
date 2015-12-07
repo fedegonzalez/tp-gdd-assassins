@@ -21,7 +21,6 @@ C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\Aerol
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modifRuta.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.canjeMillas.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoClientes.resources
-C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoProductos.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.compra.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.datosDelCliente.resources
 C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.formaPago.resources
