@@ -50,3 +50,4 @@ C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\Aerol
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.exe
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Users\Toshiba\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoProductos.resources
