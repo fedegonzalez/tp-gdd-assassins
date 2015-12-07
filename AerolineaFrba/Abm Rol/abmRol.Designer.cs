@@ -48,9 +48,9 @@
             // buttonModificacionRol
             // 
             this.buttonModificacionRol.Location = new System.Drawing.Point(254, 135);
-            this.buttonModificacionRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonModificacionRol.Margin = new System.Windows.Forms.Padding(2);
             this.buttonModificacionRol.Name = "buttonModificacionRol";
-            this.buttonModificacionRol.Size = new System.Drawing.Size(73, 31);
+            this.buttonModificacionRol.Size = new System.Drawing.Size(81, 31);
             this.buttonModificacionRol.TabIndex = 11;
             this.buttonModificacionRol.Text = "Modificación";
             this.buttonModificacionRol.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             // buttonBajaRol
             // 
             this.buttonBajaRol.Location = new System.Drawing.Point(160, 135);
-            this.buttonBajaRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBajaRol.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBajaRol.Name = "buttonBajaRol";
             this.buttonBajaRol.Size = new System.Drawing.Size(69, 31);
             this.buttonBajaRol.TabIndex = 10;
@@ -70,7 +70,7 @@
             // buttonAltaRol
             // 
             this.buttonAltaRol.Location = new System.Drawing.Point(61, 135);
-            this.buttonAltaRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAltaRol.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAltaRol.Name = "buttonAltaRol";
             this.buttonAltaRol.Size = new System.Drawing.Size(69, 31);
             this.buttonAltaRol.TabIndex = 9;
@@ -88,7 +88,7 @@
             this.Controls.Add(this.buttonModificacionRol);
             this.Controls.Add(this.buttonBajaRol);
             this.Controls.Add(this.buttonAltaRol);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "abmRol";
             this.Text = "ABM de Roles";
             this.Load += new System.EventHandler(this.abmRol_Load);

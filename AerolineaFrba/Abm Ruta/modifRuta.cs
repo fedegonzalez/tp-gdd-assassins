@@ -20,9 +20,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
-            textBox2.Text = "";
-            textBox5.Text = "";
-            textBox6.Text = "";
+            Console.Clear();
         }
 
         private void modifRuta_Load(object sender, EventArgs e)

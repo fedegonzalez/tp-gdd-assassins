@@ -353,6 +353,7 @@ CREATE PROCEDURE ASSASSINS.InsertAeronave(@aeroMat varchar(255), @aeroMod varcha
     END;
 GO
 
+--------Modifica una aeronave----------
 IF OBJECT_ID ('ASSASSINS.UpdateAeronave') IS NOT NULL DROP PROCEDURE ASSASSINS.UpdateAeronave
 GO
 CREATE PROCEDURE ASSASSINS.UpdateAeronave(@aeroNum int, @aeroMat varchar(255), @aeroMod varchar(255), @aeroKG numeric(6,0),
@@ -363,6 +364,34 @@ CREATE PROCEDURE ASSASSINS.UpdateAeronave(@aeroNum int, @aeroMat varchar(255), @
         WHERE Modelo_Nombre=@aeroMod), Aeronave_KG_Capacidad=@aeroKG, Fabricante_ID=(SELECT Fabricante_ID FROM ASSASSINS.Fabricante
         WHERE Fabricante_Nombre=@aeroFab), TipoServ_ID=(SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE
         TipoServ_Nombre=@tipoServ), Aeronave_Habilitado=@aeroHab WHERE Aeronave_Numero=@aeroNum
+
+    END;
+GO
+
+--------Modifica un rol----------
+IF OBJECT_ID ('ASSASSINS.UpdateRol') IS NOT NULL DROP PROCEDURE ASSASSINS.UpdateRol
+GO
+CREATE PROCEDURE ASSASSINS.UpdateRol(@rolID int, @rolNombre varchar(255), @funcAgregar varchar(255), @funcSacar varchar(255))
+    AS BEGIN
+
+        UPDATE ASSASSINS.Rol SET Rol_Nombre=@rolNombre WHERE Rol_ID=@rolID
+		IF @funcAgregar=''
+			DELETE FROM ASSASSINS.Rol_Funcionalidad WHERE Rol_ID=@rolID AND Func_ID=(SELECT Func_ID FROM
+			ASSASSINS.Funcionalidad WHERE Func_Nombre=@funcSacar)
+		ELSE
+			EXEC ASSASSINS.InsertRol_Funcionalidad @Rol_Nombre=@rolNombre, @Func_Nombre=@funcAgregar
+
+    END;
+GO
+
+--------Canjea Millas----------
+IF OBJECT_ID ('ASSASSINS.CanjeMillas') IS NOT NULL DROP PROCEDURE ASSASSINS.CanjeMillas
+GO
+CREATE PROCEDURE ASSASSINS.CanjeMillas(@rolID int, @rolNombre varchar(255), @funcAgregar varchar(255), @funcSacar varchar(255))
+    AS BEGIN
+
+        INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, (SELECT
+        Productos_ID FROM ASSASSINS.Productos WHERE Descripcion=@desc), @fecha, @cant)
 
     END;
 GO
