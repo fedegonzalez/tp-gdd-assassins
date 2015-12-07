@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Generacion_Viaje
+﻿namespace AerolineaFrba.Canje_Millas
 {
-    partial class listadoRutas
+    partial class listadoProductos
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.columnSeleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -37,33 +37,32 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnSeleccionar});
-            this.dataGridView1.Location = new System.Drawing.Point(9, 10);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Column1});
+            this.dataGridView1.Location = new System.Drawing.Point(11, 11);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(710, 384);
-            this.dataGridView1.TabIndex = 22;
+            this.dataGridView1.Size = new System.Drawing.Size(613, 349);
+            this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // columnSeleccionar
+            // Column1
             // 
-            this.columnSeleccionar.HeaderText = "Seleccionar";
-            this.columnSeleccionar.Name = "columnSeleccionar";
-            this.columnSeleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnSeleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column1.HeaderText = "Seleccionar";
+            this.Column1.Name = "Column1";
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // listadoRutas
+            // listadoProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(725, 401);
+            this.ClientSize = new System.Drawing.Size(653, 378);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "listadoRutas";
-            this.Text = "listadoRutas";
-            this.Load += new System.EventHandler(this.listadoRutas_Load);
+            this.Name = "listadoProductos";
+            this.Text = "listadoProductos";
+            this.Load += new System.EventHandler(this.listadoProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -72,6 +71,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewButtonColumn columnSeleccionar;
+        private System.Windows.Forms.DataGridViewButtonColumn Column1;
     }
 }

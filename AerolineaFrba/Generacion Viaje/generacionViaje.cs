@@ -97,28 +97,35 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void buttonGenerarViaje_Click(object sender, EventArgs e)
         {
-            try
+            if (DateTime.Parse(textBox1.Text) > DateTime.Now)
             {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                using (SqlCommand comando = connection.CreateCommand())
+                try
                 {
-                    comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
-                    + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
+                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                    using (SqlCommand comando = connection.CreateCommand())
+                    {
+                        comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
+                        + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
 
-                    comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
-                    comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
-                    comando.Parameters.AddWithValue("@salida", textBox1.Text);
-                    comando.Parameters.AddWithValue("@llegada", textBox2.Text);
-                    comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
+                        comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
+                        comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
+                        comando.Parameters.AddWithValue("@salida", textBox1.Text);
+                        comando.Parameters.AddWithValue("@llegada", textBox2.Text);
+                        comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
 
-                    connection.Open();
-                    comando.ExecuteNonQuery();
-                    connection.Close();
+                        connection.Open();
+                        comando.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
                 }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("La fecha de salida debe ser posterior a hoy");
             }
         }
 
@@ -144,13 +151,37 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Generacion_Viaje.listadoRutas abrir = new Generacion_Viaje.listadoRutas();
+            Generacion_Viaje.listadoRutas abrir = new Generacion_Viaje.listadoRutas(this);
             abrir.Show();
+        }
+
+        public string aeronave
+        {
+            get
+            {
+                return this.textBox4.Text;
+            }
+            set
+            {
+                this.textBox4.Text = value;
+            }
+        }
+
+        public string ruta
+        {
+            get
+            {
+                return this.textBox6.Text;
+            }
+            set
+            {
+                this.textBox6.Text = value;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Generacion_Viaje.listadoAeronaves abrir = new Generacion_Viaje.listadoAeronaves();
+            Generacion_Viaje.listadoAeronaves abrir = new Generacion_Viaje.listadoAeronaves(this);
             abrir.Show();
         }
 

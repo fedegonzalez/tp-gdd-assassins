@@ -100,8 +100,8 @@ namespace AerolineaFrba.Abm_Rol
                     }
                     else if (checkBox2.Text == "Rehabilitar Rol" && checkBox2.Checked == true)
                     {
-                        comando.CommandText = "UPDATE ASSASSINS.Rol SET Rol_Nombre=@rolNombre WHERE Rol_ID=@rolID";
-
+                        comando.CommandText = "EXEC ASSASSINS.UpdateRol @rolID=@rolID, @rolNombre=@rolNombre, @funcAgregar=@funcAgregar, @funcSacar=@funcSacar";
+                        
                         comando.Parameters.AddWithValue("@rolID", textBox2.Text);
                         comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
                         comando.Parameters.AddWithValue("@funcAgregar", comboBox1.Text);

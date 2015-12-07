@@ -396,6 +396,25 @@ CREATE PROCEDURE ASSASSINS.CanjeMillas(@rolID int, @rolNombre varchar(255), @fun
     END;
 GO
 
+--------Modifica una ruta----------
+IF OBJECT_ID ('ASSASSINS.UpdateRuta') IS NOT NULL DROP PROCEDURE ASSASSINS.UpdateRuta
+GO
+CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG numeric(8,2), @precioBasePas numeric(8,2), 
+@rutaOrigen varchar(255), @rutaDestino varchar(255), @tipoServ varchar(255))
+    AS BEGIN
+
+        UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, Ruta_Precio_BaseKG=@precioBaseKG,
+		Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%@rutaOrigen%'),
+		Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%rutaDestino%'),
+		Ruta_Codigo=@rutaCod WHERE Ruta_ID=@rutaID
+
+		IF @tipoServ <> ''
+			INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
+			VALUES(@rutaID, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ))
+
+    END;
+GO
+
 ---------------------------------------------------------------------------
 --		CREACION DE DATOS
 ---------------------------------------------------------------------------

@@ -36,10 +36,10 @@ namespace AerolineaFrba.Abm_Ruta
                 using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
                 using (SqlCommand comando = connection.CreateCommand())
                 {
-                    comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Ruta_Codigo, Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG,Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)"
-                        +"VALUES (@rutaID, @rutaPrecioBasePas, @rutaPrecioBaseKG,@rutaCiudadOrigen, @rutaCiudadDestino, @rutaHabilitado)";
+                    comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Ruta_Codigo, Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)"
+                        +"VALUES (@rutaCod, @rutaPrecioBasePas, @rutaPrecioBaseKG,@rutaCiudadOrigen, @rutaCiudadDestino, @rutaHabilitado)";
 
-                    comando.Parameters.AddWithValue("@rutaID", textBox1.Text);
+                    comando.Parameters.AddWithValue("@rutaCod", textBox1.Text);
                     comando.Parameters.AddWithValue("@rutaPrecioBasePas", textBox5.Text);
                     comando.Parameters.AddWithValue("@rutaPrecioBaseKG", textBox6.Text);
                     comando.Parameters.AddWithValue("@rutaCiudadOrigen", comboBox1.Text);

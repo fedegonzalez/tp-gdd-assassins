@@ -13,11 +13,13 @@ namespace AerolineaFrba.Canje_Millas
 {
     public partial class listadoClientes : Form
     {
-        public listadoClientes()
+        public listadoClientes(canjeMillas form)
         {
             InitializeComponent();
+            _form1 = form;
         }
 
+        public canjeMillas _form1;
         string query;
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
@@ -44,9 +46,13 @@ namespace AerolineaFrba.Canje_Millas
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Canje_Millas.canjeMillas abrir = new Canje_Millas.canjeMillas();
-            abrir.Show();
-            abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            _form1.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            this.Hide();
+        }
+
+        private void listadoClientes_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

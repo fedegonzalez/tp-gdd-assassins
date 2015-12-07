@@ -65,16 +65,16 @@ namespace AerolineaFrba.Abm_Ruta
                 }
                 else
                 {
-                    comando.CommandText = "UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, "+
-                    "Ruta_Precio_BaseKG=@precioBaseKG, Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE "+
-                    "Ciudad_Nombre like '%@rutaOrigen%'), Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE "
-                    + "Ciudad_Nombre like '%rutaDestino%') WHERE Ruta_ID=@rutaID)";
+                    comando.CommandText = "EXEC ASSASSINS.UpdateRuta @rutaID=@rutaID, @rutaCod=@rutaCod, @precioBaseKG=@precioBaseKG,"+
+                    "@precioBasePas=@precioBasePas, @rutaOrigen=@rutaOrigen, @rutaDestino=@rutaDestino, @tipoServ=@tipoServ";
 
                     comando.Parameters.AddWithValue("@rutaID", textBox1.Text);
+                    comando.Parameters.AddWithValue("@rutaCod", textBox2.Text);
                     comando.Parameters.AddWithValue("@precioBasePas", textBox5.Text);
                     comando.Parameters.AddWithValue("@precioBaseKG", textBox6.Text);
                     comando.Parameters.AddWithValue("@rutaOrigen", comboBox1.Text);
                     comando.Parameters.AddWithValue("@rutaDestino", comboBox2.Text);
+                    comando.Parameters.AddWithValue("@tipoServ", comboBox3.Text);
                 }
 
                 connection.Open();

@@ -13,10 +13,13 @@ namespace AerolineaFrba.Generacion_Viaje
 {
     public partial class listadoAeronaves : Form
     {
-        public listadoAeronaves()
+        public listadoAeronaves(generacionViaje form)
         {
             InitializeComponent();
+            _form1 = form;
         }
+
+        public generacionViaje _form1;
 
         string query;
 
@@ -40,6 +43,12 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 MessageBox.Show(err.Message);
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _form1.aeronave = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            this.Hide();
         }
     }
 }
