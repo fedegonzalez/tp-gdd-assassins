@@ -87,5 +87,11 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            int PNR = rnd.Next(999999999);
+        }
     }
 }

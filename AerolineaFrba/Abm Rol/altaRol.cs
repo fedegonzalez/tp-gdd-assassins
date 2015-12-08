@@ -29,8 +29,6 @@ namespace AerolineaFrba.Abm_Rol
             textBox1.Text="";
         }
 
-        string query;
-
         private void altaRol_Load(object sender, EventArgs e)
         {
         }
