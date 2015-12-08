@@ -94,13 +94,22 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            bool combobox = this.Controls.OfType<ComboBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox && !combobox)
             {
-                ejecutar();
+                try
+                {
+                    ejecutar();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("Faltan datos");
             }
         }
 
@@ -215,11 +224,6 @@ namespace AerolineaFrba.Abm_Aeronave
                 comboBox3.Items.Add(leer[0]);
             }
             conexion.Close();
-        }
-
-        private void buttonGuardar_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

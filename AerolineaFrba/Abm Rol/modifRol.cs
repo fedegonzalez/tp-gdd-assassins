@@ -89,33 +89,42 @@ namespace AerolineaFrba.Abm_Rol
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            bool combobox = this.Controls.OfType<ComboBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox && !combobox)
             {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                using (SqlCommand comando = connection.CreateCommand())
+                try
                 {
-                    if (checkBox2.Text == "Dar de baja" && checkBox2.Checked == true)
+                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                    using (SqlCommand comando = connection.CreateCommand())
                     {
-                        comando.CommandText = "UPDATE ASSASSINS.Rol SET Rol_Habilitado=0";
-                    }
-                    else if (checkBox2.Text == "Rehabilitar Rol" && checkBox2.Checked == true)
-                    {
-                        comando.CommandText = "EXEC ASSASSINS.UpdateRol @rolID=@rolID, @rolNombre=@rolNombre, @funcAgregar=@funcAgregar, @funcSacar=@funcSacar";
-                        
-                        comando.Parameters.AddWithValue("@rolID", textBox2.Text);
-                        comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
-                        comando.Parameters.AddWithValue("@funcAgregar", comboBox1.Text);
-                        comando.Parameters.AddWithValue("@funcSacar", comboBox2.Text);
-                    }
+                        if (checkBox2.Text == "Dar de baja" && checkBox2.Checked == true)
+                        {
+                            comando.CommandText = "UPDATE ASSASSINS.Rol SET Rol_Habilitado=0";
+                        }
+                        else if (checkBox2.Text == "Rehabilitar Rol" && checkBox2.Checked == true)
+                        {
+                            comando.CommandText = "EXEC ASSASSINS.UpdateRol @rolID=@rolID, @rolNombre=@rolNombre, @funcAgregar=@funcAgregar, @funcSacar=@funcSacar";
 
-                    connection.Open();
-                    comando.ExecuteNonQuery();
-                    connection.Close();
+                            comando.Parameters.AddWithValue("@rolID", textBox2.Text);
+                            comando.Parameters.AddWithValue("@rolNombre", textBox1.Text);
+                            comando.Parameters.AddWithValue("@funcAgregar", comboBox1.Text);
+                            comando.Parameters.AddWithValue("@funcSacar", comboBox2.Text);
+                        }
+
+                        connection.Open();
+                        comando.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
                 }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("Faltan datos");
             }
         }
 

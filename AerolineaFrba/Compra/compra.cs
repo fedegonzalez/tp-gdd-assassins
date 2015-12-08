@@ -41,13 +41,15 @@ namespace AerolineaFrba.Compra
         {
             int n, n2;
             bool isNumeric = int.TryParse(textBox2.Text, out n);
-            bool isNumeric2 = int.TryParse(textBox2.Text, out n2);
+            bool isNumeric2 = int.TryParse(textBox3.Text, out n2);
 
             if (isNumeric && isNumeric2)
             {
                 int viaje = Int32.Parse(textBox4.Text);
                 int pas = Int32.Parse(textBox2.Text);
-                Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, pas, null, null, true, tarjeta);
+                int cantKGS = Int32.Parse(textBox3.Text);
+
+                Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, pas, cantKGS, null, null, true, tarjeta);
                 abrir.Show();
                 this.Hide();
             }

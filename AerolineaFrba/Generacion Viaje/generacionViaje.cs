@@ -95,35 +95,43 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void buttonGenerarViaje_Click(object sender, EventArgs e)
         {
-            if (DateTime.Parse(textBox1.Text) > DateTime.Now)
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox)
             {
-                try
+                if (DateTime.Parse(textBox1.Text) > DateTime.Now)
                 {
-                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                    using (SqlCommand comando = connection.CreateCommand())
+                    try
                     {
-                        comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
-                        + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
+                        using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                        using (SqlCommand comando = connection.CreateCommand())
+                        {
+                            comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
+                            + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
 
-                        comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
-                        comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
-                        comando.Parameters.AddWithValue("@salida", textBox1.Text);
-                        comando.Parameters.AddWithValue("@llegada", textBox2.Text);
-                        comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
+                            comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
+                            comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
+                            comando.Parameters.AddWithValue("@salida", textBox1.Text);
+                            comando.Parameters.AddWithValue("@llegada", textBox2.Text);
+                            comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
 
-                        connection.Open();
-                        comando.ExecuteNonQuery();
-                        connection.Close();
+                            connection.Open();
+                            comando.ExecuteNonQuery();
+                            connection.Close();
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
                     }
                 }
-                catch (Exception err)
+                else
                 {
-                    MessageBox.Show(err.Message);
+                    MessageBox.Show("La fecha de salida debe ser posterior a hoy");
                 }
             }
             else
             {
-                MessageBox.Show("La fecha de salida debe ser posterior a hoy");
+                MessageBox.Show("Faltan datos");
             }
         }
 

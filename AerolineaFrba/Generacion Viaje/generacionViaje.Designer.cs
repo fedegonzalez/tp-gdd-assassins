@@ -68,7 +68,7 @@
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(186, 261);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(120, 20);
@@ -118,7 +118,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(187, 109);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(120, 20);
@@ -138,7 +138,7 @@
             // buttonGenerarViaje
             // 
             this.buttonGenerarViaje.Location = new System.Drawing.Point(187, 310);
-            this.buttonGenerarViaje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonGenerarViaje.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGenerarViaje.Name = "buttonGenerarViaje";
             this.buttonGenerarViaje.Size = new System.Drawing.Size(71, 28);
             this.buttonGenerarViaje.TabIndex = 24;
@@ -149,7 +149,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(187, 148);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(120, 20);
@@ -158,7 +158,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(186, 184);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(120, 20);
@@ -167,7 +167,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(326, 109);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(74, 20);
             this.button1.TabIndex = 27;
@@ -178,7 +178,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(326, 148);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(74, 20);
             this.button2.TabIndex = 28;
@@ -189,7 +189,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(326, 184);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(74, 20);
             this.button3.TabIndex = 29;
@@ -200,7 +200,7 @@
             // monthCalendarFS
             // 
             this.monthCalendarFS.Location = new System.Drawing.Point(423, 24);
-            this.monthCalendarFS.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendarFS.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendarFS.Name = "monthCalendarFS";
             this.monthCalendarFS.TabIndex = 30;
             this.monthCalendarFS.Visible = false;
@@ -209,7 +209,7 @@
             // monthCalendarFL
             // 
             this.monthCalendarFL.Location = new System.Drawing.Point(423, 72);
-            this.monthCalendarFL.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendarFL.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendarFL.Name = "monthCalendarFL";
             this.monthCalendarFL.TabIndex = 31;
             this.monthCalendarFL.Visible = false;
@@ -218,7 +218,7 @@
             // monthCalendarFLE
             // 
             this.monthCalendarFLE.Location = new System.Drawing.Point(423, 111);
-            this.monthCalendarFLE.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendarFLE.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendarFLE.Name = "monthCalendarFLE";
             this.monthCalendarFLE.TabIndex = 32;
             this.monthCalendarFLE.Visible = false;
@@ -228,7 +228,7 @@
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePicker1.Location = new System.Drawing.Point(446, 289);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.ShowUpDown = true;
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
@@ -240,7 +240,7 @@
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePicker2.Location = new System.Drawing.Point(446, 314);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.ShowUpDown = true;
             this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
@@ -252,7 +252,7 @@
             // 
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePicker3.Location = new System.Drawing.Point(446, 336);
-            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.ShowUpDown = true;
             this.dateTimePicker3.Size = new System.Drawing.Size(151, 20);
@@ -263,7 +263,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(326, 261);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(74, 20);
             this.button4.TabIndex = 37;
@@ -296,7 +296,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(652, 357);
+            this.ClientSize = new System.Drawing.Size(652, 364);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button4);
@@ -320,7 +320,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "generacionViaje";
             this.Text = "Generación de Viajes";
             this.Load += new System.EventHandler(this.generacionViaje_Load);

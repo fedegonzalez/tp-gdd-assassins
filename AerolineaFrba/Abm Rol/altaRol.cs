@@ -35,7 +35,13 @@ namespace AerolineaFrba.Abm_Rol
 
       private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            altaDeRol();
+          if(textBox1.Text != ""){  
+          altaDeRol();
+          }
+          else
+          {
+              MessageBox.Show("Ingrese un nombre para el rol");
+          }
         }
 
       void altaDeRol()

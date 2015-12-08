@@ -13,12 +13,13 @@ namespace AerolineaFrba.Compra
 {
     public partial class datosDelCliente : Form
     {
-        public datosDelCliente(int viajeID, int cantPas, int[] dnis, int[] butacas, bool primeraVez, bool soloTarjeta)
+        public datosDelCliente(int viajeID, int cantPas, int kg, int[] dnis, int[] butacas, bool primeraVez, bool soloTarjeta)
         {
             InitializeComponent();
             viaje = viajeID;
             tarjeta = soloTarjeta;
             cantPasajeros = cantPas;
+            cantKGS = kg;
             if (primeraVez)
             {
                 dni = new int[cantPasajeros];
@@ -37,7 +38,7 @@ namespace AerolineaFrba.Compra
         }
 
         bool tarjeta;
-        int viaje, cantPasajeros;
+        int viaje, cantPasajeros, cantKGS;
         int[] dni;
         int[] butaca;
 
@@ -54,19 +55,27 @@ namespace AerolineaFrba.Compra
         private void button2_Click(object sender, EventArgs e)
         {
             cantPasajeros--;
-            dni[cantPasajeros] = int.Parse(textBox4.Text);
-            butaca[cantPasajeros] = int.Parse(comboBox2.Text);
-            if (cantPasajeros > 0)
+            if (textBox4.Text != "" && comboBox2.Text != "")
             {
-                Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, cantPasajeros, dni, butaca, false, tarjeta);
-                abrir.Show();
-                this.Hide();
+                dni[cantPasajeros] = int.Parse(textBox4.Text);
+                butaca[cantPasajeros] = int.Parse(comboBox2.Text);
+
+                if (cantPasajeros > 0)
+                {
+                    Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, cantPasajeros, cantKGS, dni, butaca, false, tarjeta);
+                    abrir.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    Compra.formaPago abrirPago = new Compra.formaPago(viaje, dni, tarjeta);
+                    abrirPago.Show();
+                    this.Hide();
+                }
             }
             else
             {
-                Compra.formaPago abrirPago = new Compra.formaPago(viaje, dni, tarjeta);
-                abrirPago.Show();
-                this.Hide();
+                MessageBox.Show("Hay datos faltantes");
             }
         }
 

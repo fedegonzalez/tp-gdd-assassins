@@ -32,39 +32,47 @@ namespace AerolineaFrba.Canje_Millas
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                consultar();
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-
-            if (ok == true)
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox)
             {
                 try
                 {
-                    using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                    using (SqlCommand comando = connection.CreateCommand())
-                    {
-
-                        comando.CommandText = "EXEC ASSASSINS.CanjeMillas @clieID=@clieID, @desc=@desc, @fecha=@fecha, @cant=@cantidad";
-
-                        comando.Parameters.AddWithValue("@clieID", textBox1.Text);
-                        comando.Parameters.AddWithValue("@desc", textBox4.Text);
-                        comando.Parameters.AddWithValue("@fecha", textBox2.Text);
-                        comando.Parameters.AddWithValue("@cantidad", textBox3.Text);
-
-                        connection.Open();
-                        comando.ExecuteNonQuery();
-                        connection.Close();
-                    }
+                    consultar();
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show(err.Message);
                 }
+
+                if (ok == true)
+                {
+                    try
+                    {
+                        using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                        using (SqlCommand comando = connection.CreateCommand())
+                        {
+
+                            comando.CommandText = "EXEC ASSASSINS.CanjeMillas @clieID=@clieID, @desc=@desc, @fecha=@fecha, @cant=@cantidad";
+
+                            comando.Parameters.AddWithValue("@clieID", textBox1.Text);
+                            comando.Parameters.AddWithValue("@desc", textBox4.Text);
+                            comando.Parameters.AddWithValue("@fecha", textBox2.Text);
+                            comando.Parameters.AddWithValue("@cantidad", textBox3.Text);
+
+                            connection.Open();
+                            comando.ExecuteNonQuery();
+                            connection.Close();
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Faltan datos");
             }
         }
 
