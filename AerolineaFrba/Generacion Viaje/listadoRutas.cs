@@ -36,6 +36,7 @@ namespace AerolineaFrba.Generacion_Viaje
                     var myTable = new DataTable();
                     adapter.Fill(myTable);
                     dataGridView1.DataSource = myTable;
+                    connection.Close();
                 }
             }
             catch (Exception err)

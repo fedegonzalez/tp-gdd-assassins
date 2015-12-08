@@ -48,9 +48,9 @@
             // buttonModificacionRut
             // 
             this.buttonModificacionRut.Location = new System.Drawing.Point(250, 133);
-            this.buttonModificacionRut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonModificacionRut.Margin = new System.Windows.Forms.Padding(2);
             this.buttonModificacionRut.Name = "buttonModificacionRut";
-            this.buttonModificacionRut.Size = new System.Drawing.Size(73, 31);
+            this.buttonModificacionRut.Size = new System.Drawing.Size(76, 31);
             this.buttonModificacionRut.TabIndex = 15;
             this.buttonModificacionRut.Text = "Modificación";
             this.buttonModificacionRut.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             // buttonBajaRut
             // 
             this.buttonBajaRut.Location = new System.Drawing.Point(157, 133);
-            this.buttonBajaRut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBajaRut.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBajaRut.Name = "buttonBajaRut";
             this.buttonBajaRut.Size = new System.Drawing.Size(69, 31);
             this.buttonBajaRut.TabIndex = 14;
@@ -70,7 +70,7 @@
             // buttonAltaRut
             // 
             this.buttonAltaRut.Location = new System.Drawing.Point(57, 133);
-            this.buttonAltaRut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAltaRut.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAltaRut.Name = "buttonAltaRut";
             this.buttonAltaRut.Size = new System.Drawing.Size(69, 31);
             this.buttonAltaRut.TabIndex = 13;
@@ -88,7 +88,7 @@
             this.Controls.Add(this.buttonModificacionRut);
             this.Controls.Add(this.buttonBajaRut);
             this.Controls.Add(this.buttonAltaRut);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "abmRuta";
             this.Text = "ABM de Rutas";
             this.Load += new System.EventHandler(this.abmRuta_Load);

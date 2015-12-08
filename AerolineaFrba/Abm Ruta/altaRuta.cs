@@ -25,7 +25,6 @@ namespace AerolineaFrba.Abm_Ruta
             textBox6.Text = "";
             comboBox1.Text = "";
             comboBox2.Text = "";
-            comboBox3.Text = "";
         }
 
 
@@ -37,14 +36,13 @@ namespace AerolineaFrba.Abm_Ruta
                 using (SqlCommand comando = connection.CreateCommand())
                 {
                     comando.CommandText = "INSERT INTO ASSASSINS.Ruta (Ruta_Codigo, Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Habilitado)"
-                        +"VALUES (@rutaCod, @rutaPrecioBasePas, @rutaPrecioBaseKG,@rutaCiudadOrigen, @rutaCiudadDestino, @rutaHabilitado)";
+                        +"VALUES (@rutaCod, @rutaPrecioBasePas, @rutaPrecioBaseKG, @rutaCiudadOrigen, @rutaCiudadDestino, @rutaHabilitado)";
 
                     comando.Parameters.AddWithValue("@rutaCod", textBox1.Text);
                     comando.Parameters.AddWithValue("@rutaPrecioBasePas", textBox5.Text);
                     comando.Parameters.AddWithValue("@rutaPrecioBaseKG", textBox6.Text);
                     comando.Parameters.AddWithValue("@rutaCiudadOrigen", comboBox1.Text);
                     comando.Parameters.AddWithValue("@rutaCiudadDestino", comboBox2.Text);
-                    comando.Parameters.AddWithValue("@tipoServ", comboBox3.Text);
                     comando.Parameters.AddWithValue("@rutaHabilitado", 1);
 
                     connection.Open();
@@ -80,15 +78,6 @@ namespace AerolineaFrba.Abm_Ruta
             {
                 MessageBox.Show(err.Message);
             }
-            query = "SELECT TipoServ_Nombre FROM ASSASSINS.Tipo_Servicio";
-            try
-            {
-                cargarComboBox3(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            } 
         }
         void cargarComboBox(string query)
         {
@@ -113,19 +102,6 @@ namespace AerolineaFrba.Abm_Ruta
             while (leer.Read())
             {
                 comboBox2.Items.Add(leer[0]);
-            }
-            conexion.Close();
-        }
-        void cargarComboBox3(string query)
-        {
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
-
-            while (leer.Read())
-            {
-                comboBox3.Items.Add(leer[0]);
             }
             conexion.Close();
         }

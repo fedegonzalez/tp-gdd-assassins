@@ -27,36 +27,12 @@ namespace AerolineaFrba.Abm_Rol
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             textBox1.Text="";
-            comboBox1.Text = "";
         }
 
         string query;
 
         private void altaRol_Load(object sender, EventArgs e)
         {
-            query = "select Func_Nombre from ASSASSINS.Funcionalidad";
-            try
-            {
-                cargarComboBox(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-        }
-
-        void cargarComboBox(string query)
-        {
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
-
-            while (leer.Read())
-            {
-                comboBox1.Items.Add(leer[0]);
-            }
-            conexion.Close();
         }
 
       private void buttonGuardar_Click(object sender, EventArgs e)
