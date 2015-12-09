@@ -68,8 +68,6 @@ namespace AerolineaFrba.Generacion_Viaje
             textBox3.Text = monthCalendarFLE.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker3.Value.TimeOfDay;
         }
 
-        string query;
-
         private void generacionViaje_Load(object sender, EventArgs e)
         {
 

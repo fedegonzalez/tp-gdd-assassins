@@ -35,3 +35,7 @@ C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\Aeroline
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.exe
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.pdb
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.modificacionListadoRuta2.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.listadoClientes.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.listadoAeronaves.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.listadoRutas.resources

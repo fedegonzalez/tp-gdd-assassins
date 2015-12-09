@@ -183,7 +183,8 @@ CREATE TABLE ASSASSINS.Pasaje (
 	Usuario_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
 	Butaca_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Butaca,
 	Viaje_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Viaje,
-	PNR						varchar(8)
+	PNR						varchar(8),
+    Pasaje_Estado		bit
 );
 
 -----------Tabla Encomienda-----------
@@ -195,7 +196,8 @@ CREATE TABLE ASSASSINS.Encomienda (
 	Usuario_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Usuario,
 	Viaje_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Viaje,
 	Cantidad_KG					numeric(6),
-	PNR							varchar(8)
+	PNR							varchar(8),
+	Encomienda_Habilitado					bit
 );
 
 -----------Tabla Devolucion_Pasaje-----------
@@ -203,6 +205,7 @@ CREATE TABLE ASSASSINS.Devolucion_Pasaje (
 	Devolucion_Pasaje_ID		integer IDENTITY(1,1) PRIMARY KEY,
 	Pasaje_ID					integer FOREIGN KEY REFERENCES ASSASSINS.Pasaje,
 	PNR							varchar(8),
+	Codigo_devolucion           varchar(8),
 	Fecha_Devolucion			datetime,
 	Motivo 						varchar(255)
 );
@@ -212,6 +215,7 @@ CREATE TABLE ASSASSINS.Devolucion_Encomienda (
 	Devolucion_Encomienda_ID	integer IDENTITY(1,1) PRIMARY KEY,
 	Encomienda_ID				integer FOREIGN KEY REFERENCES ASSASSINS.Encomienda,
 	PNR							varchar(8),
+	Codigo_devolucion           varchar(8),
 	Fecha_Devolucion			datetime,
 	Motivo 						varchar(255)
 );
