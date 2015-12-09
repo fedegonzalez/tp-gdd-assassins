@@ -393,6 +393,12 @@ CREATE PROCEDURE ASSASSINS.CanjeMillas(@rolID int, @rolNombre varchar(255), @fun
         INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, (SELECT
         Productos_ID FROM ASSASSINS.Productos WHERE Descripcion=@desc), @fecha, @cant)
 
+		INSERT INTO ASSASSINS.Millas(Canje_ID, Millas, Fecha, Cliente_ID) VALUES ((SELECT c.Canje_ID FROM
+		ASSASSINS.Canje c WHERE c.Cliente_ID=@clieID AND c.Fecha=@fecha), (SELECT Precio_Millas FROM
+		ASSASSINS.Productos WHERE Descripcion=@desc)*@cant, @fecha, @cant)
+
+		UPDATE ASSASSINS.Productos SET Stock=Stock-@cant WHERE Descripcion=@desc
+
     END;
 GO
 
@@ -411,6 +417,17 @@ CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG n
 		IF @tipoServ <> ''
 			INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
 			VALUES(@rutaID, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ))
+
+    END;
+GO
+
+--------Registro de llegada----------
+IF OBJECT_ID ('ASSASSINS.RegistroLlegada') IS NOT NULL DROP PROCEDURE ASSASSINS.RegistroLlegada
+GO
+CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(255), @destino varchar(255), @fecha datetime)
+    AS BEGIN
+
+		
 
     END;
 GO
