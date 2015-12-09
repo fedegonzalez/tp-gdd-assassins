@@ -142,7 +142,9 @@ CREATE TABLE ASSASSINS.Viaje (
 	Aeronave_Numero					integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 	Viaje_Fecha_Salida				datetime,
 	Viaje_Fecha_Llegada				datetime,
-	Viaje_Fecha_Llegada_Estimada	datetime
+	Viaje_Fecha_Llegada_Estimada	datetime,
+	Restriccion						integer
+	CONSTRAINT RestriccionMismaFecha UNIQUE(Aeronave_Numero,Viaje_Fecha_Salida,Restriccion)
 );
 
 -----------Tabla Cliente-----------
@@ -615,8 +617,8 @@ PRINT 'Tabla ASSASSINS.Ruta_Aeronave migrada'
 GO  
 
 -----------Viajes-----------
-INSERT INTO ASSASSINS.Viaje(Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, Viaje_Fecha_Llegada_Estimada)
-	(SELECT rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada
+INSERT INTO ASSASSINS.Viaje(Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, Viaje_Fecha_Llegada_Estimada, Restriccion)
+	(SELECT rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada, ROW_NUMBER() OVER(PARTITION BY aer.Aeronave_Numero ORDER BY m.FechaSalida)
 	FROM gd_esquema.Maestra m 
 	LEFT JOIN ASSASSINS.Ruta rut ON(rut.Ruta_Codigo = m.Ruta_Codigo) 
 	LEFT JOIN ASSASSINS.Aeronave aer ON(aer.Aeronave_Matricula = m.Aeronave_Matricula) 
