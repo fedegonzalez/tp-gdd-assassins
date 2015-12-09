@@ -82,3 +82,9 @@ C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\Aeroline
 C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
 =======
 >>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.modificacionListadoRuta2.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoClientes.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Canje_Millas.listadoProductos.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.listadoViajes.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoAeronaves.resources
+C:\Users\clonpc4\Documents\Leandro\TP Gestion De Datos\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.listadoRutas.resources
