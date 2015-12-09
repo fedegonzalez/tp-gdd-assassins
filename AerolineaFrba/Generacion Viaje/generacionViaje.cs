@@ -98,35 +98,42 @@ namespace AerolineaFrba.Generacion_Viaje
             bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
             if (!textbox)
             {
-                if (DateTime.Parse(textBox1.Text) > DateTime.Now)
+                if (DateTime.Parse(textBox1.Text) > DateTime.Now && DateTime.Parse(textBox1.Text) < DateTime.Parse(textBox2.Text) && DateTime.Parse(textBox1.Text) < DateTime.Parse(textBox3.Text))
                 {
-                    try
+                    if (consultarTipoServ("SELECT * FROM ASSASSINS.Ruta_Aeronave WHERE Ruta_ID=" + textBox6.Text + " AND Aeronave_Numero=" + textBox4.Text))
                     {
-                        using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
-                        using (SqlCommand comando = connection.CreateCommand())
+                        try
                         {
-                            comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
-                            + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
+                            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                            using (SqlCommand comando = connection.CreateCommand())
+                            {
+                                comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
+                                + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
 
-                            comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
-                            comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
-                            comando.Parameters.AddWithValue("@salida", textBox1.Text);
-                            comando.Parameters.AddWithValue("@llegada", textBox2.Text);
-                            comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
+                                comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
+                                comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
+                                comando.Parameters.AddWithValue("@salida", textBox1.Text);
+                                comando.Parameters.AddWithValue("@llegada", textBox2.Text);
+                                comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
 
-                            connection.Open();
-                            comando.ExecuteNonQuery();
-                            connection.Close();
+                                connection.Open();
+                                comando.ExecuteNonQuery();
+                                connection.Close();
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show(err.Message);
                         }
                     }
-                    catch (Exception err)
+                    else
                     {
-                        MessageBox.Show(err.Message);
+                        MessageBox.Show("La Ruta y la Aeronave no tienen el mismo tipo de servicio");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("La fecha de salida debe ser posterior a hoy");
+                    MessageBox.Show("La fecha de salida debe ser posterior a hoy y anterior a la de llegada");
                 }
             }
             else
@@ -189,6 +196,25 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             Generacion_Viaje.listadoAeronaves abrir = new Generacion_Viaje.listadoAeronaves(this);
             abrir.Show();
+        }
+
+        bool consultarTipoServ(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                conexion.Close();
+                return true;
+            }
+            else
+            {
+                conexion.Close();
+                return false;
+            }
         }
 
     }
