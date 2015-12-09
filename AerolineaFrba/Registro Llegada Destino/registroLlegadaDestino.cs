@@ -56,6 +56,15 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             {
                 MessageBox.Show(err.Message);
             }
+            query = "SELECT Aeronave_Matricula FROM ASSASSINS.Aeronave";
+            try
+            {
+                cargarComboBox3(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -86,7 +95,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             {
                 comando.CommandText = "";
 
-                comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
+                comando.Parameters.AddWithValue("@aeroMat", comboBox2.Text);
 
                 connection.Open();
                 comando.ExecuteNonQuery();
@@ -117,6 +126,19 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             while (leer.Read())
             {
                 comboBox2.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+        void cargarComboBox3(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox3.Items.Add(leer[0]);
             }
             conexion.Close();
         }

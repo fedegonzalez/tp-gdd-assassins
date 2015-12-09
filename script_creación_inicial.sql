@@ -387,17 +387,16 @@ GO
 --------Canjea Millas----------
 IF OBJECT_ID ('ASSASSINS.CanjeMillas') IS NOT NULL DROP PROCEDURE ASSASSINS.CanjeMillas
 GO
-CREATE PROCEDURE ASSASSINS.CanjeMillas(@clieID int, @desc varchar(255), @fecha datetime, @cant int)
+CREATE PROCEDURE ASSASSINS.CanjeMillas(@clieID int, @prodID int, @fecha datetime, @cant int)
     AS BEGIN
 
-        INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, (SELECT
-        Productos_ID FROM ASSASSINS.Productos WHERE Descripcion=@desc), @fecha, @cant)
+        INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, @prodID, @fecha, @cant)
 
 		INSERT INTO ASSASSINS.Millas(Canje_ID, Millas, Fecha, Cliente_ID) VALUES ((SELECT c.Canje_ID FROM
 		ASSASSINS.Canje c WHERE c.Cliente_ID=@clieID AND c.Fecha=@fecha), -(SELECT Precio_Millas FROM
-		ASSASSINS.Productos WHERE Descripcion=@desc)*@cant, @fecha, @cant)
+		ASSASSINS.Productos WHERE Productos_ID=@prodID)*@cant, @fecha, @clieID)
 
-		UPDATE ASSASSINS.Productos SET Stock=Stock-@cant WHERE Descripcion=@desc
+		UPDATE ASSASSINS.Productos SET Stock=Stock-@cant WHERE Productos_ID=@prodID
 
     END;
 GO

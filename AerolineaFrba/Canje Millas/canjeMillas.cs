@@ -18,16 +18,6 @@ namespace AerolineaFrba.Canje_Millas
             InitializeComponent();
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            textBox2.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            monthCalendar1.Visible = true;
-        }
-
         bool ok = false;
 
         private void button2_Click(object sender, EventArgs e)
@@ -52,11 +42,11 @@ namespace AerolineaFrba.Canje_Millas
                         using (SqlCommand comando = connection.CreateCommand())
                         {
 
-                            comando.CommandText = "EXEC ASSASSINS.CanjeMillas @clieID=@clieID, @desc=@desc, @fecha=@fecha, @cant=@cantidad";
+                            comando.CommandText = "EXEC ASSASSINS.CanjeMillas @clieID=@clieID, @prodID=@prodID, @fecha=@fecha, @cant=@cantidad";
 
+                            comando.Parameters.AddWithValue("@fecha", DateTime.Now);
                             comando.Parameters.AddWithValue("@clieID", textBox1.Text);
-                            comando.Parameters.AddWithValue("@desc", textBox4.Text);
-                            comando.Parameters.AddWithValue("@fecha", textBox2.Text);
+                            comando.Parameters.AddWithValue("@prodID", textBox4.Text);
                             comando.Parameters.AddWithValue("@cantidad", textBox3.Text);
 
                             connection.Open();
@@ -78,7 +68,7 @@ namespace AerolineaFrba.Canje_Millas
 
         void consultar()
         {
-            string query = "SELECT Stock, Precio_Millas FROM ASSASSINS.Productos WHERE Producto_ID=" + textBox4.Text;
+            string query = "SELECT Stock, Precio_Millas FROM ASSASSINS.Productos WHERE Productos_ID=" + textBox4.Text;
             string query2 = "SELECT SUM(Millas) FROM ASSASSINS.Millas WHERE Cliente_ID=" + textBox1.Text;
 
             SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
