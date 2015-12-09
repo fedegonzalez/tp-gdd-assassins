@@ -43,10 +43,17 @@
             // buttonAeronaves
             // 
             this.buttonAeronaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonAeronaves.Location = new System.Drawing.Point(64, 91);
             this.buttonAeronaves.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAeronaves.Name = "buttonAeronaves";
             this.buttonAeronaves.Size = new System.Drawing.Size(78, 49);
+=======
+            this.buttonAeronaves.Location = new System.Drawing.Point(64, 101);
+            this.buttonAeronaves.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAeronaves.Name = "buttonAeronaves";
+            this.buttonAeronaves.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonAeronaves.TabIndex = 0;
             this.buttonAeronaves.Text = "Aeronaves";
             this.buttonAeronaves.UseVisualStyleBackColor = true;
@@ -55,10 +62,17 @@
             // buttonRoles
             // 
             this.buttonRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonRoles.Location = new System.Drawing.Point(168, 91);
             this.buttonRoles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonRoles.Name = "buttonRoles";
             this.buttonRoles.Size = new System.Drawing.Size(78, 49);
+=======
+            this.buttonRoles.Location = new System.Drawing.Point(168, 101);
+            this.buttonRoles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRoles.Name = "buttonRoles";
+            this.buttonRoles.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonRoles.TabIndex = 2;
             this.buttonRoles.Text = "Roles";
             this.buttonRoles.UseVisualStyleBackColor = true;
@@ -67,10 +81,17 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.button1.Location = new System.Drawing.Point(272, 91);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 49);
+=======
+            this.button1.Location = new System.Drawing.Point(272, 101);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.button1.TabIndex = 3;
             this.button1.Text = "Rutas";
             this.button1.UseVisualStyleBackColor = true;
@@ -90,10 +111,17 @@
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonCancel.Location = new System.Drawing.Point(263, 152);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 54);
+=======
+            this.buttonCancel.Location = new System.Drawing.Point(272, 160);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonCancel.TabIndex = 8;
             this.buttonCancel.Text = "Cancelar Pasaje / Encomienda";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -102,10 +130,17 @@
             // buttonCompra
             // 
             this.buttonCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonCompra.Location = new System.Drawing.Point(168, 152);
             this.buttonCompra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCompra.Name = "buttonCompra";
             this.buttonCompra.Size = new System.Drawing.Size(78, 54);
+=======
+            this.buttonCompra.Location = new System.Drawing.Point(168, 160);
+            this.buttonCompra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCompra.Name = "buttonCompra";
+            this.buttonCompra.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonCompra.TabIndex = 7;
             this.buttonCompra.Text = "Compra de Pasaje";
             this.buttonCompra.UseVisualStyleBackColor = true;
@@ -114,10 +149,17 @@
             // buttonRegistro
             // 
             this.buttonRegistro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonRegistro.Location = new System.Drawing.Point(64, 152);
             this.buttonRegistro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonRegistro.Name = "buttonRegistro";
             this.buttonRegistro.Size = new System.Drawing.Size(78, 54);
+=======
+            this.buttonRegistro.Location = new System.Drawing.Point(64, 160);
+            this.buttonRegistro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRegistro.Name = "buttonRegistro";
+            this.buttonRegistro.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonRegistro.TabIndex = 6;
             this.buttonRegistro.Text = "Registro Llegada";
             this.buttonRegistro.UseVisualStyleBackColor = true;
@@ -126,10 +168,17 @@
             // buttonGenerarViaje
             // 
             this.buttonGenerarViaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonGenerarViaje.Location = new System.Drawing.Point(371, 91);
             this.buttonGenerarViaje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonGenerarViaje.Name = "buttonGenerarViaje";
             this.buttonGenerarViaje.Size = new System.Drawing.Size(78, 49);
+=======
+            this.buttonGenerarViaje.Location = new System.Drawing.Point(371, 101);
+            this.buttonGenerarViaje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonGenerarViaje.Name = "buttonGenerarViaje";
+            this.buttonGenerarViaje.Size = new System.Drawing.Size(85, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonGenerarViaje.TabIndex = 5;
             this.buttonGenerarViaje.Text = "Generar Viaje";
             this.buttonGenerarViaje.UseVisualStyleBackColor = true;
@@ -138,10 +187,17 @@
             // buttonListado
             // 
             this.buttonListado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonListado.Location = new System.Drawing.Point(371, 152);
             this.buttonListado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonListado.Name = "buttonListado";
             this.buttonListado.Size = new System.Drawing.Size(85, 54);
+=======
+            this.buttonListado.Location = new System.Drawing.Point(371, 160);
+            this.buttonListado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonListado.Name = "buttonListado";
+            this.buttonListado.Size = new System.Drawing.Size(85, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonListado.TabIndex = 9;
             this.buttonListado.Text = "Listado Estadístico";
             this.buttonListado.UseVisualStyleBackColor = true;
@@ -150,10 +206,17 @@
             // buttonCanje
             // 
             this.buttonCanje.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.buttonCanje.Location = new System.Drawing.Point(220, 210);
             this.buttonCanje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCanje.Name = "buttonCanje";
             this.buttonCanje.Size = new System.Drawing.Size(78, 57);
+=======
+            this.buttonCanje.Location = new System.Drawing.Point(220, 218);
+            this.buttonCanje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCanje.Name = "buttonCanje";
+            this.buttonCanje.Size = new System.Drawing.Size(78, 39);
+>>>>>>> 361c0412628bb8c18d64c2c16233082b584d8d66
             this.buttonCanje.TabIndex = 10;
             this.buttonCanje.Text = "Canje Millas";
             this.buttonCanje.UseVisualStyleBackColor = true;

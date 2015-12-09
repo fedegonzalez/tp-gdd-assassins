@@ -142,7 +142,9 @@ CREATE TABLE ASSASSINS.Viaje (
 	Aeronave_Numero					integer FOREIGN KEY REFERENCES ASSASSINS.Aeronave,
 	Viaje_Fecha_Salida				datetime,
 	Viaje_Fecha_Llegada				datetime,
-	Viaje_Fecha_Llegada_Estimada	datetime
+	Viaje_Fecha_Llegada_Estimada	datetime,
+	Restriccion						integer
+	CONSTRAINT RestriccionMismaFecha UNIQUE(Aeronave_Numero,Viaje_Fecha_Salida,Restriccion)
 );
 
 -----------Tabla Cliente-----------
@@ -391,11 +393,46 @@ GO
 --------Canjea Millas----------
 IF OBJECT_ID ('ASSASSINS.CanjeMillas') IS NOT NULL DROP PROCEDURE ASSASSINS.CanjeMillas
 GO
-CREATE PROCEDURE ASSASSINS.CanjeMillas(@rolID int, @rolNombre varchar(255), @funcAgregar varchar(255), @funcSacar varchar(255))
+CREATE PROCEDURE ASSASSINS.CanjeMillas(@clieID int, @prodID int, @fecha datetime, @cant int)
     AS BEGIN
 
-        INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, (SELECT
-        Productos_ID FROM ASSASSINS.Productos WHERE Descripcion=@desc), @fecha, @cant)
+        INSERT INTO ASSASSINS.Canje (Cliente_ID, Producto_ID, Fecha, Cantidad) VALUES (@clieID, @prodID, @fecha, @cant)
+
+		INSERT INTO ASSASSINS.Millas(Canje_ID, Millas, Fecha, Cliente_ID) VALUES ((SELECT c.Canje_ID FROM
+		ASSASSINS.Canje c WHERE c.Cliente_ID=@clieID AND c.Fecha=@fecha), -(SELECT Precio_Millas FROM
+		ASSASSINS.Productos WHERE Productos_ID=@prodID)*@cant, @fecha, @clieID)
+
+		UPDATE ASSASSINS.Productos SET Stock=Stock-@cant WHERE Productos_ID=@prodID
+
+    END;
+GO
+
+--------Modifica una ruta----------
+IF OBJECT_ID ('ASSASSINS.UpdateRuta') IS NOT NULL DROP PROCEDURE ASSASSINS.UpdateRuta
+GO
+CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG numeric(8,2), @precioBasePas numeric(8,2), 
+@rutaOrigen varchar(255), @rutaDestino varchar(255), @tipoServ varchar(255))
+    AS BEGIN
+
+        UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, Ruta_Precio_BaseKG=@precioBaseKG,
+		Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%@rutaOrigen%'),
+		Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%rutaDestino%'),
+		Ruta_Codigo=@rutaCod WHERE Ruta_ID=@rutaID
+
+		IF @tipoServ <> ''
+			INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
+			VALUES(@rutaID, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ))
+
+    END;
+GO
+
+--------Registro de llegada----------
+IF OBJECT_ID ('ASSASSINS.RegistroLlegada') IS NOT NULL DROP PROCEDURE ASSASSINS.RegistroLlegada
+GO
+CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(255), @destino varchar(255), @fecha datetime)
+    AS BEGIN
+
+		
 
     END;
 GO
@@ -584,8 +621,8 @@ PRINT 'Tabla ASSASSINS.Ruta_Aeronave migrada'
 GO  
 
 -----------Viajes-----------
-INSERT INTO ASSASSINS.Viaje(Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, Viaje_Fecha_Llegada_Estimada)
-	(SELECT rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada
+INSERT INTO ASSASSINS.Viaje(Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, Viaje_Fecha_Llegada_Estimada, Restriccion)
+	(SELECT rut.Ruta_ID, aer.Aeronave_Numero, m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada, ROW_NUMBER() OVER(PARTITION BY aer.Aeronave_Numero ORDER BY m.FechaSalida)
 	FROM gd_esquema.Maestra m 
 	LEFT JOIN ASSASSINS.Ruta rut ON(rut.Ruta_Codigo = m.Ruta_Codigo) 
 	LEFT JOIN ASSASSINS.Aeronave aer ON(aer.Aeronave_Matricula = m.Aeronave_Matricula) 

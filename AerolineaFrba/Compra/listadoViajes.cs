@@ -9,23 +9,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace AerolineaFrba.Generacion_Viaje
+namespace AerolineaFrba.Compra
 {
-    public partial class listadoAeronaves : Form
+    public partial class listadoViajes : Form
     {
-        public listadoAeronaves(generacionViaje form)
+        public listadoViajes(Compra.compra form, string fecha, string origen, string destino)
         {
             InitializeComponent();
             _form1 = form;
+            fechasql = fecha;
+            cOrigen = origen;
+            cDestino = destino;
         }
 
-        public generacionViaje _form1;
+        public compra _form1;
+        string fechasql;
+        string cOrigen;
+        string cDestino;
 
-        string query;
-
-        private void listadoAeronaves_Load(object sender, EventArgs e)
+        private void listadoViajes_Load(object sender, EventArgs e)
         {
-            query = "SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Habilitado=1";
+            string query = "SELECT * FROM ASSASSINS.Viaje";
 
             try
             {
@@ -37,7 +41,6 @@ namespace AerolineaFrba.Generacion_Viaje
                     var myTable = new DataTable();
                     adapter.Fill(myTable);
                     dataGridView1.DataSource = myTable;
-                    connection.Close();
                 }
             }
             catch (Exception err)
@@ -48,7 +51,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            _form1.aeronave = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            _form1.viaje = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
             this.Hide();
         }
     }

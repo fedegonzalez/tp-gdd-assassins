@@ -54,18 +54,26 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            
-            try
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            bool combobox = this.Controls.OfType<ComboBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox && !combobox)
             {
-                ejecutar(query);
+                try
+                {
+                    ejecutar();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("Faltan datos a ingresar");
             }
         }
 
-        void ejecutar(string query)
+        void ejecutar()
         {
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())

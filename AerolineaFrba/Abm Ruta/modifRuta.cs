@@ -42,13 +42,22 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            bool combobox = this.Controls.OfType<ComboBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            if (!textbox && !combobox)
             {
-                ejecutar();
+                try
+                {
+                    ejecutar();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show("Faltan datos");
             }
         }
 
@@ -65,16 +74,16 @@ namespace AerolineaFrba.Abm_Ruta
                 }
                 else
                 {
-                    comando.CommandText = "UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, "+
-                    "Ruta_Precio_BaseKG=@precioBaseKG, Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE "+
-                    "Ciudad_Nombre like '%@rutaOrigen%'), Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE "
-                    + "Ciudad_Nombre like '%rutaDestino%') WHERE Ruta_ID=@rutaID)";
+                    comando.CommandText = "EXEC ASSASSINS.UpdateRuta @rutaID=@rutaID, @rutaCod=@rutaCod, @precioBaseKG=@precioBaseKG,"+
+                    "@precioBasePas=@precioBasePas, @rutaOrigen=@rutaOrigen, @rutaDestino=@rutaDestino, @tipoServ=@tipoServ";
 
                     comando.Parameters.AddWithValue("@rutaID", textBox1.Text);
+                    comando.Parameters.AddWithValue("@rutaCod", textBox2.Text);
                     comando.Parameters.AddWithValue("@precioBasePas", textBox5.Text);
                     comando.Parameters.AddWithValue("@precioBaseKG", textBox6.Text);
                     comando.Parameters.AddWithValue("@rutaOrigen", comboBox1.Text);
                     comando.Parameters.AddWithValue("@rutaDestino", comboBox2.Text);
+                    comando.Parameters.AddWithValue("@tipoServ", comboBox3.Text);
                 }
 
                 connection.Open();

@@ -19,7 +19,7 @@ namespace AerolineaFrba
 
         private void buttonCompra_Click(object sender, EventArgs e)
         {
-            Compra.compra abrirCliente = new Compra.compra();
+            Compra.compra abrirCliente = new Compra.compra(true);
             abrirCliente.Show();
             this.Hide();
         }
