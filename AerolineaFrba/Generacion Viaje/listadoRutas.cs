@@ -24,7 +24,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void listadoRutas_Load(object sender, EventArgs e)
         {
-            query = "SELECT * FROM ASSASSINS.Ruta";
+            query = "SELECT * FROM ASSASSINS.Ruta WHERE Ruta_Habilitado=1";
 
             try
             {

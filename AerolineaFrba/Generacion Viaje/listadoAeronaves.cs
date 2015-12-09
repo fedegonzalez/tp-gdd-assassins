@@ -25,7 +25,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void listadoAeronaves_Load(object sender, EventArgs e)
         {
-            query = "SELECT * FROM ASSASSINS.Aeronave";
+            query = "SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Habilitado=1";
 
             try
             {

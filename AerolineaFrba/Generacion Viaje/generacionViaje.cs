@@ -27,18 +27,14 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             monthCalendarFS.Visible = true;
             monthCalendarFLE.Visible = false;
-            monthCalendarFL.Visible = false;
             dateTimePicker1.Visible = true;
-            dateTimePicker2.Visible = false;
             dateTimePicker3.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            monthCalendarFL.Visible = true;
             monthCalendarFLE.Visible = false;
             monthCalendarFS.Visible = false;
-            dateTimePicker2.Visible = true;
             dateTimePicker1.Visible = false;
             dateTimePicker3.Visible = false;
         }
@@ -47,20 +43,13 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             monthCalendarFLE.Visible = true;
             monthCalendarFS.Visible = false;
-            monthCalendarFL.Visible = false;
             dateTimePicker3.Visible = true;
-            dateTimePicker2.Visible = false;
             dateTimePicker1.Visible = false;
         }
 
         private void monthCalendarFS_DateChanged(object sender, DateRangeEventArgs e)
         {
             textBox1.Text = monthCalendarFS.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker1.Value.TimeOfDay;
-        }
-
-        private void monthCalendarFL_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            textBox2.Text = monthCalendarFL.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker2.Value.TimeOfDay;
         }
 
         private void monthCalendarFLE_DateChanged(object sender, DateRangeEventArgs e)
@@ -76,29 +65,26 @@ namespace AerolineaFrba.Generacion_Viaje
         private void textBox4_Click(object sender, EventArgs e)
         {
             monthCalendarFLE.Visible = false;
-            monthCalendarFL.Visible = false;
             monthCalendarFS.Visible = false;
             dateTimePicker1.Visible = false;
-            dateTimePicker2.Visible = false;
             dateTimePicker3.Visible = false;
         }
 
         private void textBox6_Click(object sender, EventArgs e)
         {
             monthCalendarFLE.Visible = false;
-            monthCalendarFL.Visible = false;
             monthCalendarFS.Visible = false;
             dateTimePicker1.Visible = false;
-            dateTimePicker2.Visible = false;
             dateTimePicker3.Visible = false;
         }
 
         private void buttonGenerarViaje_Click(object sender, EventArgs e)
         {
             bool textbox = this.Controls.OfType<TextBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
+            TimeSpan diff = DateTime.Parse(textBox3.Text) - DateTime.Parse(textBox1.Text);
             if (!textbox)
             {
-                if (DateTime.Parse(textBox1.Text) > DateTime.Now && DateTime.Parse(textBox1.Text) < DateTime.Parse(textBox2.Text) && DateTime.Parse(textBox1.Text) < DateTime.Parse(textBox3.Text))
+                if (DateTime.Parse(textBox1.Text) > DateTime.Now && diff.TotalHours > 0 && diff.TotalHours < 24)
                 {
                     if (consultarTipoServ("SELECT * FROM ASSASSINS.Ruta_Aeronave WHERE Ruta_ID=" + textBox6.Text + " AND Aeronave_Numero=" + textBox4.Text))
                     {
@@ -107,13 +93,12 @@ namespace AerolineaFrba.Generacion_Viaje
                             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
                             using (SqlCommand comando = connection.CreateCommand())
                             {
-                                comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, Viaje_Fecha_Llegada, "
-                                + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegada, @llegadaEstimada)";
+                                comando.CommandText = "INSERT INTO ASSASSINS.Viaje (Ruta_ID, Aeronave_Numero, Viaje_Fecha_Salida, "
+                                + "Viaje_Fecha_Llegada_Estimada) VALUES (@rutaID, @aeroNum, @salida, @llegadaEstimada)";
 
                                 comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
                                 comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
                                 comando.Parameters.AddWithValue("@salida", textBox1.Text);
-                                comando.Parameters.AddWithValue("@llegada", textBox2.Text);
                                 comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
 
                                 connection.Open();
@@ -133,7 +118,7 @@ namespace AerolineaFrba.Generacion_Viaje
                 }
                 else
                 {
-                    MessageBox.Show("La fecha de salida debe ser posterior a hoy y anterior a la de llegada");
+                    MessageBox.Show("La fecha de salida debe ser posterior a hoy\nLa fecha estimada debe ser posterior a la de salida y menor a 24 horas");
                 }
             }
             else
@@ -150,11 +135,6 @@ namespace AerolineaFrba.Generacion_Viaje
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             textBox1.Text = monthCalendarFS.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker1.Value.TimeOfDay; 
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-            textBox2.Text = monthCalendarFL.SelectionRange.Start.Date.ToShortDateString() + " " + dateTimePicker2.Value.TimeOfDay;
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
