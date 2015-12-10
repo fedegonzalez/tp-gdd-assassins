@@ -55,6 +55,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                     }
                     inicioAdministrador abrir = new inicioAdministrador();
                     abrir.Show();
+                    this.Hide();
                 }
             }
             else
