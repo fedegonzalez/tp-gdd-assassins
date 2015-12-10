@@ -305,9 +305,20 @@ namespace AerolineaFrba.Abm_Aeronave
 
         void verificarAeronave(bool total)
         {
-            query = "SELECT Aeronave_Numero FROM ASSASSINS.AERONAVE WHERE Aeronave_KG_Capacidad >= " + kgs + " AND Fabricante_ID = " + fabricante +
-            " AND Modelo_ID = " + modelo + " AND TipoServ_ID = " + tipoServ + " AND Aeronave_Butacas_Pasillo+Aeronave_Butacas_Ventana >= "
-            + cantButacas + " AND Aeronave_Numero <> " + Convert.ToInt32(textBox2.Text);
+            int ciudad;
+            try
+            {
+                ciudad = ciudadActual();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+                ciudad = 0;
+            }
+
+            query = "EXEC ASSASSINS.AeroNueva @kgs=" + kgs + ", @fabricante=" + fabricante + ", @modelo=" + modelo + ", @tipoServ=" + tipoServ +
+            ", @cantButacas=" + cantButacas + ", @ciudad=" + ciudad;
+
             SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             SqlCommand comando = new SqlCommand(query, conexion);
             conexion.Open();
@@ -381,5 +392,26 @@ namespace AerolineaFrba.Abm_Aeronave
                 comando.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        int ciudadActual()
+        {
+            int ciudad = 0;
+            query = "SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND" 
+				  +"Aeronave_Numero=" + textBox2.Text + "AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ") > 0"+
+                  "ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ")";
+
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                ciudad = (int)leer.GetSqlInt32(0);
+            }
+            conexion.Close();
+            return ciudad;
+        }
     }
 }

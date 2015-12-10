@@ -446,6 +446,25 @@ CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(25
     END;
 GO
 
+--------Encontrar aeronave reemplazante----------
+IF OBJECT_ID ('ASSASSINS.AeroNueva') IS NOT NULL DROP PROCEDURE ASSASSINS.AeroNueva
+GO
+CREATE PROCEDURE ASSASSINS.AeroNueva(@kgs int, @fabricante int, @modelo int, @tipoServ int, @cantButacas int, @ciudad int)
+    AS BEGIN
+		
+		SELECT DISTINCT TOP 1 a.Aeronave_Numero
+		FROM ASSASSINS.Aeronave a, ASSASSINS.Ruta_Aeronave ra, ASSASSINS.ruta r, ASSASSINS.Viaje v
+		WHERE Aeronave_KG_Capacidad>=@kgs AND Aeronave_Butacas_Pasillo+
+		Aeronave_Butacas_Ventana>=@cantButacas AND Fabricante_ID = @fabricante and TipoServ_ID = @tipoServ AND 
+		Modelo_ID = @modelo AND a.Aeronave_Numero=ra.Aeronave_Numero AND r.Ruta_ID=ra.Ruta_ID AND v.Ruta_ID=r.Ruta_ID
+		AND v.Aeronave_Numero=a.Aeronave_Numero AND v.Viaje_Fecha_Salida > GETDATE() AND 
+		IIF((SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE 
+		v.Ruta_ID=r.Ruta_ID AND Aeronave_Numero=a.Aeronave_Numero AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()) > 0
+		ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()))=@ciudad,@ciudad,NULL) IS NOT NULL
+
+    END;
+GO
+
 --------Reemplazar aeronave----------
 IF OBJECT_ID ('ASSASSINS.ReemplazarAero') IS NOT NULL DROP PROCEDURE ASSASSINS.ReemplazarAero
 GO
