@@ -22,7 +22,16 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             Abm_Aeronave.modifAeronaves abrir = new Abm_Aeronave.modifAeronaves();
             abrir.Show();
+            int butacas = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[6].Value)
+            + Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[7].Value);
             abrir.idText = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            abrir.matricula = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
+            abrir.fabricante = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[5].Value.ToString();
+            abrir.modelo = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[3].Value.ToString();
+            abrir.tipoServ = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[8].Value.ToString();
+            abrir.kgs = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[4].Value.ToString();
+            abrir.cantButacas = butacas.ToString();
+            this.Hide();
         }
 
         string query;

@@ -13,10 +13,20 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class altaAeronave : Form
     {
-        public altaAeronave()
+        public altaAeronave(string modelo, string tipoServ, string fabricante, string kgs, string butacas, bool reemplazo, bool total)
         {
             InitializeComponent();
+            mod = modelo;
+            tServ = tipoServ;
+            fab = fabricante;
+            kg = kgs;
+            butaca = butacas;
+            reemplazar = reemplazo;
+            tot = total;
         }
+
+        bool reemplazar, tot;
+        string mod, tServ, fab, kg, butaca;
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
@@ -58,13 +68,28 @@ namespace AerolineaFrba.Abm_Aeronave
             bool combobox = this.Controls.OfType<ComboBox>().Any(tb => string.IsNullOrEmpty(tb.Text));
             if (!textbox && !combobox)
             {
-                try
+                if (!reemplazar)
                 {
-                    ejecutar();
+                    try
+                    {
+                        ejecutar();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
                 }
-                catch (Exception err)
+                else
                 {
-                    MessageBox.Show(err.Message);
+                    try
+                    {
+                        ejecutar();
+                        // REEMPLAZAR VIAJES POR ESTE NUEVO !!!
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
                 }
             }
             else
@@ -99,32 +124,50 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void altaAeronave_Load(object sender, EventArgs e)
         {
-            query = "select TipoServ_Nombre from ASSASSINS.Tipo_Servicio";
-            try
+            if (!reemplazar)
             {
-                cargarComboBox(query);
+                query = "select TipoServ_Nombre from ASSASSINS.Tipo_Servicio";
+                try
+                {
+                    cargarComboBox(query);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+                query = "select Modelo_Nombre from ASSASSINS.Modelo";
+                try
+                {
+                    cargarComboBoxModelo(query);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+                query = "select Fabricante_Nombre from ASSASSINS.Fabricante";
+                try
+                {
+                    cargarComboBoxFabricante(query);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
-            catch (Exception err)
+            else
             {
-                MessageBox.Show(err.Message);
-            }
-            query = "select Modelo_Nombre from ASSASSINS.Modelo";
-            try
-            {
-                cargarComboBoxModelo(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-            query = "select Fabricante_Nombre from ASSASSINS.Fabricante";
-            try
-            {
-                cargarComboBoxFabricante(query);
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
+                comboBox2.Text = mod;
+                comboBox3.Text = fab;
+                comboBox1.Text = tServ;
+                textBox9.Text = kg;
+                textBox7.Text = butaca;
+                textBox8.Text = butaca;
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                comboBox3.Enabled = false;
+                textBox7.Enabled = false;
+                textBox8.Enabled = false;
+                textBox9.Enabled = false;
             }
         }
 

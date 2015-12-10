@@ -24,7 +24,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void buttonAltaAero_Click(object sender, EventArgs e)
         {
-            Abm_Aeronave.altaAeronave abrir = new Abm_Aeronave.altaAeronave();
+            Abm_Aeronave.altaAeronave abrir = new Abm_Aeronave.altaAeronave("","","","","",false,false);
             abrir.Show();
             this.Hide();
         }

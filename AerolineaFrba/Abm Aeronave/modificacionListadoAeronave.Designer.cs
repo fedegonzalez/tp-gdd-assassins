@@ -48,10 +48,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnSeleccionar});
-            this.dataGridView1.Location = new System.Drawing.Point(38, 313);
+            this.dataGridView1.Location = new System.Drawing.Point(28, 266);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(946, 473);
+            this.dataGridView1.Size = new System.Drawing.Size(710, 232);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -64,9 +65,10 @@
             // 
             // buttonBuscar
             // 
-            this.buttonBuscar.Location = new System.Drawing.Point(880, 246);
+            this.buttonBuscar.Location = new System.Drawing.Point(660, 200);
+            this.buttonBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBuscar.Name = "buttonBuscar";
-            this.buttonBuscar.Size = new System.Drawing.Size(104, 40);
+            this.buttonBuscar.Size = new System.Drawing.Size(78, 32);
             this.buttonBuscar.TabIndex = 20;
             this.buttonBuscar.Text = "Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
@@ -74,9 +76,10 @@
             // 
             // buttonLimpiar
             // 
-            this.buttonLimpiar.Location = new System.Drawing.Point(38, 246);
+            this.buttonLimpiar.Location = new System.Drawing.Point(28, 200);
+            this.buttonLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonLimpiar.Name = "buttonLimpiar";
-            this.buttonLimpiar.Size = new System.Drawing.Size(104, 40);
+            this.buttonLimpiar.Size = new System.Drawing.Size(78, 32);
             this.buttonLimpiar.TabIndex = 19;
             this.buttonLimpiar.Text = "Limpiar";
             this.buttonLimpiar.UseVisualStyleBackColor = true;
@@ -90,9 +93,11 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxParteRol);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(38, 28);
+            this.groupBox1.Location = new System.Drawing.Point(28, 23);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(946, 182);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(710, 148);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
@@ -100,62 +105,69 @@
             // comboBoxRol
             // 
             this.comboBoxRol.FormattingEnabled = true;
-            this.comboBoxRol.Location = new System.Drawing.Point(693, 91);
+            this.comboBoxRol.Location = new System.Drawing.Point(520, 74);
+            this.comboBoxRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxRol.Name = "comboBoxRol";
-            this.comboBoxRol.Size = new System.Drawing.Size(225, 24);
+            this.comboBoxRol.Size = new System.Drawing.Size(170, 21);
             this.comboBoxRol.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(520, 94);
+            this.label3.Location = new System.Drawing.Point(390, 76);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(157, 17);
+            this.label3.Size = new System.Drawing.Size(120, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Seleccione la Aeronave";
             // 
             // textBoxRol
             // 
-            this.textBoxRol.Location = new System.Drawing.Point(285, 127);
+            this.textBoxRol.Location = new System.Drawing.Point(214, 103);
+            this.textBoxRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxRol.Name = "textBoxRol";
-            this.textBoxRol.Size = new System.Drawing.Size(215, 22);
+            this.textBoxRol.Size = new System.Drawing.Size(162, 20);
             this.textBoxRol.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 130);
+            this.label2.Location = new System.Drawing.Point(19, 106);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(247, 17);
+            this.label2.Size = new System.Drawing.Size(187, 13);
             this.label2.TabIndex = 12;
             this.label2.Text = "Ingrese nombe exacto de la Aeronave";
             // 
             // textBoxParteRol
             // 
-            this.textBoxParteRol.Location = new System.Drawing.Point(285, 55);
+            this.textBoxParteRol.Location = new System.Drawing.Point(214, 45);
+            this.textBoxParteRol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxParteRol.Name = "textBoxParteRol";
-            this.textBoxParteRol.Size = new System.Drawing.Size(215, 22);
+            this.textBoxParteRol.Size = new System.Drawing.Size(162, 20);
             this.textBoxParteRol.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 58);
+            this.label1.Location = new System.Drawing.Point(19, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 17);
+            this.label1.Size = new System.Drawing.Size(144, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Ingrese parte de la Aeronave";
             // 
             // modificacionListadoAeronave
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1087, 809);
+            this.ClientSize = new System.Drawing.Size(815, 530);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "modificacionListadoAeronave";
             this.Text = "Modificación de Aeronaves";
             this.Load += new System.EventHandler(this.modificacionListadoAeronave_Load);

@@ -431,6 +431,19 @@ CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(25
     END;
 GO
 
+--------Reemplazar aeronave----------
+IF OBJECT_ID ('ASSASSINS.ReemplazarAero') IS NOT NULL DROP PROCEDURE ASSASSINS.ReemplazarAero
+GO
+CREATE PROCEDURE ASSASSINS.ReemplazarAero(@aeroVieja int, @aeroNueva int, @fecha datetime, @total bit)
+    AS BEGIN
+		IF @total=1
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>@fecha
+		ELSE
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja
+
+    END;
+GO
+
 ---------------------------------------------------------------------------
 --		CREACION DE DATOS
 ---------------------------------------------------------------------------
