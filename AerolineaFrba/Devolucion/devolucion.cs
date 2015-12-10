@@ -135,7 +135,7 @@ namespace AerolineaFrba.Devolucion
 
                             queryEstadoEncomienda = "update ASSASSINS.Encomienda set Encomienda_Estado=0 where Encomienda_ID = " + encomiendaid;
 
-                            ejecutar(queryEstadoPasaje);
+                            ejecutar(queryEstadoEncomienda);
                         }
 
                         MessageBox.Show("Devolución Exitosa");

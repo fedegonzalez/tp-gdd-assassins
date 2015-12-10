@@ -93,9 +93,12 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
             {
-                comando.CommandText = "";
+                comando.CommandText = "EXEC ASSASSINS.RegistroLlegada @mat=@aeroMat, @origen=salida, @destino=@llegada, @fecha=@fecha";
 
-                comando.Parameters.AddWithValue("@aeroMat", comboBox2.Text);
+                comando.Parameters.AddWithValue("@aeroMat", comboBox3.Text);
+                comando.Parameters.AddWithValue("@salida", comboBox1.Text);
+                comando.Parameters.AddWithValue("@llegada", comboBox2.Text);
+                comando.Parameters.AddWithValue("@fecha", textBox3.Text);
 
                 connection.Open();
                 comando.ExecuteNonQuery();

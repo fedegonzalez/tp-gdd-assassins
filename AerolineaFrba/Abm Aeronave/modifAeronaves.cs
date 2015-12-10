@@ -251,7 +251,18 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     if (MessageBox.Show("¿Desea cancelar los pasajes?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        // CANCELAR LOS PASAJES
+                        using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+                        using (SqlCommand comando = connection.CreateCommand())
+                        {
+
+                            comando.CommandText = "";
+
+                            comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
+
+                            connection.Open();
+                            comando.ExecuteNonQuery();
+                            connection.Close();
+                        }
                     }
                     else
                     {

@@ -432,7 +432,16 @@ GO
 CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(255), @destino varchar(255), @fecha datetime)
     AS BEGIN
 
-		
+		DECLARE @rutaID int
+		SET @rutaID= (SELECT r.Ruta_ID FROM ASSASSINS.Ruta r, ASSASSINS.Ruta_Aeronave ra, ASSASSINS.Aeronave a,
+		ASSASSINS.Ciudad c, ASSASSINS.Ciudad c2
+		WHERE r.Ruta_ID=ra.Ruta_ID AND ra.Aeronave_Numero=a.Aeronave_Numero AND r.Ruta_Ciudad_Origen=c.Ciudad_ID AND
+		r.Ruta_Ciudad_Destino=c2.Ciudad_ID AND c.Ciudad_Nombre like '%@origen%' and c2.Ciudad_Nombre like '%@destino%'
+		group by r.Ruta_ID)
+
+		UPDATE ASSASSINS.Viaje SET Viaje_Fecha_Llegada=@fecha WHERE Aeronave_Numero=(SELECT Aeronave_Numero FROM
+		ASSASSINS.Aeronave WHERE Aeronave_Matricula=@mat) AND Ruta_ID=@rutaID AND DATEDIFF(hour,Viaje_Fecha_Salida,
+		@fecha) BETWEEN 0 AND 24
 
     END;
 GO
@@ -446,6 +455,24 @@ CREATE PROCEDURE ASSASSINS.ReemplazarAero(@aeroVieja int, @aeroNueva int, @fecha
 			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>@fecha
 		ELSE
 			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja
+
+    END;
+GO
+
+--------Cancela pasajes de una aeronave----------
+IF OBJECT_ID ('ASSASSINS.CancelarPasajes') IS NOT NULL DROP PROCEDURE ASSASSINS.CancelarPasajes
+GO
+CREATE PROCEDURE ASSASSINS.CancelarPasajes(@aeroNum int)
+    AS BEGIN
+		INSERT INTO ASSASSINS.Devolucion_Pasaje(Pasaje_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
+		VALUES ((SELECT p.Pasaje_ID FROM ASSASSINS.Pasaje p, ASSASSINS.Viaje v WHERE v.Viaje_ID=p.Viaje_ID AND
+		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
+		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
+
+		INSERT INTO ASSASSINS.Devolucion_Encomienda(Encomienda_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
+		VALUES ((SELECT e.Encomienda_ID FROM ASSASSINS.Encomienda e, ASSASSINS.Viaje v WHERE v.Viaje_ID=e.Viaje_ID AND
+		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
+		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
 
     END;
 GO
