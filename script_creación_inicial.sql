@@ -464,15 +464,18 @@ IF OBJECT_ID ('ASSASSINS.CancelarPasajes') IS NOT NULL DROP PROCEDURE ASSASSINS.
 GO
 CREATE PROCEDURE ASSASSINS.CancelarPasajes(@aeroNum int)
     AS BEGIN
+
 		INSERT INTO ASSASSINS.Devolucion_Pasaje(Pasaje_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
-		VALUES ((SELECT p.Pasaje_ID FROM ASSASSINS.Pasaje p, ASSASSINS.Viaje v WHERE v.Viaje_ID=p.Viaje_ID AND
-		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
-		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
+		SELECT p.Pasaje_ID, p.PNR, 'bajaAero', GETDATE(), 'Baja de la Aeronave' FROM ASSASSINS.Pasaje p, ASSASSINS.Viaje v
+		WHERE v.Viaje_ID=p.Viaje_ID AND v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum
+		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0 WHERE Pasaje_ID IN (SELECT Pasaje_ID FROM ASSASSINS.Devolucion_Pasaje WHERE
+		Codigo_Devolucion='bajaAero')
 
 		INSERT INTO ASSASSINS.Devolucion_Encomienda(Encomienda_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
-		VALUES ((SELECT e.Encomienda_ID FROM ASSASSINS.Encomienda e, ASSASSINS.Viaje v WHERE v.Viaje_ID=e.Viaje_ID AND
-		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
-		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
+		SELECT e.Encomienda_ID, e.PNR, 'bajaAero', GETDATE(), 'Baja de la Aeronave' FROM ASSASSINS.Encomienda e, ASSASSINS.Viaje v
+		WHERE v.Viaje_ID=e.Viaje_ID AND v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum
+		UPDATE ASSASSINS.Encomienda SET Encomienda_Estado=0 WHERE Encomienda_ID IN (SELECT Encomienda_ID FROM
+		ASSASSINS.Devolucion_Encomienda WHERE Codigo_Devolucion='bajaAero')
 
     END;
 GO

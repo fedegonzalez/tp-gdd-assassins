@@ -280,7 +280,14 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     if (MessageBox.Show("¿Desea cancelar los pasajes?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        // CANCELAR LOS PASAJES
+                        try
+                        {
+                            cancelar();
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
                     }
                     else
                     {
@@ -359,5 +366,20 @@ namespace AerolineaFrba.Abm_Aeronave
                 connection.Close();
             }
         }
+
+        void cancelar()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+
+                comando.CommandText = "EXEC ASSASSINS.CancelarPasajes @aeroNum=@aeroNum";
+
+                comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
     }
 }
