@@ -255,7 +255,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         using (SqlCommand comando = connection.CreateCommand())
                         {
 
-                            comando.CommandText = "";
+                            comando.CommandText = "EXEC ASSASSINS.CancelarPasajes @aeroNum=@aeroNum";
 
                             comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
 
@@ -315,25 +315,49 @@ namespace AerolineaFrba.Abm_Aeronave
                 MessageBox.Show(err.Message);
                 ciudad = 0;
             }
-
-            query = "EXEC ASSASSINS.AeroNueva @kgs=" + kgs + ", @fabricante=" + fabricante + ", @modelo=" + modelo + ", @tipoServ=" + tipoServ +
-            ", @cantButacas=" + cantButacas + ", @ciudad=" + ciudad;
-
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
-
-            if (leer.Read() == true)
+            try
             {
-                // REEMPLAZAR VIAJES CON ESTE NUMERO DE AERONAVE !!!
+                query = "EXEC ASSASSINS.AeroNueva @kgs=" + kgs + ", @fabricante=" + fabricante + ", @modelo=" + modelo + ", @tipoServ=" + tipoServ +
+                ", @cantButacas=" + cantButacas + ", @ciudad=" + ciudad;
+
+                SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+                SqlCommand comando = new SqlCommand(query, conexion);
+                conexion.Open();
+                SqlDataReader leer = comando.ExecuteReader();
+
+                if (leer.Read() == true)
+                {
+                    try
+                    {
+                        string query2 = "EXEC ASSASSINS.ReemplazarAero @aeroVieja=@aeroNum, @aeroNueva=@aeroNue, @fecha=@fechaReset, @total=" + total;
+                        SqlConnection conexion2 = new SqlConnection(Properties.Settings.Default.dbConnection);
+                        SqlCommand comando2 = new SqlCommand(query2, conexion2);
+
+                        comando2.Parameters.AddWithValue("@fechaReset", textBox1.Text);
+                        comando2.Parameters.AddWithValue("@aeroNue", leer.GetSqlInt32(0));
+                        comando2.Parameters.AddWithValue("@aeroNum", textBox2.Text);
+
+                        conexion2.Open();
+                        comando2.ExecuteNonQuery();
+                        conexion2.Close();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+
+                }
+                else
+                {
+                    altaAeronave alta = new altaAeronave(textBox1.Text, textBox4.Text, comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
+                    alta.Show();
+                }
+                conexion.Close();
             }
-            else
+            catch (Exception err)
             {
-                altaAeronave alta = new altaAeronave(comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
-                alta.Show();
+                MessageBox.Show(err.Message);
             }
-            conexion.Close();
         }
 
         void ejecutar()
