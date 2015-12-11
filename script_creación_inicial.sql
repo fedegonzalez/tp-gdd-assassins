@@ -470,11 +470,23 @@ IF OBJECT_ID ('ASSASSINS.ReemplazarAero') IS NOT NULL DROP PROCEDURE ASSASSINS.R
 GO
 CREATE PROCEDURE ASSASSINS.ReemplazarAero(@aeroVieja int, @aeroNueva int, @fecha datetime, @total bit)
     AS BEGIN
+		DECLARE @ciudadActual int
+		DECLARE @contador int
+		DECLARE @actualizados table (id int);
+		SET @ciudadActual = (SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND
+		Aeronave_Numero=@aeroVieja AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()) > 0
+		ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()))
 		IF @total=1
-			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>@fecha
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>GETDATE()
 		ELSE
-			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja
-
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva OUTPUT INSERTED.Viaje_ID INTO @actualizados
+			WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>GETDATE() AND Viaje_Fecha_Salida<@fecha
+			SET @contador =	(SELECT MAX(id) FROM @actualizados)
+			WHILE @contador <= (SELECT MAX(Viaje_ID) FROM ASSASSINS.Viaje)
+				IF (SELECT r.Ruta_Ciudad_Destino FROM ASSASSINS.Ruta r, ASSASSINS.Viaje v WHERE v.Viaje_ID=@contador)=@ciudadActual
+					BREAK;
+				UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_ID=@contador
+				SET @contador=@contador+1
     END;
 GO
 
