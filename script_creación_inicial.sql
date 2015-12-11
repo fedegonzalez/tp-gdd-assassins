@@ -314,7 +314,7 @@ IF OBJECT_ID ('ASSASSINS.InsertUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.In
 GO
 CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Intentos integer, @Habilitado bit) AS
 	BEGIN
-		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Intentos, Usuario_Habilitado)
+		INSERT INTO ASSASSINS.Usuario(Usuario_Username, Usuario_Password, Rol_ID, Usuario_Intentos, Usuario_Habilitado)
 			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Intentos, @Habilitado
 			FROM ASSASSINS.Rol WHERE Rol_Nombre = @Rol_Nombre
 	END;
