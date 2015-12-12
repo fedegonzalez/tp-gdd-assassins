@@ -25,6 +25,7 @@ namespace AerolineaFrba.Compra
         bool tarjeta;
         int viaje;
         int[] dni;
+        string datosTotales;
 
         private void formaPago_Load(object sender, EventArgs e)
         {
@@ -90,8 +91,42 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            int PNR = rnd.Next(999999999);
+            datosTotales = "";
+            for (int i = 0; i <= dni.Length - 1; i++)
+            {
+                if (i != 0)
+                {
+                    datosTotales += ",";
+                }
+
+                datosTotales += dni[i].ToString();
+            }
+
+            try
+            {
+                comprar();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+
+        }
+
+        void comprar()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+                comando.CommandText = "EXEC ASSASSINS.LOQUEQUIERAS @DATOS=@DATOS, @viaje=@viaje";
+
+                comando.Parameters.AddWithValue("@DATOS", datosTotales);
+                comando.Parameters.AddWithValue("@DATOS", viaje);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
         }
     }
 }

@@ -232,9 +232,9 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.monthCalendar1);
             this.groupBox1.Location = new System.Drawing.Point(47, 60);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(765, 294);
             this.groupBox1.TabIndex = 52;
             this.groupBox1.TabStop = false;

@@ -349,7 +349,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 }
                 else
                 {
-                    altaAeronave alta = new altaAeronave(textBox1.Text, textBox4.Text, comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
+                    altaAeronave alta = new altaAeronave(textBox1.Text, textBox2.Text, comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
                     alta.Show();
                 }
                 conexion.Close();
@@ -377,14 +377,14 @@ namespace AerolineaFrba.Abm_Aeronave
                     if (checkBox2.Checked == true)
                     {
                         comando.CommandText = "UPDATE ASSASSINS.Aeronave SET Aeronave_Habilitado=0 WHERE Aeronave_Numero=@aeroNum; INSERT INTO"+
-                        "ASSASSINS.Baja_Servicio(Aeronave_Fecha_Fuera_Servicio, Aeronave_Fecha_Reinicio_Servicio, Aeronave_Numero) VALUES(" +
+                        " ASSASSINS.Baja_Servicio(Aeronave_Fecha_Fuera_Servicio, Aeronave_Fecha_Reinicio_Servicio, Aeronave_Numero) VALUES(" +
                         "getdate(), @fechaReset, @aeroNum)";
                     }
                     else
                     {
                         comando.CommandText = "EXEC ASSASSINS.UpdateAeronave @aeroNum=@aeroNum, @aeroMat=@aeroMat, @aeroMod=@aeroMod,"
                         + "@aeroKG=@aeroKG, @aeroFab=@aeroFab, @tipoServ=@tipoServ, " +
-                        "@aeroHab=1 WHERE Aeronave_Numero=@aeroNum)";
+                        "@aeroHab=1";
                     }
 
                     comando.Parameters.AddWithValue("@fechaReset", textBox1.Text);
@@ -421,9 +421,9 @@ namespace AerolineaFrba.Abm_Aeronave
         int ciudadActual()
         {
             int ciudad = 0;
-            query = "SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND" 
-				  +"Aeronave_Numero=" + textBox2.Text + "AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ") > 0"+
-                  "ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ")";
+            query = "SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND "
+                  + "Aeronave_Numero=" + textBox2.Text + " AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, '" + DateTime.Now + "') > 0 " +
+                  "ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, '" + DateTime.Now + "')";
 
             SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
             SqlCommand comando = new SqlCommand(query, conexion);

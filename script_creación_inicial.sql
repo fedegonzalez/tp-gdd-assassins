@@ -349,12 +349,14 @@ CREATE PROCEDURE ASSASSINS.InsertAeronave(@aeroMat varchar(255), @aeroMod varcha
         BEGIN
             INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Pasillo, Butaca_Ventana, Aeronave_Numero)
             VALUES (@Contador,1,0,(SELECT Modelo_ID FROM ASSASSINS.Modelo WHERE Modelo_Nombre=@aeroMod))
+			SET @Contador=@Contador+1
         END
         SET @Contador = 0
         WHILE @Contador < (@aeroButVen)
         BEGIN
             INSERT INTO ASSASSINS.Butaca(Butaca_Nro, Butaca_Pasillo, Butaca_Ventana, Aeronave_Numero)
             VALUES (@Contador+@aeroButPas,0,1,(SELECT Modelo_ID FROM ASSASSINS.Modelo WHERE Modelo_Nombre=@aeroMod))
+			SET @Contador=@Contador+1
         END
     END;
 GO
@@ -502,6 +504,22 @@ CREATE PROCEDURE ASSASSINS.AeroNueva(@kgs int, @fabricante int, @modelo int, @ti
 		ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()))=@ciudad,@ciudad,NULL) IS NOT NULL
 
     END;
+GO
+
+--------Compra de pasajes----------
+IF OBJECT_ID ('ASSASSINS.ComprarPasaje') IS NOT NULL DROP PROCEDURE ASSASSINS.ComprarPasaje
+GO
+CREATE PROCEDURE ASSASSINS.ComprarPasaje(@nombre varchar(255), @apellido varchar(255), @dni numeric(18), @direccion varchar(255), @telefono numeric(18),@mail varchar(255),@fechanacimiento date) AS
+ BEGIN
+  IF (@dni = (SELECT Cliente_DNI FROM ASSASSINS.Cliente WHERE Cliente_DNI=@dni))
+  BEGIN
+   UPDATE ASSASSINS.Cliente SET Cliente_Nombre=@nombre, Cliente_Apellido=@apellido, Cliente_Direccion=@direccion,Cliente_Telefono=@telefono,Cliente_Mail=@mail,Cliente_Fecha_Nacimiento=@fechanacimiento WHERE Cliente_DNI=@dni
+  END
+  ELSE
+  BEGIN
+   INSERT INTO ASSASSINS.Cliente (Cliente_Nombre,Cliente_Apellido,Cliente_DNI,Cliente_Direccion,Cliente_Telefono,Cliente_Mail,Cliente_Fecha_Nacimiento) VALUES ( @nombre, @apellido, @dni,@direccion,@telefono,@mail,@fechanacimiento)
+  END
+ END;
 GO
 
 --------Reemplazar aeronave----------

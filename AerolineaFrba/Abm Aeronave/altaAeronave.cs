@@ -29,6 +29,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         bool reemplazar, tot;
         string mod, tServ, fab, kg, butaca, aero, fec;
+        int aeroNueva;
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
@@ -97,12 +98,23 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     try
                     {
-                        ejecutar();
-                        reemplazarAero();
+                        consultarUnico("SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula='" + textBox4.Text + "'");
                     }
                     catch (Exception err)
                     {
                         MessageBox.Show(err.Message);
+                    }
+                    if (unico)
+                    {
+                        try
+                        {
+                            ejecutar();
+                            reemplazarAero();
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
                     }
                 }
             }
@@ -121,12 +133,12 @@ namespace AerolineaFrba.Abm_Aeronave
                 ", @aeroButPas=@aeroButPas, @aeroButVen=@aeroButVen, @tipoServ=@tipoServ, @aeroFechaAlta=@aeroFechaAlta, @aeroHab=@aeroHab";
 
                 comando.Parameters.AddWithValue("@aeroMat", textBox4.Text);
-                comando.Parameters.AddWithValue("@aeroMod", comboBox2.Text);
-                comando.Parameters.AddWithValue("@aeroKG", textBox9.Text);
-                comando.Parameters.AddWithValue("@aeroFab", comboBox3.Text);
-                comando.Parameters.AddWithValue("@aeroButPas", textBox7.Text);
-                comando.Parameters.AddWithValue("@aeroButVen", textBox8.Text);
-                comando.Parameters.AddWithValue("@tipoServ", comboBox1.Text);
+                comando.Parameters.AddWithValue("@aeroMod", Int32.Parse(comboBox2.Text));
+                comando.Parameters.AddWithValue("@aeroKG", Int32.Parse(textBox9.Text));
+                comando.Parameters.AddWithValue("@aeroFab", Int32.Parse(comboBox3.Text));
+                comando.Parameters.AddWithValue("@aeroButPas", Int32.Parse(textBox7.Text));
+                comando.Parameters.AddWithValue("@aeroButVen", Int32.Parse(textBox8.Text));
+                comando.Parameters.AddWithValue("@tipoServ", Int32.Parse(comboBox1.Text));
                 comando.Parameters.AddWithValue("@aeroFechaAlta", textBox1.Text);
                 comando.Parameters.AddWithValue("@aeroHab", 1);
 
@@ -230,14 +242,17 @@ namespace AerolineaFrba.Abm_Aeronave
 
         void reemplazarAero()
         {
-                string query2 = "EXEC ASSASSINS.ReemplazarAero @aeroVieja=@aeroNum, @aeroNueva=(SELECT Aeronave_Numero FROM ASSASSINS.Aeronave "+
-                "WHERE Aeronave_Matricula=" + textBox4.Text + "), @fecha=@fechaReset, @total=@total";
+            consultarMatricula();
+
+                string query2 = "EXEC ASSASSINS.ReemplazarAero @aeroVieja=@aeroNum, @aeroNueva=@aeroNueva, @fecha=@fechaReset"+
+                ", @total=@total";
                 SqlConnection conexion2 = new SqlConnection(Properties.Settings.Default.dbConnection);
                 SqlCommand comando2 = new SqlCommand(query2, conexion2);
 
-                comando2.Parameters.AddWithValue("@fechaReset", fec);
+                comando2.Parameters.AddWithValue("@fechaReset", DateTime.Parse(fec));
                 comando2.Parameters.AddWithValue("@total", tot);
-                comando2.Parameters.AddWithValue("@aeroNum", aero);
+                comando2.Parameters.AddWithValue("@aeroNum", Int32.Parse(aero));
+                comando2.Parameters.AddWithValue("@aeroNueva", aeroNueva);
 
                 conexion2.Open();
                 comando2.ExecuteNonQuery();
@@ -258,5 +273,27 @@ namespace AerolineaFrba.Abm_Aeronave
             conexion.Close();
         }
 
+        void consultarMatricula()
+        {
+            try
+            {
+                string query = "SELECT Aeronave_Numero FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula='" + textBox4.Text + "'";
+                SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+                SqlCommand comando = new SqlCommand(query, conexion);
+                conexion.Open();
+                SqlDataReader leer = comando.ExecuteReader();
+
+                if (leer.Read() == true)
+                {
+                    aeroNueva = (int)leer.GetSqlInt32(0);
+                }
+                conexion.Close();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+
+        }
     }
 }

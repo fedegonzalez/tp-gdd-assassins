@@ -39,6 +39,7 @@ namespace AerolineaFrba.Compra
 
         bool tarjeta;
         int viaje, cantPasajeros, cantKGS;
+        string datosTotales;
         int[] dni;
         int[] butaca;
 
@@ -84,6 +85,25 @@ namespace AerolineaFrba.Compra
                     {
                         MessageBox.Show(err.Message);
                     }
+                    datosTotales="";
+                    for (int i = 0; i <= dni.Length - 1; i++)
+                    {
+                        if (i != 0)
+                        {
+                            datosTotales += "/";
+                        }
+
+                        datosTotales += dni[i].ToString() + "," + butaca[i].ToString();
+                    }
+                    try
+                    {
+                        comprar();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+
                     Compra.formaPago abrirPago = new Compra.formaPago(viaje, dni, tarjeta);
                     abrirPago.Show();
                     this.Hide();
@@ -157,7 +177,7 @@ namespace AerolineaFrba.Compra
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
             {
-                comando.CommandText = "EXEC ASSASSINS.CompraPasaje @nombre=@nombre, @apellido=@apellido, " +
+                comando.CommandText = "EXEC ASSASSINS.ComprarPasaje @nombre=@nombre, @apellido=@apellido, " +
                 "@dni=@dni, @direccion=@direccion, @telefono=@telefono, @mail=@mail, @fechanacimiento=@fechanacimiento";
 
                 comando.Parameters.AddWithValue("@nombre", textBox2.Text);
@@ -167,6 +187,21 @@ namespace AerolineaFrba.Compra
                 comando.Parameters.AddWithValue("@telefono", textBox5.Text);
                 comando.Parameters.AddWithValue("@mail", textBox7.Text);
                 comando.Parameters.AddWithValue("@fechanacimiento", textBox1.Text);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        void comprar()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+                comando.CommandText = "EXEC ASSASSINS.LOQUEQUIERAS @DATOS=@DATOS";
+
+                comando.Parameters.AddWithValue("@DATOS", datosTotales);
 
                 connection.Open();
                 comando.ExecuteNonQuery();
