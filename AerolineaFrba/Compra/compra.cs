@@ -39,19 +39,26 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int n, n2;
-            bool isNumeric = int.TryParse(textBox2.Text, out n);
-            bool isNumeric2 = int.TryParse(textBox3.Text, out n2);
+            int pasaje, encomienda;
+            bool isNumeric = int.TryParse(textBox2.Text, out pasaje);
+            bool isNumeric2 = int.TryParse(textBox3.Text, out encomienda);
+            int butacas = int.Parse(label4.Text);
+            int kgs = int.Parse(label9.Text);
 
             if (isNumeric && isNumeric2)
             {
-                int viaje = Int32.Parse(textBox4.Text);
-                int pas = Int32.Parse(textBox2.Text);
-                int cantKGS = Int32.Parse(textBox3.Text);
+                if (butacas>pasaje && kgs>encomienda)
+                {
+                    int viaje = Int32.Parse(textBox4.Text);
 
-                Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, pas, cantKGS, null, null, true, tarjeta);
-                abrir.Show();
-                this.Hide();
+                    Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, pasaje, encomienda, null, null, true, tarjeta);
+                    abrir.Show();
+                    this.Hide(); 
+                }
+                else
+                {
+                    MessageBox.Show("No hay tantos pasajes/kgs disponibles");
+                } 
             }
             else
             {
@@ -68,6 +75,30 @@ namespace AerolineaFrba.Compra
             set
             {
                 this.textBox4.Text = value;
+            }
+        }
+
+        public string butaca
+        {
+            get
+            {
+                return this.label4.Text;
+            }
+            set
+            {
+                this.label4.Text = value;
+            }
+        }
+
+        public string kg
+        {
+            get
+            {
+                return this.label9.Text;
+            }
+            set
+            {
+                this.label9.Text = value;
             }
         }
 

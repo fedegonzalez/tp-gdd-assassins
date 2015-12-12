@@ -1,7 +1,6 @@
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.exe
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
-C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.abmAeronave.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.altaAeronave.resources
 C:\Users\FEDE\Documents\GitHub\tp-gdd-assassins\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.modifAeronaves.resources
