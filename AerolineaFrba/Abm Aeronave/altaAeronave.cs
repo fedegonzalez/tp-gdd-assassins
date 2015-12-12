@@ -63,6 +63,7 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         string query;
+        bool unico = true;
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
@@ -74,11 +75,22 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     try
                     {
-                        ejecutar();
+                        consultarUnico("SELECT * FROM ASSASSINS.Aeronave WHERE Aeronave_Matricula='" + textBox4.Text + "'");
                     }
                     catch (Exception err)
                     {
                         MessageBox.Show(err.Message);
+                    }
+                    if (unico)
+                    {
+                        try
+                        {
+                            ejecutar();
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
                     }
                 }
                 else
@@ -231,5 +243,20 @@ namespace AerolineaFrba.Abm_Aeronave
                 comando2.ExecuteNonQuery();
                 conexion2.Close();
         }
+        void consultarUnico(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                    MessageBox.Show("Ya existe una aeronave con esa matricula");
+                    unico = false;
+            }
+            conexion.Close();
+        }
+
     }
 }
