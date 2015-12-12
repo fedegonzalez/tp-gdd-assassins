@@ -23,9 +23,37 @@ namespace AerolineaFrba.Abm_Ruta
             Console.Clear();
         }
 
+        string query;
+
         private void modifRuta_Load(object sender, EventArgs e)
         {
-
+            query = "SELECT Ciudad_Nombre FROM ASSASSINS.Ciudad";
+            try
+            {
+                cargarComboBox(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            query = "SELECT Ciudad_Nombre FROM ASSASSINS.Ciudad";
+            try
+            {
+                cargarComboBox2(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            query = "SELECT TipoServ_Nombre FROM ASSASSINS.Tipo_Servicio";
+            try
+            {
+                cargarComboBox3(query);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         public string idText
@@ -81,8 +109,8 @@ namespace AerolineaFrba.Abm_Ruta
                     comando.Parameters.AddWithValue("@rutaCod", textBox2.Text);
                     comando.Parameters.AddWithValue("@precioBasePas", textBox5.Text);
                     comando.Parameters.AddWithValue("@precioBaseKG", textBox6.Text);
-                    comando.Parameters.AddWithValue("@rutaOrigen", comboBox1.Text);
-                    comando.Parameters.AddWithValue("@rutaDestino", comboBox2.Text);
+                    comando.Parameters.AddWithValue("@rutaOrigen", comboBox1.Text.Substring(2));
+                    comando.Parameters.AddWithValue("@rutaDestino", comboBox2.Text.Substring(2));
                     comando.Parameters.AddWithValue("@tipoServ", comboBox3.Text);
                 }
 
@@ -90,6 +118,47 @@ namespace AerolineaFrba.Abm_Ruta
                 comando.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        void cargarComboBox(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox1.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+        void cargarComboBox2(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox2.Items.Add(leer[0]);
+            }
+            conexion.Close();
+        }
+
+        void cargarComboBox3(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            while (leer.Read())
+            {
+                comboBox3.Items.Add(leer[0]);
+            }
+            conexion.Close();
         }
     }
 }

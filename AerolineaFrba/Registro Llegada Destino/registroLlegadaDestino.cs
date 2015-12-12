@@ -93,16 +93,28 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
             using (SqlCommand comando = connection.CreateCommand())
             {
-                comando.CommandText = "EXEC ASSASSINS.RegistroLlegada @mat=@aeroMat, @origen=salida, @destino=@llegada, @fecha=@fecha";
+                comando.CommandText = "ASSASSINS.RegistroLlegada";
 
-                comando.Parameters.AddWithValue("@aeroMat", comboBox3.Text);
-                comando.Parameters.AddWithValue("@salida", comboBox1.Text);
-                comando.Parameters.AddWithValue("@llegada", comboBox2.Text);
-                comando.Parameters.AddWithValue("@fecha", textBox3.Text);
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.AddWithValue("@mat", comboBox3.Text);
+                comando.Parameters.AddWithValue("@origen", comboBox1.Text.Substring(2));
+                comando.Parameters.AddWithValue("@destino", comboBox2.Text.Substring(2));
+                comando.Parameters.AddWithValue("@fecha", Convert.ToDateTime(textBox3.Text));
+
+                var returnParameter = comando.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
 
                 connection.Open();
                 comando.ExecuteNonQuery();
                 connection.Close();
+
+                var result = (int)returnParameter.Value;
+
+                if (result == -1)
+                {
+                    MessageBox.Show("La aeronave llegó a un destino distinto");
+                }
             }
         }
 

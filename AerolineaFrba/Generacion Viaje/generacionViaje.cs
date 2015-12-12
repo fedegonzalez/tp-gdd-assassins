@@ -98,8 +98,8 @@ namespace AerolineaFrba.Generacion_Viaje
 
                                 comando.Parameters.AddWithValue("@rutaID", textBox6.Text);
                                 comando.Parameters.AddWithValue("@aeroNum", textBox4.Text);
-                                comando.Parameters.AddWithValue("@salida", textBox1.Text);
-                                comando.Parameters.AddWithValue("@llegadaEstimada", textBox3.Text);
+                                comando.Parameters.AddWithValue("@salida", Convert.ToDateTime(textBox1.Text));
+                                comando.Parameters.AddWithValue("@llegadaEstimada", Convert.ToDateTime(textBox3.Text));
 
                                 connection.Open();
                                 comando.ExecuteNonQuery();

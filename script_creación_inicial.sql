@@ -415,13 +415,27 @@ CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG n
     AS BEGIN
 
         UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, Ruta_Precio_BaseKG=@precioBaseKG,
-		Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%@rutaOrigen%'),
-		Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%rutaDestino%'),
+		Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaOrigen + '%'),
+		Ruta_Ciudad_Destino=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaDestino + '%'),
 		Ruta_Codigo=@rutaCod WHERE Ruta_ID=@rutaID
 
 		IF @tipoServ <> ''
 			INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
 			VALUES(@rutaID, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ))
+
+    END;
+GO
+
+--------Inserta una ruta----------
+IF OBJECT_ID ('ASSASSINS.InsertRuta') IS NOT NULL DROP PROCEDURE ASSASSINS.InsertRuta
+GO
+CREATE PROCEDURE ASSASSINS.InsertRuta(@rutaCod int, @precioBaseKG numeric(8,2), @precioBasePas numeric(8,2), 
+@rutaOrigen varchar(255), @rutaDestino varchar(255))
+    AS BEGIN
+
+        INSERT INTO ASSASSINS.Ruta(Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Codigo)
+		VALUES(@precioBasePas, @precioBaseKG, (SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaOrigen + '%')
+		, (SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaDestino + '%'), @rutaCod)
 
     END;
 GO
@@ -433,16 +447,26 @@ CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(25
     AS BEGIN
 
 		DECLARE @rutaID int
+		DECLARE @retorno int
 		SET @rutaID= (SELECT r.Ruta_ID FROM ASSASSINS.Ruta r, ASSASSINS.Ruta_Aeronave ra, ASSASSINS.Aeronave a,
 		ASSASSINS.Ciudad c, ASSASSINS.Ciudad c2
 		WHERE r.Ruta_ID=ra.Ruta_ID AND ra.Aeronave_Numero=a.Aeronave_Numero AND r.Ruta_Ciudad_Origen=c.Ciudad_ID AND
-		r.Ruta_Ciudad_Destino=c2.Ciudad_ID AND c.Ciudad_Nombre like '%@origen%' and c2.Ciudad_Nombre like '%@destino%'
+		r.Ruta_Ciudad_Destino=c2.Ciudad_ID AND c.Ciudad_Nombre like '%' + @origen + '%' and c2.Ciudad_Nombre like '%' + @destino + '%'
 		group by r.Ruta_ID)
 
-		UPDATE ASSASSINS.Viaje SET Viaje_Fecha_Llegada=@fecha WHERE Aeronave_Numero=(SELECT Aeronave_Numero FROM
-		ASSASSINS.Aeronave WHERE Aeronave_Matricula=@mat) AND Ruta_ID=@rutaID AND DATEDIFF(hour,Viaje_Fecha_Salida,
-		@fecha) BETWEEN 0 AND 24
-
+		IF @rutaID = (SELECT TOP 1 Ruta_ID FROM ASSASSINS.Viaje 
+			WHERE Aeronave_Numero=(SELECT Aeronave_Numero FROM ASSASSINS.Aeronave WHERE 
+			Aeronave_Matricula=@mat) and DATEDIFF(hour,Viaje_Fecha_Salida, @fecha) BETWEEN 0 AND 24
+			ORDER BY DATEDIFF(hour, Viaje_Fecha_Salida, @fecha))
+		BEGIN	
+			UPDATE ASSASSINS.Viaje SET Viaje_Fecha_Llegada=@fecha WHERE Aeronave_Numero=(SELECT Aeronave_Numero FROM
+			ASSASSINS.Aeronave WHERE Aeronave_Matricula=@mat) AND Ruta_ID=@rutaID AND DATEDIFF(hour,Viaje_Fecha_Salida, @fecha) BETWEEN 0 AND 24
+		END
+		ELSE
+		BEGIN
+			SET @retorno = -1
+			RETURN @retorno
+		END
     END;
 GO
 
