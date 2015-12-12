@@ -39,7 +39,7 @@ namespace AerolineaFrba.Abm_Ruta
                     using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
                     using (SqlCommand comando = connection.CreateCommand())
                     {
-                        comando.CommandText = "EXEC ASSASSINS.InsertRuta @rutaCod=@rutaCod, @precioBaseKG=@rutaPrecioBaseKG"
+                        comando.CommandText = "EXEC ASSASSINS.InsertRuta @rutaCod=@rutaCod, @precioBaseKG=@rutaPrecioBaseKG, "
                         + "@precioBasePas=@rutaPrecioBaseKG, @rutaOrigen=@rutaCiudadOrigen, @rutaDestino=@rutaCiudadDestino";
 
                         comando.Parameters.AddWithValue("@rutaCod", textBox1.Text);

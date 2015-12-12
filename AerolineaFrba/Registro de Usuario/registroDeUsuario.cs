@@ -24,6 +24,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
 
         bool ok = false;
+        bool flag = true;
         string query;
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,16 +32,28 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (textUsuario.Text.Length > 0 && textPass.Text.Length > 0)
             {
                 query = "EXEC ASSASSINS.SelectUsuario @Username = '" + textUsuario.Text + "' , @Password = '" + textPass.Text + "'";
+                string query2 = "SELECT Usuario_Habilitado FROM ASSASSINS.USUARIO WHERE Usuario_Username='" + textUsuario.Text + "'";
 
                 try
                 {
-                    consultarUsuario(query);
+                    consultarHabilitado(query2);
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show(err.Message);
                 }
 
+                if (flag)
+                {
+                    try
+                    {
+                        consultarUsuario(query);
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+                }
                 if (ok == true)
                 {
                     MessageBox.Show("Bienvenido al sistema");
@@ -117,9 +130,28 @@ namespace AerolineaFrba.Registro_de_Usuario
 
             if (leer.Read() == true)
             {
-                if (leer.GetSqlDecimal(4) == 3)
+                if (leer.GetSqlInt32(4) >= 3)
                 {
                     ejecutar("update ASSASSINS.Usuario set Usuario_Habilitado=0 where Usuario_Username='" + textUsuario.Text + "'");
+                }
+            }
+            conexion.Close();
+        }
+
+        void consultarHabilitado(string query)
+        {
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                if (leer.GetSqlBoolean(0) == false)
+                {
+                    MessageBox.Show("El usuario esta deshabilitado");
+                    ok = false;
+                    flag = false;
                 }
             }
             conexion.Close();

@@ -413,6 +413,10 @@ GO
 CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG numeric(8,2), @precioBasePas numeric(8,2), 
 @rutaOrigen varchar(255), @rutaDestino varchar(255), @tipoServ varchar(255))
     AS BEGIN
+		DECLARE @contador int
+		DECLARE @fin int
+		SET @contador = 1
+		SET @fin = (SELECT MAX(Aeronave_Numero) FROM ASSASSINS.Aeronave)
 
         UPDATE ASSASSINS.Ruta SET Ruta_Precio_BasePasaje=@precioBasePas, Ruta_Precio_BaseKG=@precioBaseKG,
 		Ruta_Ciudad_Origen=(SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaOrigen + '%'),
@@ -423,6 +427,17 @@ CREATE PROCEDURE ASSASSINS.UpdateRuta(@rutaID int, @rutaCod int, @precioBaseKG n
 			INSERT INTO ASSASSINS.Ruta_TipoServicio(Ruta_ID, TipoServ_ID)
 			VALUES(@rutaID, (SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ))
 
+			WHILE @contador <= @fin
+			BEGIN
+				IF (SELECT a.Aeronave_Numero FROM ASSASSINS.Aeronave a WHERE a.Aeronave_Numero=@contador AND
+				a.TipoServ_ID=(SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ)) IS NOT NULL
+				BEGIN
+					INSERT INTO ASSASSINS.Ruta_Aeronave(Ruta_ID, Aeronave_Numero)
+					VALUES(@rutaID, (SELECT a.Aeronave_Numero FROM ASSASSINS.Aeronave a WHERE a.Aeronave_Numero=@contador AND
+					a.TipoServ_ID=(SELECT TipoServ_ID FROM ASSASSINS.Tipo_Servicio WHERE TipoServ_Nombre=@tipoServ)))
+				END
+			SET @contador=@contador+1
+			END
     END;
 GO
 
@@ -433,9 +448,9 @@ CREATE PROCEDURE ASSASSINS.InsertRuta(@rutaCod int, @precioBaseKG numeric(8,2), 
 @rutaOrigen varchar(255), @rutaDestino varchar(255))
     AS BEGIN
 
-        INSERT INTO ASSASSINS.Ruta(Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Codigo)
+        INSERT INTO ASSASSINS.Ruta(Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG, Ruta_Ciudad_Origen, Ruta_Ciudad_Destino, Ruta_Codigo, Ruta_Habilitado)
 		VALUES(@precioBasePas, @precioBaseKG, (SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaOrigen + '%')
-		, (SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaDestino + '%'), @rutaCod)
+		, (SELECT Ciudad_ID FROM ASSASSINS.Ciudad WHERE Ciudad_Nombre like '%' + @rutaDestino + '%'), @rutaCod, 1)
 
     END;
 GO
