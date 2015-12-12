@@ -255,7 +255,7 @@ namespace AerolineaFrba.Abm_Aeronave
                         using (SqlCommand comando = connection.CreateCommand())
                         {
 
-                            comando.CommandText = "";
+                            comando.CommandText = "EXEC ASSASSINS.CancelarPasajes @aeroNum=@aeroNum";
 
                             comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
 
@@ -280,7 +280,14 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     if (MessageBox.Show("¿Desea cancelar los pasajes?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        // CANCELAR LOS PASAJES
+                        try
+                        {
+                            cancelar();
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
                     }
                     else
                     {
@@ -298,24 +305,59 @@ namespace AerolineaFrba.Abm_Aeronave
 
         void verificarAeronave(bool total)
         {
-            query = "SELECT Aeronave_Numero FROM ASSASSINS.AERONAVE WHERE Aeronave_KG_Capacidad >= " + kgs + " AND Fabricante_ID = " + fabricante +
-            " AND Modelo_ID = " + modelo + " AND TipoServ_ID = " + tipoServ + " AND Aeronave_Butacas_Pasillo+Aeronave_Butacas_Ventana >= "
-            + cantButacas + " AND Aeronave_Numero <> " + Convert.ToInt32(textBox2.Text);
-            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
-            SqlCommand comando = new SqlCommand(query, conexion);
-            conexion.Open();
-            SqlDataReader leer = comando.ExecuteReader();
+            int ciudad;
+            try
+            {
+                ciudad = ciudadActual();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+                ciudad = 0;
+            }
+            try
+            {
+                query = "EXEC ASSASSINS.AeroNueva @kgs=" + kgs + ", @fabricante=" + fabricante + ", @modelo=" + modelo + ", @tipoServ=" + tipoServ +
+                ", @cantButacas=" + cantButacas + ", @ciudad=" + ciudad;
 
-            if (leer.Read() == true)
-            {
-                // REEMPLAZAR VIAJES CON ESTE NUMERO DE AERONAVE !!!
+                SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+                SqlCommand comando = new SqlCommand(query, conexion);
+                conexion.Open();
+                SqlDataReader leer = comando.ExecuteReader();
+
+                if (leer.Read() == true)
+                {
+                    try
+                    {
+                        string query2 = "EXEC ASSASSINS.ReemplazarAero @aeroVieja=@aeroNum, @aeroNueva=@aeroNue, @fecha=@fechaReset, @total=" + total;
+                        SqlConnection conexion2 = new SqlConnection(Properties.Settings.Default.dbConnection);
+                        SqlCommand comando2 = new SqlCommand(query2, conexion2);
+
+                        comando2.Parameters.AddWithValue("@fechaReset", textBox1.Text);
+                        comando2.Parameters.AddWithValue("@aeroNue", leer.GetSqlInt32(0));
+                        comando2.Parameters.AddWithValue("@aeroNum", textBox2.Text);
+
+                        conexion2.Open();
+                        comando2.ExecuteNonQuery();
+                        conexion2.Close();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+
+                }
+                else
+                {
+                    altaAeronave alta = new altaAeronave(textBox1.Text, textBox4.Text, comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
+                    alta.Show();
+                }
+                conexion.Close();
             }
-            else
+            catch (Exception err)
             {
-                altaAeronave alta = new altaAeronave(comboBox2.Text, comboBox1.Text, comboBox3.Text, textBox9.Text, label8.Text, true, total);
-                alta.Show();
+                MessageBox.Show(err.Message);
             }
-            conexion.Close();
         }
 
         void ejecutar()
@@ -358,6 +400,42 @@ namespace AerolineaFrba.Abm_Aeronave
                 comando.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        void cancelar()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+
+                comando.CommandText = "EXEC ASSASSINS.CancelarPasajes @aeroNum=@aeroNum";
+
+                comando.Parameters.AddWithValue("@aeroNum", textBox2.Text);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        int ciudadActual()
+        {
+            int ciudad = 0;
+            query = "SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND" 
+				  +"Aeronave_Numero=" + textBox2.Text + "AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ") > 0"+
+                  "ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, " + DateTime.Now + ")";
+
+            SqlConnection conexion = new SqlConnection(Properties.Settings.Default.dbConnection);
+            SqlCommand comando = new SqlCommand(query, conexion);
+            conexion.Open();
+            SqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read() == true)
+            {
+                ciudad = (int)leer.GetSqlInt32(0);
+            }
+            conexion.Close();
+            return ciudad;
         }
     }
 }

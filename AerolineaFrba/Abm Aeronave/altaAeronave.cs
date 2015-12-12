@@ -13,7 +13,7 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class altaAeronave : Form
     {
-        public altaAeronave(string modelo, string tipoServ, string fabricante, string kgs, string butacas, bool reemplazo, bool total)
+        public altaAeronave(string fecha, string aeroVieja, string modelo, string tipoServ, string fabricante, string kgs, string butacas, bool reemplazo, bool total)
         {
             InitializeComponent();
             mod = modelo;
@@ -23,10 +23,12 @@ namespace AerolineaFrba.Abm_Aeronave
             butaca = butacas;
             reemplazar = reemplazo;
             tot = total;
+            aero = aeroVieja;
+            fec = fecha;
         }
 
         bool reemplazar, tot;
-        string mod, tServ, fab, kg, butaca;
+        string mod, tServ, fab, kg, butaca, aero, fec;
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
@@ -84,7 +86,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     try
                     {
                         ejecutar();
-                        // REEMPLAZAR VIAJES POR ESTE NUEVO !!!
+                        reemplazarAero();
                     }
                     catch (Exception err)
                     {
@@ -212,6 +214,22 @@ namespace AerolineaFrba.Abm_Aeronave
                 comboBox3.Items.Add(leer[0]);
             }
             conexion.Close();
+        }
+
+        void reemplazarAero()
+        {
+                string query2 = "EXEC ASSASSINS.ReemplazarAero @aeroVieja=@aeroNum, @aeroNueva=(SELECT Aeronave_Numero FROM ASSASSINS.Aeronave "+
+                "WHERE Aeronave_Matricula=" + textBox4.Text + "), @fecha=@fechaReset, @total=@total";
+                SqlConnection conexion2 = new SqlConnection(Properties.Settings.Default.dbConnection);
+                SqlCommand comando2 = new SqlCommand(query2, conexion2);
+
+                comando2.Parameters.AddWithValue("@fechaReset", fec);
+                comando2.Parameters.AddWithValue("@total", tot);
+                comando2.Parameters.AddWithValue("@aeroNum", aero);
+
+                conexion2.Open();
+                comando2.ExecuteNonQuery();
+                conexion2.Close();
         }
     }
 }

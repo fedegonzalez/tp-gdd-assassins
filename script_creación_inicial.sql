@@ -314,7 +314,7 @@ IF OBJECT_ID ('ASSASSINS.InsertUsuario') IS NOT NULL DROP PROCEDURE ASSASSINS.In
 GO
 CREATE PROCEDURE ASSASSINS.InsertUsuario(@Username varchar(255), @Password varchar(255), @Rol_Nombre varchar(255), @Intentos integer, @Habilitado bit) AS
 	BEGIN
-		INSERT INTO ASSASSINS.Usuario(USuario_Username, Usuario_Password, Rol_ID, Usuario_Intentos, Usuario_Habilitado)
+		INSERT INTO ASSASSINS.Usuario(Usuario_Username, Usuario_Password, Rol_ID, Usuario_Intentos, Usuario_Habilitado)
 			SELECT @Username, HASHBYTES('SHA2_256', @Password), Rol_ID , @Intentos, @Habilitado
 			FROM ASSASSINS.Rol WHERE Rol_Nombre = @Rol_Nombre
 	END;
@@ -446,16 +446,47 @@ CREATE PROCEDURE ASSASSINS.RegistroLlegada(@mat varchar(255), @origen varchar(25
     END;
 GO
 
+--------Encontrar aeronave reemplazante----------
+IF OBJECT_ID ('ASSASSINS.AeroNueva') IS NOT NULL DROP PROCEDURE ASSASSINS.AeroNueva
+GO
+CREATE PROCEDURE ASSASSINS.AeroNueva(@kgs int, @fabricante int, @modelo int, @tipoServ int, @cantButacas int, @ciudad int)
+    AS BEGIN
+		
+		SELECT DISTINCT TOP 1 a.Aeronave_Numero
+		FROM ASSASSINS.Aeronave a, ASSASSINS.Ruta_Aeronave ra, ASSASSINS.ruta r, ASSASSINS.Viaje v
+		WHERE Aeronave_KG_Capacidad>=@kgs AND Aeronave_Butacas_Pasillo+
+		Aeronave_Butacas_Ventana>=@cantButacas AND Fabricante_ID = @fabricante and TipoServ_ID = @tipoServ AND 
+		Modelo_ID = @modelo AND a.Aeronave_Numero=ra.Aeronave_Numero AND r.Ruta_ID=ra.Ruta_ID AND v.Ruta_ID=r.Ruta_ID
+		AND v.Aeronave_Numero=a.Aeronave_Numero AND v.Viaje_Fecha_Salida > GETDATE() AND 
+		IIF((SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE 
+		v.Ruta_ID=r.Ruta_ID AND Aeronave_Numero=a.Aeronave_Numero AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()) > 0
+		ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()))=@ciudad,@ciudad,NULL) IS NOT NULL
+
+    END;
+GO
+
 --------Reemplazar aeronave----------
 IF OBJECT_ID ('ASSASSINS.ReemplazarAero') IS NOT NULL DROP PROCEDURE ASSASSINS.ReemplazarAero
 GO
 CREATE PROCEDURE ASSASSINS.ReemplazarAero(@aeroVieja int, @aeroNueva int, @fecha datetime, @total bit)
     AS BEGIN
+		DECLARE @ciudadActual int
+		DECLARE @contador int
+		DECLARE @actualizados table (id int);
+		SET @ciudadActual = (SELECT TOP 1 r.Ruta_Ciudad_Destino FROM ASSASSINS.Viaje v, ASSASSINS.Ruta r WHERE v.Ruta_ID=r.Ruta_ID AND
+		Aeronave_Numero=@aeroVieja AND DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()) > 0
+		ORDER BY DATEDIFF(SECOND, Viaje_Fecha_Llegada, GETDATE()))
 		IF @total=1
-			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>@fecha
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>GETDATE()
 		ELSE
-			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja
-
+			UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva OUTPUT INSERTED.Viaje_ID INTO @actualizados
+			WHERE Aeronave_Numero=@aeroVieja AND Viaje_Fecha_Salida>GETDATE() AND Viaje_Fecha_Salida<@fecha
+			SET @contador =	(SELECT MAX(id) FROM @actualizados)
+			WHILE @contador <= (SELECT MAX(Viaje_ID) FROM ASSASSINS.Viaje)
+				IF (SELECT r.Ruta_Ciudad_Destino FROM ASSASSINS.Ruta r, ASSASSINS.Viaje v WHERE v.Viaje_ID=@contador)=@ciudadActual
+					BREAK;
+				UPDATE ASSASSINS.Viaje SET Aeronave_Numero=@aeroNueva WHERE Aeronave_Numero=@aeroVieja AND Viaje_ID=@contador
+				SET @contador=@contador+1
     END;
 GO
 
@@ -464,15 +495,18 @@ IF OBJECT_ID ('ASSASSINS.CancelarPasajes') IS NOT NULL DROP PROCEDURE ASSASSINS.
 GO
 CREATE PROCEDURE ASSASSINS.CancelarPasajes(@aeroNum int)
     AS BEGIN
+
 		INSERT INTO ASSASSINS.Devolucion_Pasaje(Pasaje_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
-		VALUES ((SELECT p.Pasaje_ID FROM ASSASSINS.Pasaje p, ASSASSINS.Viaje v WHERE v.Viaje_ID=p.Viaje_ID AND
-		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
-		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
+		SELECT p.Pasaje_ID, p.PNR, 'bajaAero', GETDATE(), 'Baja de la Aeronave' FROM ASSASSINS.Pasaje p, ASSASSINS.Viaje v
+		WHERE v.Viaje_ID=p.Viaje_ID AND v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum
+		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0 WHERE Pasaje_ID IN (SELECT Pasaje_ID FROM ASSASSINS.Devolucion_Pasaje WHERE
+		Codigo_Devolucion='bajaAero')
 
 		INSERT INTO ASSASSINS.Devolucion_Encomienda(Encomienda_ID, PNR, Codigo_Devolucion, Fecha_Devolucion, Motivo)
-		VALUES ((SELECT e.Encomienda_ID FROM ASSASSINS.Encomienda e, ASSASSINS.Viaje v WHERE v.Viaje_ID=e.Viaje_ID AND
-		v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum), PNR, 'bajaAero', GETDATE(), 'Baja de Aeronave')
-		UPDATE ASSASSINS.Pasaje SET Pasaje_Estado=0
+		SELECT e.Encomienda_ID, e.PNR, 'bajaAero', GETDATE(), 'Baja de la Aeronave' FROM ASSASSINS.Encomienda e, ASSASSINS.Viaje v
+		WHERE v.Viaje_ID=e.Viaje_ID AND v.Viaje_Fecha_Salida > GETDATE() AND v.Aeronave_Numero=@aeroNum
+		UPDATE ASSASSINS.Encomienda SET Encomienda_Estado=0 WHERE Encomienda_ID IN (SELECT Encomienda_ID FROM
+		ASSASSINS.Devolucion_Encomienda WHERE Codigo_Devolucion='bajaAero')
 
     END;
 GO
