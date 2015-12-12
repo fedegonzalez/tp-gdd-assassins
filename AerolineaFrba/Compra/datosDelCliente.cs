@@ -62,12 +62,28 @@ namespace AerolineaFrba.Compra
 
                 if (cantPasajeros > 0)
                 {
+                    try
+                    {
+                        cliente();
+                    }
+                    catch(Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
                     Compra.datosDelCliente abrir = new Compra.datosDelCliente(viaje, cantPasajeros, cantKGS, dni, butaca, false, tarjeta);
                     abrir.Show();
                     this.Hide();
                 }
                 else
                 {
+                    try
+                    {
+                        cliente();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
                     Compra.formaPago abrirPago = new Compra.formaPago(viaje, dni, tarjeta);
                     abrirPago.Show();
                     this.Hide();
@@ -81,7 +97,9 @@ namespace AerolineaFrba.Compra
 
         private void datosDelCliente_Load(object sender, EventArgs e)
         {
-            string query = "SELECT Butaca_Nro FROM ASSASSINS.Butaca";
+            string query = "SELECT b.Butaca_Nro FROM ASSASSINS.Butaca b, ASSASSINS.Viaje v WHERE "+
+            "b.Aeronave_Numero=v.Aeronave_Numero AND b.Butaca_ID NOT IN (SELECT Butaca_ID FROM ASSASSINS.Pasaje WHERE"+
+            " Viaje_ID=" + viaje + ") AND v.Viaje_ID=" + viaje;
             try
             {
                 cargarComboBox(query);
@@ -131,6 +149,28 @@ namespace AerolineaFrba.Compra
             catch (Exception err)
             {
                 MessageBox.Show(err.Message);
+            }
+        }
+
+        void cliente()
+        {
+            using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.dbConnection))
+            using (SqlCommand comando = connection.CreateCommand())
+            {
+                comando.CommandText = "EXEC ASSASSINS.CompraPasaje @nombre=@nombre, @apellido=@apellido, " +
+                "@dni=@dni, @direccion=@direccion, @telefono=@telefono, @mail=@mail, @fechanacimiento=@fechanacimiento";
+
+                comando.Parameters.AddWithValue("@nombre", textBox2.Text);
+                comando.Parameters.AddWithValue("@apellido", textBox3.Text);
+                comando.Parameters.AddWithValue("@dni", textBox4.Text);
+                comando.Parameters.AddWithValue("@direccion", textBox6.Text);
+                comando.Parameters.AddWithValue("@telefono", textBox5.Text);
+                comando.Parameters.AddWithValue("@mail", textBox7.Text);
+                comando.Parameters.AddWithValue("@fechanacimiento", textBox1.Text);
+
+                connection.Open();
+                comando.ExecuteNonQuery();
+                connection.Close();
             }
         }
     }
